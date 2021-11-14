@@ -50,12 +50,6 @@ module priorityLogic(busInterface.priorityLogic busIf, dmaInternalRegistersIf.pr
                 priorityOrder = priorityOrder;
               end
 
-            default:
-              begin
-                busIf.DACK = 4'b0000;
-                priorityOrder = priorityOrder;
-              end
-
           endcase
         end
 
