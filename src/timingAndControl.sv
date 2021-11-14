@@ -69,7 +69,7 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, busInterface.prio
       intSigIf.updateCurrentAddressReg = 1'b0;
       intSigIf.decrTemporaryWordCountReg = 1'b0;
       intSigIf.incrTemporaryAddressReg = 1'b0;
-      if(TCbusIf.RESET) configured = 1'b0;
+      configured = 1'b0;
       {ior,memw,iow,memr} = 4'b0000;
 
       unique case (1'b1)
