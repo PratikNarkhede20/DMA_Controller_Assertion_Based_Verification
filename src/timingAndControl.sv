@@ -181,10 +181,15 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, busInterface.prio
                 intSigIf.intEOP = 1'b1;
                 configured = 0;
               end
-
             intSigIf.updateCurrentAddressReg = 1'b1;
-
           end
+
+          default:
+          begin
+            if(TCbusIf.RESET) configured = 1'b0;
+            {ior,memw,iow,memr} = 4'b0000;
+          end
+
       endcase
     end
 
