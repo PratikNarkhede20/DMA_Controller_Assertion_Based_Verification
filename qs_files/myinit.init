@@ -1,0 +1,5 @@
+$default_clock clk
+$default_input_value 0
+busIf.RESET = 1'b1
+##
+busIf.RESET = 1'b0
