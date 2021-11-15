@@ -13,8 +13,8 @@ DACK1isOne_c : cover property (busIf.DACK == 4'b0010);
 DACK2isOne_c : cover property (busIf.DACK == 4'b0100);
 DACK3isOne_c : cover property (busIf.DACK == 4'b1000);
 
-iorIsOne_c : cover property (busIf.IOR == 1'b1);
-iowIsOne_c : cover property (busIf.IOW == 1'b1);
+iorIsActive_c : cover property (busIf.IOR_N == 1'b0);
+iowIsActive_c : cover property (busIf.IOW_N == 1'b0);
 
 
 endmodule
