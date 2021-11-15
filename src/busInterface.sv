@@ -46,6 +46,8 @@ interface busInterface(input logic CLK, RESET);
   );
 
   modport priorityLogic(
+    input CLK,
+    input RESET,
     input DREQ,
     input HLDA,
 
