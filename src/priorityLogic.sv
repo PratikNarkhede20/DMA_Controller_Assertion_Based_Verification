@@ -4,11 +4,6 @@ module priorityLogic(busInterface.priorityLogic busIf, dmaInternalRegistersIf.pr
 
   always_comb
     begin
-
-      //initialize DACK and priorityOrder to remove latch. (works as default)
-      busIf.DACK = 4'b0000;
-      priorityOrder = priorityOrder;
-
       //commandReg.priorityType=0 is Fixed Priority. commandReg.priorityType=1 is Rotating Priority
       //Fixed Priority
       if(!intRegIf.commandReg.priorityType && intSigIf.assertDACK)
@@ -54,6 +49,10 @@ module priorityLogic(busInterface.priorityLogic busIf, dmaInternalRegistersIf.pr
         end
 
       else
+      begin
         busIf.DACK = 4'b0000;
+        priorityOrder = priorityOrder;
+      end
+
     end
 endmodule
