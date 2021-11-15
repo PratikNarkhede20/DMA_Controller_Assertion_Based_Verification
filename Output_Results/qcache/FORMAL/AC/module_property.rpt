@@ -1,0 +1,71 @@
+
+
+===============================================================================
+Module: dma_checker_sva
+===============================================================================
+Summary
+-------------------------------------------------------------------------------
+Assertions   : 0 
+Assumptions  : 0 
+Covers       : 10 
+-------------------------------------------------------------------------------
+cover DREQ0isOne_c (sva)
+  Instance: check1.DREQ0isOne_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 7
+  Severity: info
+  Stats:   depth=1 gates=1 flops=0
+
+cover DREQ1isOne_c (sva)
+  Instance: check1.DREQ1isOne_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 8
+  Severity: info
+  Stats:   depth=1 gates=1 flops=0
+
+cover DREQ2isOne_c (sva)
+  Instance: check1.DREQ2isOne_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 9
+  Severity: info
+  Stats:   depth=1 gates=1 flops=0
+
+cover DREQ3isOne_c (sva)
+  Instance: check1.DREQ3isOne_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 10
+  Severity: info
+  Stats:   depth=1 gates=1 flops=0
+
+cover DACK0isOne_c (sva)
+  Instance: check1.DACK0isOne_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 13
+  Severity: info
+  Stats:   depth=1 gates=1 flops=0
+
+cover DACK1isOne_c (sva)
+  Instance: check1.DACK1isOne_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 14
+  Severity: info
+  Stats:   depth=1 gates=1 flops=0
+
+cover DACK2isOne_c (sva)
+  Instance: check1.DACK2isOne_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 15
+  Severity: info
+  Stats:   depth=1 gates=1 flops=0
+
+cover DACK3isOne_c (sva)
+  Instance: check1.DACK3isOne_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 16
+  Severity: info
+  Stats:   depth=1 gates=1 flops=0
+
+cover iorIsActive_c (sva)
+  Instance: check1.iorIsActive_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 19
+  Severity: info
+  Stats:   depth=1 gates=1 flops=0
+
+cover iowIsActive_c (sva)
+  Instance: check1.iowIsActive_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 20
+  Severity: info
+  Stats:   depth=1 gates=1 flops=0
+

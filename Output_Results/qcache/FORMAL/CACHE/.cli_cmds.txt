@@ -1,0 +1,3 @@
+
+# /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qverify_cmds.tcl : 6
+/pkgs/mentor/questa_cdc_formal/10.7b/linux_x86_64/bin/qverifypm --master  --connect_bin  --od /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qcache/FORMAL/NET --wd /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification --binary /pkgs/mentor/questa_cdc_formal/10.7b/linux_x86_64/bin/qverifyfk  -netcache /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qcache/FORMAL/NET  -od Output_Results -tool prove -j 4     -init qs_files/myinit.init -timeout 5m -import_db Output_Results/formal_compile.db  -zdb /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qcache/DB/zdb_0

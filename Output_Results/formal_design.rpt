@@ -1,0 +1,158 @@
+
+Questa Version 10.7b linux_x86_64 12 Jun 2018
+
+-------------------------------------------------------------------------------
+Design Report
+Created Sun Nov 14 22:59:34 2021
+-------------------------------------------------------------------------------
+
+
+Design 'dma'
+===============================================================================
+
+
+---------------------------------------
+Design Summary                    Count
+---------------------------------------
+Clocks                                1
+  User-specified                      1
+  Inferred                            0
+Control Point Bits                   90
+  DUT Input Bits                     37
+  Cut Point Bits                      0
+  Black Box Output Bits               0
+  Undriven Wire Bits                 53
+State Bits                          376
+  Design Register Bits              376
+  Design Latch Bits                   0
+Storage Structures       
+  Counters                            1
+  RAMs                                0
+Black Boxes                           0
+---------------------------------------
+
+Detailed Design Information
+===============================================================================
+
+
+Clocks
+------------------------------------------------------------------------------
+Port                                   Period         Waveform    Edges
+------------------------------------------------------------------------------
+busIf.CLK                                  10              0 5    PE   
+------------------------------------------------------------------------------
+Cut Points
+----------
+  <none>
+
+Black Box Outputs
+-----------------
+  <none>
+
+Undriven Wires
+--------------
+  d.temporaryReg  (8 bits)
+  intRegIf.maskReg  (4 bits)
+  intRegIf.requestReg  (3 bits)
+  pL.busIf.HRQ  (1 bit)
+  tC.PLbusIf.DACK  (4 bits)
+  tC.intSigIf.deassertDACK  (1 bit)
+  tC.stateIndex  (32 bits)
+
+Latches
+-------
+  <none>
+
+Counters
+--------
+  d.intRegIf.temporaryWordCountReg  (16 bits)
+
+RAMs
+----
+  <none>
+
+Black Boxes (User-specified)
+----------------------------
+  <none>
+
+Black Boxes (Inferred)
+----------------------
+  <none>
+
+
+
+Port Constraints
+-------------------------------------------------------------------------------
+Type                 Clock Domain         Value         Port
+-------------------------------------------------------------------------------
+Unconstrained        <none>               -            'busIf.A0'
+Unconstrained        <none>               -            'busIf.A1'
+Unconstrained        <none>               -            'busIf.A2'
+Unconstrained        <none>               -            'busIf.A3'
+Unconstrained        <none>               -            'busIf.A4'
+Unconstrained        <none>               -            'busIf.A5'
+Unconstrained        <none>               -            'busIf.A6'
+Unconstrained        <none>               -            'busIf.A7'
+Unconstrained        <none>               -            'busIf.ADSTB'
+Unconstrained        <none>               -            'busIf.AEN'
+Clock                <n/a>                -            'busIf.CLK'
+Unconstrained        <none>               -            'busIf.CS_N'
+Unconstrained        <none>               -            'busIf.DACK'
+Unconstrained        <none>               -            'busIf.DB'
+Unconstrained        <none>               -            'busIf.DREQ'
+Unconstrained        <none>               -            'busIf.EOP_N'
+Unconstrained        <none>               -            'busIf.HLDA'
+Unconstrained        <none>               -            'busIf.HRQ'
+Unconstrained        <none>               -            'busIf.IOR_N'
+Unconstrained        <none>               -            'busIf.IOW_N'
+Unconstrained        <none>               -            'busIf.MEMR_N'
+Unconstrained        <none>               -            'busIf.MEMW_N'
+Unconstrained        <none>               -            'busIf.READY'
+Constraint           <none>               1'b0         'busIf.RESET'
+-------------------------------------------------------------------------------
+
+Instance Usage
+===============================================================================
+Count  Module          Location
+-------------------------------------------------------------------------------
+   1   datapath        /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/datapath.sv (Line 1)
+   1   dmaInternalRegistersIf /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/dmaInternalRegistersIf.sv (Line 1)
+   1   dmaInternalSignalsIf /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/dmaInternalSignalsIf.sv (Line 1)
+   1   dma_checker_sva /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv (Line 1)
+   1   priorityLogic   /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/priorityLogic.sv (Line 1)
+   1   timingAndControl /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/timingAndControl.sv (Line 1)
+
+
+
+Design Checks Details
+===============================================================================
+Type      : REG_MULTIPLY_DRIVEN
+Module    : datapath
+Name      : ioDataBuffer
+Instance  : d
+
+Type      : REG_MULTIPLY_DRIVEN
+Module    : datapath
+Name      : ioAddressBuffer
+Instance  : d
+
+Type      : REG_MULTIPLY_DRIVEN
+Module    : datapath
+Name      : intRegIf.temporaryAddressReg
+Instance  : d
+
+Type      : REG_MULTIPLY_DRIVEN
+Module    : datapath
+Name      : outputAddressBuffer
+Instance  : d
+
+Type      : REG_MULTIPLY_DRIVEN
+Module    : datapath
+Name      : enUpperAddress
+Instance  : d
+
+Type      : REG_MULTIPLY_DRIVEN
+Module    : datapath
+Name      : readBuffer
+Instance  : d
+

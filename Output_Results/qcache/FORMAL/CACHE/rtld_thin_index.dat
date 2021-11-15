@@ -1,0 +1,12 @@
+>8
+v366
+t6
+c7
+#6 p41639 @dma
+#5 p36285 @dma_checker_sva_826184537
+#4 p15696 @datapath_2064166904
+#0 p0 @dmaInternalRegistersIf_1237682558
+#1 p3547 @dmaInternalSignalsIf_1525781362
+#2 p5211 @priorityLogic_1349834258
+#3 p9631 @timingAndControl_198560092
+<8

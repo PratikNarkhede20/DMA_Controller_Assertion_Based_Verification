@@ -1,0 +1,294 @@
+# 
+# Copyright 1995-2018 Mentor Graphics Corporation.
+# All Rights Reserved.
+# 
+# THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION 
+# WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# 
+# THIS DOCUMENT CONTAINS TRADE SECRETS AND COMMERCIAL OR FINANCIAL
+# INFORMATION THAT ARE PRIVILEGED, CONFIDENTIAL, AND EXEMPT FROM
+# DISCLOSURE UNDER THE FREEDOM OF INFORMATION ACT, 5 U.S.C. SECTION
+# 552.  FURTHERMORE, THIS INFORMATION IS PROHIBITED FROM DISCLOSURE
+# UNDER THE TRADE SECRETS ACT, 18 U.S.C. SECTION 1905.
+# 
+# 
+# Questa Static Verification System
+# Version 10.7b linux_x86_64 12 Jun 2018
+# 
+# log created Sun Nov 14 22:59:28 2021 by pratik2 on mo.ece.pdx.edu
+# 
+# 
+# Command: netlist elaborate
+# Command arguments:
+#     -zdb
+#       /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qcache/DB/zdb_0
+#     -tool propcheck
+#     -d dma
+#     -cuname my_bind_sva
+# 
+# 
+## Elaborating Design...
+# Reading MTI mapping for library mapping
+# Writing all MTI mappings to vmap output ...
+# 
+# Top level modules:
+# 	dma
+# 	my_bind_sva
+# 
+# Analyzing design...
+# -- Loading module z0in_work.dma
+# -- Importing package z0in_work.dmaRegConfigPkg
+# -- Loading package z0in_work.my_bind_sva
+# -- Loading interface z0in_work.dmaInternalRegistersIf
+# -- Loading interface z0in_work.dmaInternalSignalsIf
+# -- Loading module z0in_work.priorityLogic
+# -- Loading module z0in_work.timingAndControl
+# -- Loading module z0in_work.datapath
+# -- Loading module z0in_work.dma_checker_sva
+# -- Loading interface z0in_work.busInterface
+# Optimizing 10 design-units (inlining 0/8 module instances):
+# -- Optimizing package z0in_work.my_bind_sva(fast)
+# -- Optimizing package z0in_work.dmaRegConfigPkg(fast)
+# -- Optimizing interface z0in_work.busInterface(fast)
+# -- Optimizing interface z0in_work.dmaInternalRegistersIf(fast)
+# -- Optimizing interface z0in_work.dmaInternalSignalsIf(fast)
+# -- Optimizing module z0in_work.priorityLogic(fast)
+# -- Optimizing module z0in_work.timingAndControl(fast)
+# -- Optimizing module z0in_work.datapath(fast)
+# -- Optimizing module z0in_work.dma_checker_sva(fast)
+# -- Optimizing module z0in_work.dma(fast)
+# Optimized design name is zi_opt_csl_1402776646_1
+# Identified prefix 'dma'.
+# End of log Sun Nov 14 22:59:29 2021
+# 
+# 
+# 
+# Questa Static Verification System
+# Version 10.7b linux_x86_64 12 Jun 2018
+# 
+# log created Sun Nov 14 22:59:29 2021 by pratik2 on mo.ece.pdx.edu
+# 
+# 
+# Command: netlist create
+# Command arguments:
+#     -zdb
+#       /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qcache/DB/zdb_0
+#     -tool propcheck
+#     -d dma
+#     -cuname my_bind_sva
+#     -tcs
+# 
+# 
+## Synthesizing netlist...
+# Processing module 'dmaInternalRegistersIf'
+# Elaborating module 'dmaInternalRegistersIf'.
+# Processing module 'dmaInternalSignalsIf'
+# Elaborating module 'dmaInternalSignalsIf'.
+# Processing module 'priorityLogic'
+# Elaborating module 'priorityLogic'.
+# Processing module 'timingAndControl'
+# Elaborating module 'timingAndControl'.
+# Processing module 'datapath'
+# Elaborating module 'datapath'.
+# Processing module 'dma_checker_sva'
+# Elaborating module 'dma_checker_sva'.
+# Processing module 'dma'
+# Elaborating module 'dma'.
+# 
+##Time Taken (Synthesis) = 199.000000 ticks = 1.990000 secs
+# 
+# End of log Sun Nov 14 22:59:32 2021
+# 
+# 
+# 
+# Questa Static Verification System
+# Version 10.7b linux_x86_64 12 Jun 2018
+# 
+# log created Sun Nov 14 22:59:32 2021 by pratik2 on mo.ece.pdx.edu
+# 
+# 
+# Command: formal compile
+# Command arguments:
+#     -zdb
+#       /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qcache/DB/zdb_0
+#     -d dma
+#     -cuname my_bind_sva
+#     -tcs
+# 
+# 
+## Processing Formal Logic...
+# Processing module 'dmaInternalRegistersIf'
+# Restoring module 'dmaInternalRegistersIf'.
+# Processing module 'dmaInternalSignalsIf'
+# Restoring module 'dmaInternalSignalsIf'.
+# Processing module 'priorityLogic'
+# Restoring module 'priorityLogic'.
+# Processing module 'timingAndControl'
+# Restoring module 'timingAndControl'.
+# Processing module 'datapath'
+# Restoring module 'datapath'.
+# Processing module 'dma_checker_sva'
+# Restoring module 'dma_checker_sva'.
+# Processing module 'dma'
+# Restoring module 'dma'.
+# Flattening design 'dmaInternalRegistersIf'.
+# Flattening design 'dmaInternalSignalsIf'.
+# Flattening design 'priorityLogic'.
+# Flattening design 'timingAndControl'.
+# Flattening design 'datapath'.
+# Flattening design 'dma_checker_sva'.
+# Flattening design 'dma'.
+# Flattening design 'dma'.
+# Info    : Detected reset.  Reset: busIf.RESET, polarity: synchronous, active: high.  [netlist-12]
+# Info    : Detected clock.  Clock: busIf.CLK, polarity: posedge.  [netlist-11]
+# Design is processed for formal verification.  Design 'dma'.
+# 
+# Clocks
+# ------------------------------------------------------------------------------
+# Port                                   Period         Waveform    Edges
+# ------------------------------------------------------------------------------
+# busIf.CLK                                  10              0 5    PE   
+# ------------------------------------------------------------------------------
+# 
+# Blackboxes
+# ------------------------------------------------------------------------------
+# Module name                                                Reason
+# ------------------------------------------------------------------------------
+# <no blackboxed modules>
+# ------------------------------------------------------------------------------
+# 
+# Inferred directives
+# ------------------------------------------------------------------------------
+# <no inferred directives>
+# ------------------------------------------------------------------------------
+# 
+# Design is linked for formal analysis.  Design 'dma'.
+# Info    : Multiply-driven register/latch found.  Register: 'd.ioDataBuffer'.  [formal-280]
+# Info    : Multiply-driven register/latch found.  Register: 'd.ioAddressBuffer'.  [formal-280]
+# Info    : Multiply-driven register/latch found.  Register: 'd.intRegIf.temporaryAddressReg'.  [formal-280]
+# Info    : Multiply-driven register/latch found.  Register: 'd.outputAddressBuffer'.  [formal-280]
+# Info    : Multiply-driven register/latch found.  Register: 'd.enUpperAddress'.  [formal-280]
+# Info    : Multiply-driven register/latch found.  Register: 'd.readBuffer'.  [formal-280]
+# Formal model has been created.
+# 
+# Property Summary
+# -------------------------------------------------------------------------------
+# Total  Directives :10
+# Assert Directives :0
+# Assume Directives :0
+# Cover  Directives :10
+# 
+# SVA Summary
+# -------------------------------------------------------------------------------
+# SVA Directive Type        Directives           Checkers
+# -------------------------------------------------------------------------------
+# Assert                         0                   0
+# Assume                         0                   0
+# Cover                         10                  10
+# -------------------------------------------------------------------------------
+# 
+# Design Checks Summary
+# -------------------------------------------------------------------------------
+# Check                              Found
+# -------------------------------------------------------------------------------
+# PORT_UNDRIVEN                          1
+# REG_MULTIPLY_DRIVEN                    6
+# -------------------------------------------------------------------------------
+# Total                                  7
+# -------------------------------------------------------------------------------
+# 
+# 
+# To see results in the GUI run:
+# qverify /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/formal_compile.db
+# 
+# 
+# Message Summary
+# ---------------------------------------------------------------------------
+# Count  Type     Message ID         Summary
+# ---------------------------------------------------------------------------
+#     6  Info     formal-280         Multiply-driven register/latch found.
+#     1  Info     netlist-11         Detected clock.
+#     1  Info     netlist-12         Detected reset.
+# 
+# Final Process Statistics: Max memory 606MB, CPU time 4s, Total time 7s
+# End of log Sun Nov 14 22:59:34 2021
+# 
+# 
+# 
+# Command-line arguments:
+# 	-jobs 4 \
+# 	-init qs_files/myinit.init \
+# 	-timeout 5m 
+# 
+# Info    : Using initialization sequence file to initialize design state.  File 'qs_files/myinit.init'.  [formal-205]
+# Applying synthesis semantics.
+# [00:00:00] Status: Done 0/10, Update 0/10, Proof radius min=0, avg=0.0, Mem=0GB
+# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=19605.
+# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=19603.
+# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=19602.
+# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=19604.
+# [00:00:00] Covered @1: check1.DACK0isOne_c
+# [00:00:00] Covered @1: check1.DACK3isOne_c
+# [00:00:00] Covered @1: check1.DACK1isOne_c
+# [00:00:00] Covered @1: check1.iorIsActive_c
+# [00:00:00] Covered @1: check1.DACK2isOne_c
+# [00:00:00] Covered @1: check1.iowIsActive_c
+# [00:00:00] Covered @1: check1.DREQ3isOne_c
+# [00:00:00] Covered @1: check1.DREQ2isOne_c
+# [00:00:00] Covered @1: check1.DREQ1isOne_c
+# [00:00:00] Covered @1: check1.DREQ0isOne_c
+# [00:00:01] Status: Done 10/10, Update 10/10, Proof radius min=N/A, avg=N/A, Mem=1GB
+# 
+# ---------------------------------------
+# Property Summary                  Count
+# ---------------------------------------
+# Assumed                               0
+# Covered                              10
+# Inconclusive                          0
+# Uncoverable                           0
+# ---------------------------------------
+# Total                                10
+# ---------------------------------------
+# 
+# 
+# --------- Process Statistics ----------
+# Elapsed Time                       1 s 
+# -------- Orchestration Process --------
+# -------- mo.ece.pdx.edu:19582 ---------
+# CPU Time                           0 s 
+# Peak Memory                      0.2 GB
+# ---------- Engine Processes -----------
+# -------- mo.ece.pdx.edu:19602 ---------
+# CPU Time                           2 s 
+# Peak Memory                      0.3 GB
+# CPU Utilization                  100 % 
+# -------- mo.ece.pdx.edu:19605 ---------
+# CPU Time                           0 s 
+# Peak Memory                      0.1 GB
+# CPU Utilization                    0 % 
+# -------- mo.ece.pdx.edu:19603 ---------
+# CPU Time                           0 s 
+# Peak Memory                      0.1 GB
+# CPU Utilization                    0 % 
+# -------- mo.ece.pdx.edu:19604 ---------
+# CPU Time                           0 s 
+# Peak Memory                      0.1 GB
+# CPU Utilization                    0 % 
+# ---------------------------------------
+# 
+# 
+# Message Summary
+# ---------------------------------------------------------------------------
+# Count  Type     Message ID         Summary
+# ---------------------------------------------------------------------------
+#     1  Info     formal-205         Using initialization sequence file to initialize design state.
+# 
+# Final Process Statistics: Peak Memory 0.28GB, Cumulative CPU Time 2s, Elapsed Time 1s
+# 
+# To see results in the GUI run:
+# qverify /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/formal_verify.db
+# 
+# End of log Sun Nov 14 22:59:37 2021
+# 
+# 

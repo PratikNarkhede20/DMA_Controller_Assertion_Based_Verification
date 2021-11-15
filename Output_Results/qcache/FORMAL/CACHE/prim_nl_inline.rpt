@@ -1,0 +1,10 @@
+-----------------------------------------------------------------
+Netlist Inline Information
+-----------------------------------------------------------------
+Module_Name                                        | Instance_Count       | Is_Libcell_Or_Udp    | Is_Inlined | Comments                      
+dmaInternalRegistersIf                             | 1                    | 0                    | 0          |                               
+dmaInternalSignalsIf                               | 1                    | 0                    | 0          |                               
+priorityLogic                                      | 1                    | 0                    | 0          |                               
+timingAndControl                                   | 1                    | 0                    | 0          |                               
+datapath                                           | 1                    | 0                    | 0          |                               
+dma_checker_sva                                    | 1                    | 0                    | 0          |                               
