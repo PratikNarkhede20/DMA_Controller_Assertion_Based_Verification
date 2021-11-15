@@ -8,6 +8,8 @@ module priorityLogic(busInterface.priorityLogic busIf, dmaInternalRegistersIf.pr
       //commandReg.priorityType=0 is Fixed Priority. commandReg.priorityType=1 is Rotating Priority
 
       //Fixed Priority
+      priorityOrderTemp = 8'b00_00_00_00;
+
       if(!intRegIf.commandReg.priorityType && intSigIf.assertDACK)
         begin
           priority case(1'b1)
