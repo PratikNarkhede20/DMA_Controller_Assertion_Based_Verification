@@ -8,6 +8,7 @@ module priorityLogic(busInterface.priorityLogic busIf, dmaInternalRegistersIf.pr
       //Fixed Priority
       if(!intRegIf.commandReg.priorityType && intSigIf.assertDACK)
         begin
+          busIf.DACK = 4'b0000;
           priority case(1'b1)
             busIf.DREQ[0] : busIf.DACK = 4'b0001 << 0;
             busIf.DREQ[1] : busIf.DACK = 4'b0001 << 1;
@@ -19,6 +20,8 @@ module priorityLogic(busInterface.priorityLogic busIf, dmaInternalRegistersIf.pr
       //Rotating Priority
       else if(intRegIf.commandReg.priorityType && intSigIf.assertDACK)
         begin
+          busIf.DACK = 4'b0000;
+          priorityOrder = priorityOrder;
           priority case(1'b1)
 
             busIf.DREQ[priorityOrder[0]]:
