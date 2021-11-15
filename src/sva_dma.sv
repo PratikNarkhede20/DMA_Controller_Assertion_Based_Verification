@@ -8,5 +8,7 @@ DREQ1isOne_c : cover property (busIf.DREQ[1] == 1'b1);
 DREQ2isOne_c : cover property (busIf.DREQ[2] == 1'b1);
 DREQ3isOne_c : cover property (busIf.DREQ[3] == 1'b1);
 
+DREQ3isOne_c : cover property (busIf.DREQ[3] == 1'b1);
+
 
 endmodule
