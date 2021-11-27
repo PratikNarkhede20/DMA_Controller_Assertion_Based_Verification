@@ -8,7 +8,7 @@ module dma(busInterface busIf);
 
   priorityLogic pL ( busIf.priorityLogic, intRegIf.priorityLogic, intSigIf.priorityLogic );
 
-  timingAndControl tC ( busIf.timingAndControl, busIf.priorityLogic, intRegIf.timingAndControl, intSigIf.timingAndControl );
+  timingAndControl tC ( busIf.timingAndControl, intRegIf.timingAndControl, intSigIf.timingAndControl );
 
   datapath d ( busIf, intRegIf, intSigIf );
 
