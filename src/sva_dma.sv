@@ -19,5 +19,6 @@ DACK3isOne_c : cover property (busIf.DACK == 4'b1000);
 iorIsActive_c : cover property (busIf.IOR_N == 1'b0);
 iowIsActive_c : cover property (busIf.IOW_N == 1'b0);
 
+stateTransistion_a: assert property((busIf.CS_N && dma.tC.State == S0) |=> dma.tC.NextState == S1);
 
 endmodule
