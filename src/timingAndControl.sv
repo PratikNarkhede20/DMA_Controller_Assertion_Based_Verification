@@ -1,4 +1,4 @@
-module timingAndControl(busInterface.timingAndControl TCbusIf, busInterface.priorityLogic PLbusIf, dmaInternalRegistersIf.timingAndControl intRegIf, dmaInternalSignalsIf.timingAndControl intSigIf);
+module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegistersIf.timingAndControl intRegIf, dmaInternalSignalsIf.timingAndControl intSigIf);
 
 //Flags for peripheral and memory read/write operations
   logic ior;
@@ -44,9 +44,9 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, busInterface.prio
     begin
       nextState = state;
       unique case (1'b1)
-        state[SIIndex]:	if (|PLbusIf.DREQ && intSigIf.programCondition == 1'b0 && configured)
+        state[SIIndex]:	if (|TCbusIf.DREQ && intSigIf.programCondition == 1'b0 && configured)
           nextState = SO;
-        state[SOIndex]:	if (PLbusIf.HLDA )
+        state[SOIndex]:	if (TCbusIf.HLDA )
           nextState = S1;
         state[S1Index]:
           nextState = S2;
@@ -60,7 +60,7 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, busInterface.prio
 //Output Logic
   always_comb
     begin
-      {TCbusIf.AEN, TCbusIf.ADSTB, PLbusIf.HRQ} = 3'b0;
+      {TCbusIf.AEN, TCbusIf.ADSTB, TCbusIf.HRQ} = 3'b0;
       intSigIf.intEOP = 1'b0;
       intSigIf.loadAddr = 1'b0;
       intSigIf.assertDACK = 1'b0;
@@ -76,7 +76,7 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, busInterface.prio
 
         state[SIIndex]:
           begin
-            if(!TCbusIf.CS_N && !PLbusIf.HRQ)
+            if(!TCbusIf.CS_N && !TCbusIf.HRQ)
             begin
               intSigIf.programCondition = 1'b1;
               configured = 1'b1;
@@ -85,7 +85,7 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, busInterface.prio
             begin
               configured = 1'b0;
             end
-            {TCbusIf.AEN, TCbusIf.ADSTB, PLbusIf.HRQ} = 3'b0;
+            {TCbusIf.AEN, TCbusIf.ADSTB, TCbusIf.HRQ} = 3'b0;
             {ior,memw,iow,memr} = 4'b0000;
             intSigIf.intEOP = 1'b0; intSigIf.loadAddr = 1'b0; intSigIf.assertDACK = 1'b0;
             intSigIf.updateCurrentWordCountReg = 1'b0;
@@ -96,7 +96,7 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, busInterface.prio
 
         state[SOIndex]:
           begin
-            PLbusIf.HRQ = 1'b1;
+            TCbusIf.HRQ = 1'b1;
             if(TCbusIf.RESET)
             begin
               configured = 1'b0;
@@ -105,7 +105,7 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, busInterface.prio
 
         state[S1Index]:
           begin
-            PLbusIf.HRQ = 1'b1;
+            TCbusIf.HRQ = 1'b1;
             {TCbusIf.AEN, TCbusIf.ADSTB, intSigIf.loadAddr, intSigIf.assertDACK} = 4'b1111;
             if(TCbusIf.RESET)
             begin
@@ -124,10 +124,10 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, busInterface.prio
 
             intSigIf.incrTemporaryAddressReg = 1'b1;
 
-            {PLbusIf.HRQ, TCbusIf.AEN, intSigIf.loadAddr, intSigIf.assertDACK} = 4'b1111;
+            {TCbusIf.HRQ, TCbusIf.AEN, intSigIf.loadAddr, intSigIf.assertDACK} = 4'b1111;
             unique case (1'b1)
 
-              PLbusIf.DACK[0]:
+              TCbusIf.DACK[0]:
                 begin
                   {ior,memw,iow,memr} = 4'b0000;
                   unique case (intRegIf.modeReg[0].transferType)
@@ -136,7 +136,7 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, busInterface.prio
                   endcase
                 end
 
-              PLbusIf.DACK[1]:
+              TCbusIf.DACK[1]:
                 begin
                   {ior,memw,iow,memr} = 4'b0000;
                   unique case (intRegIf.modeReg[1].transferType)
@@ -145,7 +145,7 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, busInterface.prio
                   endcase
                 end
 
-              PLbusIf.DACK[2]:
+              TCbusIf.DACK[2]:
                 begin
                   {ior,memw,iow,memr} = 4'b0000;
                   unique case (intRegIf.modeReg[2].transferType)
@@ -154,7 +154,7 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, busInterface.prio
                   endcase
                 end
 
-              PLbusIf.DACK[3]:
+              TCbusIf.DACK[3]:
                 begin
                   {ior,memw,iow,memr} = 4'b0000;
                   unique case (intRegIf.modeReg[3].transferType)
@@ -174,7 +174,7 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, busInterface.prio
               configured = 1'b0;
             end
 
-            {PLbusIf.HRQ, TCbusIf.AEN, intSigIf.loadAddr, intSigIf.assertDACK} = 4'b0000;
+            {TCbusIf.HRQ, TCbusIf.AEN, intSigIf.loadAddr, intSigIf.assertDACK} = 4'b0000;
             {ior,memw,iow,memr} = 4'b0000;
 
             intSigIf.updateCurrentWordCountReg = 1'b1;

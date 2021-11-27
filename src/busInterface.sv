@@ -34,6 +34,10 @@ interface busInterface(input logic CLK, RESET);
     input RESET,
     input CS_N,
     input READY,
+    input DREQ,
+    input HLDA,
+    input HRQ,
+    input DACK,
 
     inout EOP_N,
     inout IOR_N,
