@@ -36,7 +36,6 @@ interface busInterface(input logic CLK, RESET);
     input READY,
     input DREQ,
     input HLDA,
-    input HRQ,
     input DACK,
 
     inout EOP_N,
@@ -45,6 +44,7 @@ interface busInterface(input logic CLK, RESET);
 
     output AEN,
     output ADSTB,
+    output HRQ,
     output MEMR_N,
     output MEMW_N
   );
