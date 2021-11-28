@@ -55,7 +55,6 @@ interface busInterface(input logic CLK, RESET);
     input DREQ,
     input HLDA,
 
-    output HRQ,
     output DACK
   );
 
