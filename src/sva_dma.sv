@@ -26,10 +26,10 @@ DACK0isOne_c : cover property (busIf.DACK == 4'b0001);
 iorIsActive_c : cover property (busIf.IOR_N == 1'b0);
 iowIsActive_c : cover property (busIf.IOW_N == 1'b0);
 
-stateSO_c : cover property (dma.tC.state == SO);
+stateSO_c : cover property (dma.tC.state == `SO);
 
 
 
-stateTransistion_a: assert property((busIf.CS_N && dma.tC.state == SO) |=> (dma.tC.nextState == S1) );
+stateTransistion_a: assert property((busIf.CS_N && dma.tC.state == `SO) |=> (dma.tC.nextState == `S1) );
 
 endmodule
