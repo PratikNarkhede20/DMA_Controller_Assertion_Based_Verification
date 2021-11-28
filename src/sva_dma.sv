@@ -21,9 +21,9 @@ CS_NisLow_a : assume property (busIf.CS_N == 1'b0);
 
 //cover for data acknowledgement
 DACK0isOne_c : cover property (busIf.DACK == 4'b0001);
-//DACK1isOne_c : cover property (busIf.DACK == 4'b0010);
-//DACK2isOne_c : cover property (busIf.DACK == 4'b0100);
-//DACK3isOne_c : cover property (busIf.DACK == 4'b1000);
+DACK1isOne_c : cover property (busIf.DACK == 4'b0010);
+DACK2isOne_c : cover property (busIf.DACK == 4'b0100);
+DACK3isOne_c : cover property (busIf.DACK == 4'b1000);
 
 //cover for input output read or write signal from timing and control
 ioRead_c : cover property (busIf.IOR_N == 1'b0);
