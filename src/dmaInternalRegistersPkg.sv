@@ -30,7 +30,7 @@ struct packed{
       logic controller    ; //0-Controller Enable, 1-Controller Disable
       logic c0AddressHold ; //0-Channel 0 address hold disabled,  1-Channel 0 address hold enable, X-if MemToMem=0
       logic memToMem      ; //0 - Memory to Memory disable, 1 - Memory to Memory enable
-    } command;
+    } commandReg;
 
     struct packed{
       logic [1 : 0] modeSelect        ; //00-Demand Mode , 01-Single Mode, 10-Block Mode, 11-Cascade Mode

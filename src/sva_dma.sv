@@ -48,4 +48,8 @@ stateTransistionS1toS2_a: assert property( ( !busIf.CS_N && (dma.tC.state == `S1
 stateTransistionS2toS4_a: assert property( ( !busIf.CS_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `S4) );
 stateTransistionS4toSI_a: assert property( ( !busIf.CS_N && (dma.tC.state == `S4) ) |-> (dma.tC.nextState == `SI) );
 
+commandRegZeroOnReset_a : assert property (busIf.RESET |-> (dma.intRegIf.commandReg == '0) );
+statusRegZeroOnReset_a : assert property (busIf.RESET |-> (dma.intRegIf.status == '0) );
+modeRegZeroOnReset_a : assert property (busIf.RESET |-> ( for(int i=0; i<4;i=i+1) dma.intRegIf.mode[i] == '0) );
+
 endmodule
