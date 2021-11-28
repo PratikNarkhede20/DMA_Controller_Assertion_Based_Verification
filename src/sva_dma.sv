@@ -1,5 +1,12 @@
 module dma_checker_sva(busInterface busIf);
 
+`define SI 6'b000001;
+`define SO 6'b000010;
+`define S1 6'b000100;
+`define S2 6'b001000;
+`define S3 6'b010000;
+`define S4 6'b100000;
+
 
 default clocking c0 @(posedge busIf.CLK); endclocking
 
@@ -19,10 +26,10 @@ DACK0isOne_c : cover property (busIf.DACK == 4'b0001);
 iorIsActive_c : cover property (busIf.IOR_N == 1'b0);
 iowIsActive_c : cover property (busIf.IOW_N == 1'b0);
 
-stateSO_c : cover property (dma.tC.state.SO);
+stateSO_c : cover property (dma.tC.state == SO);
 
 
 
-stateTransistion_a: assert property((busIf.CS_N && dma.tC.state == dma.tC.state.SO) |=> (dma.tC.nextState == dma.tC.state.S1) );
+stateTransistion_a: assert property((busIf.CS_N && dma.tC.state == SO) |=> (dma.tC.nextState == S1) );
 
 endmodule
