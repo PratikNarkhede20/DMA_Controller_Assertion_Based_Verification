@@ -1,12 +1,3 @@
-`include "dmaInternalRegistersIf.sv"
-`include "busInterface.sv"
-`include "dmaInternalRegistersPkg.sv"
-`include "dmaInternalSignalsIf.sv"
-`include "dmaRegConfigPkg.sv"
-
-import dmaInternalRegistersPkg :: *;
-import dmaRegConfigPkg :: *;
-
 module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegistersIf.timingAndControl intRegIf, dmaInternalSignalsIf.timingAndControl intSigIf);
 
   //Flags for peripheral and memory read/write operations

@@ -11,7 +11,8 @@ module dma_checker_sva(busInterface busIf);
 default clocking c0 @(posedge busIf.CLK); endclocking
 
 //assume the DMA controller is always active
-CS_NisLow_a : assume property (busIf.CS_N == 1'b0);
+CS_NisLow_assume : assume property (busIf.CS_N == 1'b0);
+HLDAisActive_assume : assume property (busIf.HLDA == 1'b1);
 
 //cover for Data request
 //DREQ0isOne_c : cover property (busIf.DREQ == 4'b0001);
@@ -41,7 +42,7 @@ stateS1_c : cover property (dma.tC.state == `S1);
 stateS2_c : cover property (dma.tC.state == `S2);
 stateS4_c : cover property (dma.tC.state == `S4);
 
-stateTransistionSItoSO_a: assert property( ( !busIf.CS_N && (dma.tC.state == `SI) ) |-> (dma.tC.nextState == `SO) );
+stateTransistionSItoSO_a: assert property( ( !busIf.CS_N && (dma.tC.state == `SI) ) |-> s_eventually(dma.tC.nextState == `SO) );
 stateTransistionSOtoS1_a: assert property( ( !busIf.CS_N && (dma.tC.state == `SO) ) |-> (dma.tC.nextState == `S1) );
 stateTransistionS1toS2_a: assert property( ( !busIf.CS_N && (dma.tC.state == `S1) ) |-> (dma.tC.nextState == `S2) );
 stateTransistionS2toS4_a: assert property( ( !busIf.CS_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `S4) );
