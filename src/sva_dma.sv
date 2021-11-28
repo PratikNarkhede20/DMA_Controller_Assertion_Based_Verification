@@ -39,7 +39,7 @@ stateSI_c : cover property (dma.tC.state == `SI);
 stateSO_c : cover property (dma.tC.state == `SO);
 stateS1_c : cover property (dma.tC.state == `S1);
 stateS2_c : cover property (dma.tC.state == `S2);
-stateS2_c : cover property (dma.tC.state == `S4);
+stateS3_c : cover property (dma.tC.state == `S4);
 
 stateTransistion_a: assert property( ( busIf.CS_N && (dma.tC.state == `SO) ) |=> (dma.tC.nextState == `S1) );
 
