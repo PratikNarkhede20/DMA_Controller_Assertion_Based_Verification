@@ -1,12 +1,21 @@
+`include "dmaInternalRegistersIf.sv"
+`include "busInterface.sv"
+`include "dmaInternalRegistersPkg.sv"
+`include "dmaInternalSignalsIf.sv"
+`include "dmaRegConfigPkg.sv"
+
+import dmaInternalRegistersPkg :: *;
+import dmaRegConfigPkg :: *;
+
 module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegistersIf.timingAndControl intRegIf, dmaInternalSignalsIf.timingAndControl intSigIf);
 
-//Flags for peripheral and memory read/write operations
+  //Flags for peripheral and memory read/write operations
   logic ior;
   logic iow;
   logic memr;
   logic memw;
 
-//Flag to signify that the DMA has been configured
+  //Flag to signify that the DMA has been configured
   logic configured;
 
   enum {SIIndex = 0,
@@ -27,24 +36,24 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegist
   always_ff @(posedge TCbusIf.CLK)
     begin
       if (TCbusIf.RESET)
-      begin
-        state <= SI;
-      end
+        begin
+          state <= SI;
+        end
       else
         state <= nextState;
     end
 
-    assign TCbusIf.IOR_N = (ior)? 1'b0 : 1'bz;
-    assign TCbusIf.MEMW_N = (memw)? 1'b0 : 1'bz;
-    assign TCbusIf.IOW_N = (iow)? 1'b0 : 1'bz;
-    assign TCbusIf.MEMR_N = (memr)? 1'b0 : 1'bz;
+  assign TCbusIf.IOR_N = (ior)? 1'b0 : 1'bz;
+  assign TCbusIf.MEMW_N = (memw)? 1'b0 : 1'bz;
+  assign TCbusIf.IOW_N = (iow)? 1'b0 : 1'bz;
+  assign TCbusIf.MEMR_N = (memr)? 1'b0 : 1'bz;
 
   //Next state Logic
   always_comb
     begin
       nextState = state;
       unique case (1'b1)
-        state[SIIndex]:	if (|TCbusIf.DREQ && intSigIf.programCondition == 1'b0 && configured)
+        state[SIIndex]:	if (|TCbusIf.DREQ && intSigIf.programCondition && configured)
           nextState = SO;
         state[SOIndex]:	if (TCbusIf.HLDA )
           nextState = S1;
@@ -54,10 +63,11 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegist
           nextState = S4;
         state[S4Index]:
           nextState = SI;
+        default: nextState = SI;
       endcase
     end
 
-//Output Logic
+  //Output Logic
   always_comb
     begin
       {TCbusIf.AEN, TCbusIf.ADSTB, TCbusIf.HRQ} = 3'b0;
@@ -77,14 +87,14 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegist
         state[SIIndex]:
           begin
             if(!TCbusIf.CS_N && !TCbusIf.HRQ)
-            begin
-              intSigIf.programCondition = 1'b1;
-              configured = 1'b1;
-            end
+              begin
+                intSigIf.programCondition = 1'b1;
+                configured = 1'b1;
+              end
             if(TCbusIf.RESET)
-            begin
-              configured = 1'b0;
-            end
+              begin
+                configured = 1'b0;
+              end
             {TCbusIf.AEN, TCbusIf.ADSTB, TCbusIf.HRQ} = 3'b0;
             {ior,memw,iow,memr} = 4'b0000;
             intSigIf.intEOP = 1'b0; intSigIf.loadAddr = 1'b0; intSigIf.assertDACK = 1'b0;
@@ -98,9 +108,9 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegist
           begin
             TCbusIf.HRQ = 1'b1;
             if(TCbusIf.RESET)
-            begin
-              configured = 1'b0;
-            end
+              begin
+                configured = 1'b0;
+              end
           end
 
         state[S1Index]:
@@ -108,17 +118,17 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegist
             TCbusIf.HRQ = 1'b1;
             {TCbusIf.AEN, TCbusIf.ADSTB, intSigIf.loadAddr, intSigIf.assertDACK} = 4'b1111;
             if(TCbusIf.RESET)
-            begin
-              configured = 1'b0;
-            end
+              begin
+                configured = 1'b0;
+              end
           end
 
         state[S2Index]:
           begin
             if(TCbusIf.RESET)
-            begin
-              configured = 1'b0;
-            end
+              begin
+                configured = 1'b0;
+              end
 
             intSigIf.decrTemporaryWordCountReg = 1'b1;
 
@@ -170,9 +180,9 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegist
         state[S4Index]:
           begin
             if(TCbusIf.RESET)
-            begin
-              configured = 1'b0;
-            end
+              begin
+                configured = 1'b0;
+              end
 
             {TCbusIf.HRQ, TCbusIf.AEN, intSigIf.loadAddr, intSigIf.assertDACK} = 4'b0000;
             {ior,memw,iow,memr} = 4'b0000;
@@ -184,6 +194,26 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegist
                 configured = 0;
               end
             intSigIf.updateCurrentAddressReg = 1'b1;
+          end
+
+        default:
+          begin
+            if(!TCbusIf.CS_N && !TCbusIf.HRQ)
+              begin
+                intSigIf.programCondition = 1'b1;
+                configured = 1'b1;
+              end
+            if(TCbusIf.RESET)
+              begin
+                configured = 1'b0;
+              end
+            {TCbusIf.AEN, TCbusIf.ADSTB, TCbusIf.HRQ} = 3'b0;
+            {ior,memw,iow,memr} = 4'b0000;
+            intSigIf.intEOP = 1'b0; intSigIf.loadAddr = 1'b0; intSigIf.assertDACK = 1'b0;
+            intSigIf.updateCurrentWordCountReg = 1'b0;
+            intSigIf.updateCurrentAddressReg = 1'b0;
+            intSigIf.decrTemporaryWordCountReg = 1'b0;
+            intSigIf.incrTemporaryAddressReg = 1'b0;
           end
 
       endcase
