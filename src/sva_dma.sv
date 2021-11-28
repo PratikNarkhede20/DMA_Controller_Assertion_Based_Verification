@@ -39,8 +39,12 @@ stateSI_c : cover property (dma.tC.state == `SI);
 stateSO_c : cover property (dma.tC.state == `SO);
 stateS1_c : cover property (dma.tC.state == `S1);
 stateS2_c : cover property (dma.tC.state == `S2);
-stateS3_c : cover property (dma.tC.state == `S4);
+stateS4_c : cover property (dma.tC.state == `S4);
 
-stateTransistion_a: assert property( ( busIf.CS_N && (dma.tC.state == `SO) ) |=> (dma.tC.nextState == `S1) );
+stateTransistionSItoSO_a: assert property( ( !busIf.CS_N && (dma.tC.state == `SI) ) |=> (dma.tC.nextState == `SO) );
+stateTransistionSOtoS1_a: assert property( ( !busIf.CS_N && (dma.tC.state == `SO) ) |=> (dma.tC.nextState == `S1) );
+stateTransistionS1toS2_a: assert property( ( !busIf.CS_N && (dma.tC.state == `S1) ) |=> (dma.tC.nextState == `S2) );
+stateTransistionS2toS4_a: assert property( ( !busIf.CS_N && (dma.tC.state == `S2) ) |=> (dma.tC.nextState == `S4) );
+stateTransistionS4toSI_a: assert property( ( !busIf.CS_N && (dma.tC.state == `S4) ) |=> (dma.tC.nextState == `SI) );
 
 endmodule
