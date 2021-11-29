@@ -48,8 +48,8 @@ stateTransistionS1toS2_a: assert property( ( !busIf.CS_N && (dma.tC.state == `S1
 stateTransistionS2toS4_a: assert property( ( !busIf.CS_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `S4) );
 stateTransistionS4toSI_a: assert property( ( !busIf.CS_N && (dma.tC.state == `S4) ) |-> (dma.tC.nextState == `SI) );
 
-commandRegZeroOnReset_a : assert property (busIf.RESET |-> (dma.intRegIf.commandReg == '0) );
-statusRegZeroOnReset_a : assert property (busIf.RESET |-> (dma.intRegIf.status == '0) );
-modeRegZeroOnReset_a : assert property ( (busIf.RESET) |-> ( (dma.intRegIf.mode[0] == '0) && (dma.intRegIf.mode[1] == '0) && (dma.intRegIf.mode[2] == '0) && (dma.intRegIf.mode[3] == '0) ) );
-
+commandRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.commandReg == '0) );
+statusRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.statusReg == '0) );
+modeRegZeroOnReset_a : assert property ( busIf.RESET |=> ( (dma.intRegIf.modeReg[0] == '0) && (dma.intRegIf.modeReg[1] == '0) && (dma.intRegIf.modeReg[2] == '0) && (dma.intRegIf.modeReg[3] == '0) ) );
+writeBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.writeBuffer == '0));
 endmodule
