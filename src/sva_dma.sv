@@ -52,4 +52,15 @@ commandRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.command
 statusRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.statusReg == '0) );
 modeRegZeroOnReset_a : assert property ( busIf.RESET |=> ( (dma.intRegIf.modeReg[0] == '0) && (dma.intRegIf.modeReg[1] == '0) && (dma.intRegIf.modeReg[2] == '0) && (dma.intRegIf.modeReg[3] == '0) ) );
 writeBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.writeBuffer == '0));
+readBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.readBuffer == '0));
+baseAddressRegZeroOnReset_a : assert property ( busIf.RESET |=> ( (dma.d.baseAddressReg[0] == '0) && (dma.d.baseAddressReg[1] == '0) && (dma.d.baseAddressReg[2] == '0) && (dma.d.baseAddressReg[3] == '0) ) );
+currentAddressRegZeroOnReset_a : assert property ( busIf.RESET |=> ( (dma.d.currentAddressReg[0] == '0) && (dma.d.currentAddressReg[1] == '0) && (dma.d.currentAddressReg[2] == '0) && (dma.d.currentAddressReg[3] == '0) ) );
+baseWordCountRegZeroOnReset_a : assert property ( busIf.RESET |=> ( (dma.d.baseWordCountReg[0] == '0) && (dma.d.baseWordCountReg[1] == '0) && (dma.d.baseWordCountReg[2] == '0) && (dma.d.baseWordCountReg[3] == '0) ) );
+currentWordCountRegZeroOnReset_a : assert property ( busIf.RESET |=> ( (dma.d.currentWordCountReg[0] == '0) && (dma.d.currentWordCountReg[1] == '0) && (dma.d.currentWordCountReg[2] == '0) && (dma.d.currentWordCountReg[3] == '0) ) );
+tempAddressRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.temporaryAddressReg == '0));
+tempWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.temporaryWordCountReg == '0));
+internalFFzeroOnReset_a : assert property (busIf.RESET |=> (dma.d.internalFF == 1'b0));
+outputAddressBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.outputAddressBuffer == '0));
+
+
 endmodule
