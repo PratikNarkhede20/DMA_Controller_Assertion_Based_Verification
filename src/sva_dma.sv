@@ -42,12 +42,14 @@ stateS1_c : cover property (dma.tC.state == `S1);
 stateS2_c : cover property (dma.tC.state == `S2);
 stateS4_c : cover property (dma.tC.state == `S4);
 
-stateTransistionSItoSO_a: assert property( ( !busIf.CS_N && (dma.tC.state == `SI) ) |-> s_eventually(dma.tC.nextState == `SO) );
-stateTransistionSOtoS1_a: assert property( ( !busIf.CS_N && (dma.tC.state == `SO) ) |-> (dma.tC.nextState == `S1) );
-stateTransistionS1toS2_a: assert property( ( !busIf.CS_N && (dma.tC.state == `S1) ) |-> (dma.tC.nextState == `S2) );
-stateTransistionS2toS4_a: assert property( ( !busIf.CS_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `S4) );
-stateTransistionS4toSI_a: assert property( ( !busIf.CS_N && (dma.tC.state == `S4) ) |-> (dma.tC.nextState == `SI) );
+stateTransistionSItoSO_a: assert property( disable iff busIf.RESET ( !busIf.CS_N && (dma.tC.state == `SI) ) |-> s_eventually(dma.tC.nextState == `SO) );
+stateTransistionSOtoS1_a: assert property( disable iff busIf.RESET ( !busIf.CS_N && (dma.tC.state == `SO) ) |-> (dma.tC.nextState == `S1) );
+stateTransistionS1toS2_a: assert property( disable iff busIf.RESET ( !busIf.CS_N && (dma.tC.state == `S1) ) |-> (dma.tC.nextState == `S2) );
+stateTransistionS2toS4_a: assert property( disable iff busIf.RESET ( !busIf.CS_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `S4) );
+stateTransistionS4toSI_a: assert property( disable iff busIf.RESET ( !busIf.CS_N && (dma.tC.state == `S4) ) |-> (dma.tC.nextState == `SI) );
 
+
+resetHigh_assume : assert property (busIf.RESET == 1'b1);
 commandRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.commandReg == '0) );
 statusRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.statusReg == '0) );
 modeRegZeroOnReset_a : assert property ( busIf.RESET |=> ( (dma.intRegIf.modeReg[0] == '0) && (dma.intRegIf.modeReg[1] == '0) && (dma.intRegIf.modeReg[2] == '0) && (dma.intRegIf.modeReg[3] == '0) ) );
