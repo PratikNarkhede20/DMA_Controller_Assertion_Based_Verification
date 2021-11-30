@@ -48,7 +48,7 @@ stateTransistionS1toS2_a : assert property( disable iff (busIf.RESET) ( !busIf.C
 stateTransistionS2toS4_a : assert property( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `S4) );
 stateTransistionS4toSI_a : assert property( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `S4) ) |-> (dma.tC.nextState == `SI) );
 
-|TCbusIf.DREQ && intSigIf.programCondition && configured
+//|TCbusIf.DREQ && intSigIf.programCondition && configured
 
 //resetHigh_assume : assume property (busIf.RESET == 1'b1);
 stateTransistionOnReset_a : assert property (busIf.RESET |=> (dma.tC.state == `SI) );
