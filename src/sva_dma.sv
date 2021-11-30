@@ -8,10 +8,7 @@ module dma_checker_sva(busInterface busIf);
 `define S4 6'b100000
 
 
-default clocking c0 @(posedge busIf.CLK);
-busIf.RESET == 1'b1;
-busIf.RESET == 1'b0;
-endclocking
+default clocking c0 @(posedge busIf.CLK); endclocking
 
 //assume the DMA controller is always active
 CS_NisLow_assume : assume property (busIf.CS_N == 1'b0);
