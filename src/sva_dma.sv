@@ -51,7 +51,7 @@ stateTransistionS4toSI_a : assert property ( disable iff (busIf.RESET) ( !busIf.
 //|TCbusIf.DREQ && intSigIf.programCondition && configured
 
 //resetHigh_assume : assume property (busIf.RESET == 1'b1);
-busIf.RESET == 1'b1;
+//busIf.RESET == 1'b1;
 stateTransistionOnReset_a : assert property (busIf.RESET |=> (dma.tC.state == `SI) );
 commandRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.commandReg == '0) );
 statusRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.statusReg == '0) );
@@ -70,7 +70,7 @@ outputAddressBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.outpu
 /*baseAddressRegZeroOnReset_a1 : assert property (int i; (busIf.RESET) |=> ( for(i=0;i<4;i=i+1)
                                                                             dma.d.baseAddressReg[i] == '0
                                                                          ) );*/
-busIf.RESET == 1'b0;
+//busIf.RESET == 1'b0;
 
 DREQ0011ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b0011) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) ) );
 DREQ0111ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b0111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) ) );
