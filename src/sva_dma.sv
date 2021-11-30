@@ -66,7 +66,7 @@ tempWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.t
 internalFFzeroOnReset_a : assert property (busIf.RESET |=> (dma.d.internalFF == 1'b0));
 outputAddressBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.outputAddressBuffer == '0));
 
-DREQ0011ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( (busIf.DREQ == 4'b0011)  )|=> [0:1] (busIf.DACK == (4'b0001)) );
+DREQ0011ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( (busIf.DREQ == 4'b0011) |=> [0:1] (busIf.DACK == 4'b0001) ) );
 //&&  (!dma.intRegIf.commandReg.priorityType) && (dma.intSigIf.assertDACK)
 
 endmodule
