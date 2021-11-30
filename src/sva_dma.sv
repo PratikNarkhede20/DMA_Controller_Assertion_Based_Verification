@@ -49,7 +49,7 @@ stateTransistionS2toS4_a: assert property( disable iff (busIf.RESET) ( !busIf.CS
 stateTransistionS4toSI_a: assert property( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `S4) ) |-> (dma.tC.nextState == `SI) );
 
 
-resetHigh_assume : assert property (busIf.RESET == 1'b1);
+resetHigh_assume : assume property (busIf.RESET == 1'b1);
 commandRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.commandReg == '0) );
 statusRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.statusReg == '0) );
 modeRegZeroOnReset_a : assert property ( busIf.RESET |=> ( (dma.intRegIf.modeReg[0] == '0) && (dma.intRegIf.modeReg[1] == '0) && (dma.intRegIf.modeReg[2] == '0) && (dma.intRegIf.modeReg[3] == '0) ) );
