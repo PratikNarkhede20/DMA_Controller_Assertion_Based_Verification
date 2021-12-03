@@ -41,7 +41,7 @@ stateSO_c : cover property (dma.tC.state == `SO);
 stateS1_c : cover property (dma.tC.state == `S1);
 stateS2_c : cover property (dma.tC.state == `S2);
 stateS4_c : cover property (dma.tC.state == `S4);
-stateTransistions_a : cover property ((dma.tC.state == `SI) ##10 (dma.tC.state == `SO) ##1 (dma.tC.state == `S1) ##1 (dma.tC.state == `S2) ##1 (dma.tC.state == `S4) ##1 (dma.tC.state == `SI));
+//stateTransistions_a : cover property ((dma.tC.state == `SI) ##10 (dma.tC.state == `SO) ##1 (dma.tC.state == `S1) ##1 (dma.tC.state == `S2) ##1 (dma.tC.state == `S4) ##1 (dma.tC.state == `SI));
 
 stateTransistionSItoSO_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `SI) ) |-> ##[0:$] (dma.tC.nextState == `SO) );
 stateTransistionSOtoS1_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `SO) ) |-> (dma.tC.nextState == `S1) );
