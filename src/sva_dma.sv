@@ -66,16 +66,40 @@ tempAddressRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.tem
 tempWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.temporaryWordCountReg == '0));
 internalFFzeroOnReset_a : assert property (busIf.RESET |=> (dma.d.internalFF == 1'b0));
 outputAddressBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.outputAddressBuffer == '0));
+priorityOrderDefaultOnReset_a : assert property (busIf.RESET |=> dma.pL.priorityOrder == 8'b11_10_01_00);
+DACKisZeroOnReset_a : assert property (busIf.RESET |=> busIf.DACK == 4'b0000);
 
 /*baseAddressRegZeroOnReset_a1 : assert property (int i; (busIf.RESET) |=> ( for(i=0;i<4;i=i+1)
                                                                             dma.d.baseAddressReg[i] == '0
                                                                          ) );*/
 //busIf.RESET == 1'b0;
-
+/*
 DREQ0011ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b0011) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) ) );
 DREQ0111ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b0111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) ) );
 DREQ1111ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b1111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) ) );
 DREQ1110ToDACK0010_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b1110) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0010) ) );
 //&&  (!dma.intRegIf.commandReg.priorityType) && (dma.intSigIf.assertDACK)
+
+property DACKforDREQ (inputDREQ, expectedDACK);
+  logic [3:0] inputDREQ, expectedDACK;
+  disable iff (busIf.RESET)
+  ( ( (busIf.DREQ == inputDREQ) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == expectedDACK) );
+endproperty
+
+genvar i;
+generate
+  for(i=0; i<16; i=i+1)
+   begin
+     inputDREQ = i;
+     if(inputDREQ[0]==1'b1) expectedDACK = 4'b0001;
+     else if(inputDREQ[1]==1'b1) expectedDACK = 4'b0010;
+     else if(inputDREQ[2]==1'b1) expectedDACK = 4'b0100;
+     else if(inputDREQ[3]==1'b1) expectedDACK = 4'b1000;
+     else expectedDACK = 4'b0000;
+     DACKforDREQfixedPriority_a : assert DACKforDREQ (inputDREQ, expectedDACK);
+   end
+  end
+endgenerate
+*/
 
 endmodule

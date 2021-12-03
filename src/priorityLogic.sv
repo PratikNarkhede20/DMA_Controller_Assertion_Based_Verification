@@ -65,6 +65,7 @@ module priorityLogic(busInterface.priorityLogic busIf, dmaInternalRegistersIf.pr
       if(busIf.RESET)
         begin
           priorityOrder <= 8'b11_10_01_00;
+          busIf.DACK <= 4'b0000;
         end
       else
         begin
