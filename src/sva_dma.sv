@@ -42,16 +42,16 @@ stateS1_c : cover property (dma.tC.state == `S1);
 stateS2_c : cover property (dma.tC.state == `S2);
 stateS4_c : cover property (dma.tC.state == `S4);
 
-stateTransistionSItoSO_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `SI) ) |-> (dma.tC.nextState == `SO) );
+stateTransistionSItoSO_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `SI) ) |-> ##[0:$] (dma.tC.nextState == `SO) );
 stateTransistionSOtoS1_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `SO) ) |-> (dma.tC.nextState == `S1) );
 stateTransistionS1toS2_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `S1) ) |-> (dma.tC.nextState == `S2) );
 stateTransistionS2toS4_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `S4) );
 stateTransistionS4toSI_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `S4) ) |-> (dma.tC.nextState == `SI) );
+stateTransistions_a : assert property (disable iff (busIf.RESET) (dma.tC.state == `SI) ##10 (dma.tC.state == `SO) ##1 (dma.tC.state == `S1) ##1 (dma.tC.state == `S2) ##1 (dma.tC.state == `S4) ##1 (dma.tC.state == `SI));
 
 //|TCbusIf.DREQ && intSigIf.programCondition && configured
 
-//resetHigh_assume : assume property (busIf.RESET == 1'b1);
-//busIf.RESET == 1'b1;
+/*
 stateTransistionOnReset_a : assert property (busIf.RESET |=> (dma.tC.state == `SI) );
 commandRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.commandReg == '0) );
 statusRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.statusReg == '0) );
@@ -68,6 +68,7 @@ internalFFzeroOnReset_a : assert property (busIf.RESET |=> (dma.d.internalFF == 
 outputAddressBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.outputAddressBuffer == '0));
 priorityOrderDefaultOnReset_a : assert property (busIf.RESET |=> dma.pL.priorityOrder == 8'b11_10_01_00);
 DACKisZeroOnReset_a : assert property (busIf.RESET |=> busIf.DACK == 4'b0000);
+*/
 
 /*baseAddressRegZeroOnReset_a1 : assert property (int i; (busIf.RESET) |=> ( for(i=0;i<4;i=i+1)
                                                                             dma.d.baseAddressReg[i] == '0
