@@ -1,6 +1,6 @@
 module dma_checker_sva(busInterface busIf);
-`define Reset
-`define Run
+//`define Reset
+//`define Run
 `define SI 6'b000001
 `define SO 6'b000010
 `define S1 6'b000100
