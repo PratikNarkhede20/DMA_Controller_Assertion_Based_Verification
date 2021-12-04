@@ -1,5 +1,6 @@
 module dma_checker_sva(busInterface busIf);
-
+`define Reset
+`define Run
 `define SI 6'b000001
 `define SO 6'b000010
 `define S1 6'b000100
@@ -10,6 +11,7 @@ module dma_checker_sva(busInterface busIf);
 
 default clocking c0 @(posedge busIf.CLK); endclocking
 
+`ifdef Run
 //assume the DMA controller is always active
 CS_NisLow_assume : assume property (busIf.CS_N == 1'b0);
 HLDAisActive_assume : assume property (busIf.HLDA == 1'b1);
@@ -30,7 +32,7 @@ AENactive_c : cover property (busIf.AEN == 1'b1);
 ADSTBactive_c : cover property (busIf.ADSTB == 1'b1);
 HRQactive_c : cover property (busIf.HRQ == 1'b1);
 
-stateSI_c : cover property (dma.tC.state == `SI);
+stateSI_c : cover property (##5 dma.tC.state == `SI);
 stateSO_c : cover property (dma.tC.state == `SO);
 stateS1_c : cover property (dma.tC.state == `S1);
 stateS2_c : cover property (dma.tC.state == `S2);
@@ -42,10 +44,11 @@ stateTransistionSOtoS1_a : assert property ( disable iff (busIf.RESET) ( !busIf.
 stateTransistionS1toS2_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `S1) ) |-> (dma.tC.nextState == `S2) );
 stateTransistionS2toS4_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `S4) );
 stateTransistionS4toSI_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `S4) ) |-> (dma.tC.nextState == `SI) );
-
 //|TCbusIf.DREQ && intSigIf.programCondition && configured
+`endif
 
-/*
+
+`ifdef Reset
 stateTransistionOnReset_a : assert property (busIf.RESET |=> (dma.tC.state == `SI) );
 commandRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.commandReg == '0) );
 statusRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.statusReg == '0) );
@@ -62,12 +65,14 @@ internalFFzeroOnReset_a : assert property (busIf.RESET |=> (dma.d.internalFF == 
 outputAddressBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.outputAddressBuffer == '0));
 priorityOrderDefaultOnReset_a : assert property (busIf.RESET |=> dma.pL.priorityOrder == 8'b11_10_01_00);
 DACKisZeroOnReset_a : assert property (busIf.RESET |=> busIf.DACK == 4'b0000);
-*/
+`endif
 
 /*baseAddressRegZeroOnReset_a1 : assert property (int i; (busIf.RESET) |=> ( for(i=0;i<4;i=i+1)
                                                                             dma.d.baseAddressReg[i] == '0
                                                                          ) );*/
 //busIf.RESET == 1'b0;
+
+`ifdef Run
 DREQ0011ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b0011) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) ) );
 DREQ0111ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b0111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) ) );
 DREQ1111ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b1111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) ) );
@@ -95,5 +100,6 @@ generate
   end
 endgenerate
 */
+`endif
 
 endmodule
