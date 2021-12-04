@@ -12,26 +12,26 @@ module dma_checker_sva(busInterface busIf);
 default clocking c0 @(posedge busIf.CLK); endclocking
 
 `ifdef Run
-//assume the DMA controller is always active
-CS_NisLow_assume : assume property (busIf.CS_N == 1'b0);
-HLDAisActive_assume : assume property (busIf.HLDA == 1'b1);
+CS_NisLow_assume : assume property (busIf.CS_N == 1'b0); //assume the DMA controller is always active
+HLDAisActive_assume : assume property (busIf.HLDA == 1'b1); //assume the DMA Controller always gets hold acknowledgement signal from CPU
 
-//cover for data acknowledgement
+//cover for data acknowledgement. check if inidividual channels are working
 DACK0isOne_c : cover property (busIf.DACK == 4'b0001);
 DACK1isOne_c : cover property (busIf.DACK == 4'b0010);
 DACK2isOne_c : cover property (busIf.DACK == 4'b0100);
 DACK3isOne_c : cover property (busIf.DACK == 4'b1000);
 
-//cover for input output read or write signal from timing and control
+//cover for input output read or write OR memory read or write signals
 ioRead_c : cover property (##5 busIf.IOR_N == 1'b0);
 ioWrite_c : cover property (##10 busIf.IOW_N == 1'b0);
 memoryRead_c : cover property (##5 busIf.MEMR_N == 1'b0);
 memoryWrite_c : cover property (##10 busIf.MEMW_N == 1'b0);
 
-AENactive_c : cover property (busIf.AEN == 1'b1);
-ADSTBactive_c : cover property (busIf.ADSTB == 1'b1);
-HRQactive_c : cover property (busIf.HRQ == 1'b1);
+AENactive_c : cover property (busIf.AEN == 1'b1); //cover for address enable signal
+ADSTBactive_c : cover property (busIf.ADSTB == 1'b1); ////cover for address strobe signal
+HRQactive_c : cover property (busIf.HRQ == 1'b1);//cover for hold request signal
 
+//state machine covers
 stateSI_c : cover property (##5 dma.tC.state == `SI);
 stateSO_c : cover property (dma.tC.state == `SO);
 stateS1_c : cover property (dma.tC.state == `S1);
@@ -39,6 +39,7 @@ stateS2_c : cover property (dma.tC.state == `S2);
 stateS4_c : cover property (dma.tC.state == `S4);
 stateTransistions_a : cover property ((dma.tC.state == `SI) ##10 (dma.tC.state == `SO) ##1 (dma.tC.state == `S1) ##1 (dma.tC.state == `S2) ##1 (dma.tC.state == `S4) ##1 (dma.tC.state == `SI));
 
+//state machine assertions
 stateTransistionSItoSO_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `SI) ) |-> ##[0:$] (dma.tC.nextState == `SO) );
 stateTransistionSOtoS1_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `SO) ) |-> (dma.tC.nextState == `S1) );
 stateTransistionS1toS2_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `S1) ) |-> (dma.tC.nextState == `S2) );
@@ -49,6 +50,7 @@ stateTransistionS4toSI_a : assert property ( disable iff (busIf.RESET) ( !busIf.
 
 
 `ifdef Reset
+//assertions are signals/registers on reset
 stateTransistionOnReset_a : assert property (busIf.RESET |=> (dma.tC.state == `SI) );
 commandRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.commandReg == '0) );
 statusRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.statusReg == '0) );
@@ -73,11 +75,14 @@ DACKisZeroOnReset_a : assert property (busIf.RESET |=> busIf.DACK == 4'b0000);
 //busIf.RESET == 1'b0;
 
 `ifdef Run
+//assertions for priority logic
 DREQ0011ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b0011) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) ) );
 DREQ0111ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b0111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) ) );
 DREQ1111ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b1111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) ) );
 DREQ1110ToDACK0010_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b1110) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0010) ) );
 //&&  (!dma.intRegIf.commandReg.priorityType) && (dma.intSigIf.assertDACK)
+
+//this below code is for exhaustive testcases for DREQ in generate block. there are few errors which we are still trying to figure out.
 /*
 property DACKforDREQ (inputDREQ, expectedDACK);
   logic [3:0] inputDREQ, expectedDACK;
@@ -100,6 +105,9 @@ generate
   end
 endgenerate
 */
+
+commandRegConfig_a : assert property ( disable iff (busIf.RESET) (intSigIf.programCondition & !busIf.CS_N & busIf.IOR_N & !busIf.IOW_N & busIf.A3 & !busIf.A2 & !busIf.A1 & !busIf.A0) |=> ##1 $past(busIf.DB,2) );
+
 `endif
 
 endmodule
