@@ -10,55 +10,73 @@ Command-line arguments:
 
 Info    : Using initialization sequence file to initialize design state.  File 'qs_files/myinit.init'.  [formal-205]
 Applying synthesis semantics.
-[00:00:00] Status: Done 0/10, Update 0/10, Proof radius min=0, avg=0.0, Mem=0GB
-[00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=19605.
-[00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=19603.
-[00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=19602.
-[00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=19604.
-[00:00:00] Covered @1: check1.DACK0isOne_c
-[00:00:00] Covered @1: check1.DACK3isOne_c
-[00:00:00] Covered @1: check1.DACK1isOne_c
-[00:00:00] Covered @1: check1.iorIsActive_c
-[00:00:00] Covered @1: check1.DACK2isOne_c
-[00:00:00] Covered @1: check1.iowIsActive_c
-[00:00:00] Covered @1: check1.DREQ3isOne_c
-[00:00:00] Covered @1: check1.DREQ2isOne_c
-[00:00:00] Covered @1: check1.DREQ1isOne_c
-[00:00:00] Covered @1: check1.DREQ0isOne_c
-[00:00:01] Status: Done 10/10, Update 10/10, Proof radius min=N/A, avg=N/A, Mem=1GB
+[00:00:00] Status: Done 0/26, Update 0/26, Proof radius min=0, avg=0.00, Mem=0GB
+[00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=25718.
+[00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=25716.
+[00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=25715.
+[00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=25717.
+[00:00:00] Covered @2: check1.stateSO_c
+[00:00:00] Covered @3: check1.DACK0isOne_c
+[00:00:00] Covered @3: check1.DACK1isOne_c
+[00:00:00] Covered @3: check1.DACK2isOne_c
+[00:00:00] Covered @3: check1.stateS1_c
+[00:00:00] Proven: check1.stateTransistionS4toSI_a
+[00:00:00] Covered @3: check1.DACK3isOne_c
+[00:00:00] Proven: check1.DREQ0011ToDACK0001_a
+[00:00:00] Covered @4: check1.stateS2_c
+[00:00:00] Proven: check1.DREQ0111ToDACK0001_a
+[00:00:00] Covered @6: check1.ioRead_c
+[00:00:00] Proven: check1.DREQ1111ToDACK0001_a
+[00:00:00] Proven: check1.DREQ1110ToDACK0010_a
+[00:00:00] Covered @5: check1.stateS4_c
+[00:00:00] Covered @11: check1.ioWrite_c
+[00:00:00] Covered @6: check1.memoryRead_c
+[00:00:00] Covered @6: check1.stateSI_c
+[00:00:00] Covered @11: check1.memoryWrite_c
+[00:00:00] Proven: check1.stateTransistionS2toS4_a
+[00:00:00] Proven: check1.stateTransistionSItoSO_a
+[00:00:00] Proven: check1.stateTransistionS1toS2_a
+[00:00:00] Proven: check1.stateTransistionSOtoS1_a
+[00:00:00] Covered @2: check1.HRQactive_c
+[00:00:00] Covered @3: check1.AENactive_c
+[00:00:00] Covered @3: check1.ADSTBactive_c
+[00:00:00] Covered @15: check1.stateTransistions_a
+[00:00:02] Status: Done 26/26, Update 26/26, Proof radius min=N/A, avg=N/A, Mem=1GB
 
 ---------------------------------------
 Property Summary                  Count
 ---------------------------------------
-Assumed                               0
-Covered                              10
+Assumed                               2
+Proven                                9
+Covered                              17
 Inconclusive                          0
+Fired                                 0
 Uncoverable                           0
 ---------------------------------------
-Total                                10
+Total                                28
 ---------------------------------------
 
 
 --------- Process Statistics ----------
-Elapsed Time                       1 s 
+Elapsed Time                       2 s 
 -------- Orchestration Process --------
--------- mo.ece.pdx.edu:19582 ---------
+-------- mo.ece.pdx.edu:25699 ---------
 CPU Time                           0 s 
 Peak Memory                      0.2 GB
 ---------- Engine Processes -----------
--------- mo.ece.pdx.edu:19602 ---------
+-------- mo.ece.pdx.edu:25718 ---------
+CPU Time                           0 s 
+Peak Memory                      0.1 GB
+CPU Utilization                    0 % 
+-------- mo.ece.pdx.edu:25715 ---------
 CPU Time                           2 s 
 Peak Memory                      0.3 GB
 CPU Utilization                  100 % 
--------- mo.ece.pdx.edu:19605 ---------
+-------- mo.ece.pdx.edu:25717 ---------
 CPU Time                           0 s 
 Peak Memory                      0.1 GB
 CPU Utilization                    0 % 
--------- mo.ece.pdx.edu:19603 ---------
-CPU Time                           0 s 
-Peak Memory                      0.1 GB
-CPU Utilization                    0 % 
--------- mo.ece.pdx.edu:19604 ---------
+-------- mo.ece.pdx.edu:25716 ---------
 CPU Time                           0 s 
 Peak Memory                      0.1 GB
 CPU Utilization                    0 % 
@@ -71,7 +89,7 @@ Count  Type     Message ID         Summary
 ---------------------------------------------------------------------------
     1  Info     formal-205         Using initialization sequence file to initialize design state.
 
-Final Process Statistics: Peak Memory 0.28GB, Cumulative CPU Time 2s, Elapsed Time 1s
+Final Process Statistics: Peak Memory 0.28GB, Cumulative CPU Time 2s, Elapsed Time 2s
 
 To see results in the GUI run:
 qverify /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/formal_verify.db

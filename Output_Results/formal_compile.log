@@ -2,7 +2,7 @@
 # Questa Static Verification System
 # Version 10.7b linux_x86_64 12 Jun 2018
 
-log created Sun Nov 14 22:59:28 2021 by pratik2 on mo.ece.pdx.edu
+log created Fri Dec  3 21:33:09 2021 by pratik2 on mo.ece.pdx.edu
 
 
 Command: netlist elaborate
@@ -46,14 +46,14 @@ Optimizing 10 design-units (inlining 0/8 module instances):
 -- Optimizing module z0in_work.dma(fast)
 Optimized design name is zi_opt_csl_1402776646_1
 Identified prefix 'dma'.
-End of log Sun Nov 14 22:59:29 2021
+End of log Fri Dec  3 21:33:10 2021
 
 
 # 
 # Questa Static Verification System
 # Version 10.7b linux_x86_64 12 Jun 2018
 
-log created Sun Nov 14 22:59:29 2021 by pratik2 on mo.ece.pdx.edu
+log created Fri Dec  3 21:33:10 2021 by pratik2 on mo.ece.pdx.edu
 
 
 Command: netlist create
@@ -82,16 +82,16 @@ Elaborating module 'dma_checker_sva'.
 Processing module 'dma'
 Elaborating module 'dma'.
 
-##Time Taken (Synthesis) = 199.000000 ticks = 1.990000 secs
+##Time Taken (Synthesis) = 236.000000 ticks = 2.360000 secs
 
-End of log Sun Nov 14 22:59:32 2021
+End of log Fri Dec  3 21:33:13 2021
 
 
 # 
 # Questa Static Verification System
 # Version 10.7b linux_x86_64 12 Jun 2018
 
-log created Sun Nov 14 22:59:32 2021 by pratik2 on mo.ece.pdx.edu
+log created Fri Dec  3 21:33:13 2021 by pratik2 on mo.ece.pdx.edu
 
 
 Command: formal compile
@@ -160,28 +160,27 @@ Formal model has been created.
 
 Property Summary
 -------------------------------------------------------------------------------
-Total  Directives :10
-Assert Directives :0
-Assume Directives :0
-Cover  Directives :10
+Total  Directives :28
+Assert Directives :9
+Assume Directives :2
+Cover  Directives :17
 
 SVA Summary
 -------------------------------------------------------------------------------
 SVA Directive Type        Directives           Checkers
 -------------------------------------------------------------------------------
-Assert                         0                   0
-Assume                         0                   0
-Cover                         10                  10
+Assert                         9                   9
+Assume                         2                   2
+Cover                         17                  17
 -------------------------------------------------------------------------------
 
 Design Checks Summary
 -------------------------------------------------------------------------------
 Check                              Found
 -------------------------------------------------------------------------------
-PORT_UNDRIVEN                          1
 REG_MULTIPLY_DRIVEN                    6
 -------------------------------------------------------------------------------
-Total                                  7
+Total                                  6
 -------------------------------------------------------------------------------
 
 
@@ -197,7 +196,7 @@ Count  Type     Message ID         Summary
     1  Info     netlist-11         Detected clock.
     1  Info     netlist-12         Detected reset.
 
-Final Process Statistics: Max memory 606MB, CPU time 4s, Total time 7s
-End of log Sun Nov 14 22:59:34 2021
+Final Process Statistics: Max memory 606MB, CPU time 5s, Total time 8s
+End of log Fri Dec  3 21:33:16 2021
 
 

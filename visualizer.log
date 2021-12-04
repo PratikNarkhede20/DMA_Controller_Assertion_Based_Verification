@@ -6,7 +6,7 @@ Server Initialized ...
 Mentor Graphics software version 10.7b-QCF (Build on Jun  7 2018)
 Copyright (C) 1999-2021 by Mentor Graphics All rights reserved.
    from_mega_agent
-   +outputDir+/tmp/visscratch.1TUnUX
+   +outputDir+/tmp/visscratch.SISIrT
    +tcl
    -I/pkgs/mentor/questa_cdc_formal/10.7b/linux_x86_64/share/modeltech/bin/../linux_x86_64/Visualizer/bin/../tb/incl
    +designfile+/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qcache/VISUALIZER/design.bin
@@ -18,7 +18,7 @@ Copyright (C) 1999-2021 by Mentor Graphics All rights reserved.
    +designfile+Output_Results/qcache/VISUALIZER/design.bin
 
 Command line option(s) :
-   +outputDir+/tmp/visscratch.1TUnUX
+   +outputDir+/tmp/visscratch.SISIrT
    +tcl
    -I/pkgs/mentor/questa_cdc_formal/10.7b/linux_x86_64/share/modeltech/bin/../linux_x86_64/Visualizer/bin/../tb/incl
    +designfile+/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qcache/VISUALIZER/design.bin
@@ -46,16 +46,9 @@ Design Statistics
          Always Comb = 4
             CA-Muxes = 4
         Cont-Assigns = 3
-           SVA-Cover = 10
+          SVA-Assert = 9
+           SVA-Cover = 17
 End of Design Statistics
 design loaded ...
 Reading file /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/dma.sv
-completed (0.01 (s)).
-Window layout Default has been saved in file /u/pratik2/.visualizer/layout.xml
-End of log Sun Nov 14 23:06:42 2021
-
-
-Start  : Sun Nov 14 22:59:39 2021
-End    : Sun Nov 14 23:06:42 2021
-VMSize : 2444352 kB
-VMPeak : 2512932 kB
+completed (0.02 (s)).

@@ -11,11 +11,11 @@
   <argv value="+external_client" pos="6"/>
  </app>
  <window_config>
-  <dockareas right="250" left="367" bottom="339" top="0"/>
-  <window width="1436" x="8" y="31" undocked="0" height="826" visible="1" type="rtl"/>
+  <dockareas right="250" left="367" bottom="141" top="0"/>
+  <window width="1436" x="0" y="0" undocked="0" height="826" visible="1" type="rtl"/>
   <window x="0" y="0" undocked="0" visible="1" type="transcript" dock_location="bottom"/>
-  <window width="614" title="Wave (check1.noFarmGreenWhenHigGreen_a)" x="0" y="80" undocked="1" height="460" visible="0" type="wave"/>
-  <window width="614" title="Wave (mod1.g1[1].g2[0].g3[1].g4[1].c1)" x="0" y="80" undocked="1" height="460" visible="0" type="wave" id="1"/>
+  <window width="1022" title="Wave (check1.commandRegConfig_a)" x="0" y="24" undocked="1" height="690" visible="1" type="wave"/>
+  <window width="1440" title="Wave (check1.DACKisZeroOnReset_a)" x="0" y="23" undocked="1" height="837" visible="0" type="wave" id="1"/>
   <window x="0" y="0" undocked="0" visible="1" type="source"/>
   <window x="0" y="0" undocked="0" visible="0" type="variables" dock_location="right"/>
   <window width="800" x="160" y="380" undocked="1" height="300" visible="0" type="search"/>
@@ -28,17 +28,19 @@
   <window title="Directives" x="0" y="0" undocked="0" visible="0" type="zindirectiveseditor" dock_location="right"/>
   <window title="Schematic" x="0" y="0" undocked="0" visible="0" type="zinschematicview" dock_location="right"/>
   <window width="367" title="Design" x="52" y="163" undocked="0" height="356" visible="1" type="zindutview" dock_location="left"/>
-  <window title="Properties" x="0" y="0" undocked="0" visible="1" type="zinformalproperties" dock_location="bottom"/>
+  <window width="1022" title="Properties" x="0" y="24" undocked="1" height="690" visible="1" type="zinformalproperties"/>
   <window width="1024" title="Property Summary" x="0" y="24" undocked="1" height="691" visible="0" type="zinformalpropertysummary" dock_location="right"/>
   <window title="Control Points" x="0" y="0" undocked="0" visible="0" type="zinformalcontrolpointsnew" dock_location="right"/>
   <window title="Clocks" x="0" y="0" undocked="0" visible="0" type="zinformalclocks" dock_location="right"/>
   <window title="Design Checks" x="0" y="0" undocked="0" visible="1" type="zinformalpolicychecks" dock_location="bottom"/>
  </window_config>
- <wave_file_mgr/>
+ <wave_file_mgr>
+  <waveFile waveType="0" tagName="ZIN1" fileName="/tmp/propcheck.15644_149/check1.commandRegConfig_a__0.db"/>
+ </wave_file_mgr>
  <gui>
   <main_window visible="1">
-   <srcbrowser primary="true" instancename="dma">
-    <drv_rec_gui drivers="true" gui_mode="false"/>
+   <srcbrowser value_annotation_mode="true" primary="true" instancename="dma" value_tooltip_mode="true">
+    <drv_rec_gui drivers="true" gui_mode="false" active="true"/>
    </srcbrowser>
    <sourcetclcommands>
     <tcl command="src activate source"/>
@@ -46,11 +48,81 @@
    </sourcetclcommands>
    <edge_gui cur_selection="AnyEdge"/>
   </main_window>
-  <watchTower_cur_setting curDisplayTimeUnitStr="1s" curDisplayTimeUnit="0" customDisplayTimeUnitListStr="" curRadix="8">
-   <curTime hightime="0" lowtime="0"/>
+  <watchTower_cur_setting curDisplayTimeUnitStr="1ns" curDisplayTimeUnit="-9" customDisplayTimeUnitListStr="" curActiveWaveFile="ZIN1" curRadix="8">
+   <curTime hightime="0" lowtime="70"/>
   </watchTower_cur_setting>
  </gui>
- <wave_mgr sync_time_range="0"/>
+ <wave_mgr sync_time_range="0">
+  <waveWindow signalHeight="27" displayGlobalView="1" wintype="4" showSecCursor="0" displayTimeUnitStr="1ns" swapRepresentationOfX="0" valueWidth="83" snapToEdge="1" displayRadixWithValue="0" secNudge="1" alignBaseName="0" showMarkers="1" displayLeadingZeros="0" displayFileTag="0" displayScopeName="1" primNudge="1" displayTimeUnit="-9" displayGrid="0" value_tooltip="0" trackViewToTime="0" waveWidth="747" nameWidth="150">
+   <window name="Wave0">
+    <timeunit value="11"/>
+    <frequnit value="2"/>
+    <showdiff value="0"/>
+   </window>
+   <viewPort>
+    <beginTime hightime="0" lowtime="0"/>
+    <endTime hightime="0" lowtime="90"/>
+    <beginViewTime hightime="0" lowtime="0"/>
+    <endViewTime hightime="0" lowtime="90"/>
+    <beginLastViewTime hightime="0" lowtime="0"/>
+    <endLastViewTime hightime="0" lowtime="90"/>
+   </viewPort>
+   <primCursor hightime="0" lowtime="70"/>
+   <wavetclcommands>
+    <tcl command="onerror resume"/>
+    <tcl command="wave update off"/>
+    <tcl command="wave clearselection"/>
+    <tcl command="wave update off"/>
+    <tcl command="wave add dma.qft_cycle_index -tag ZIN1 -label {cycle} -radix decimal -representation twoscomplement -foregroundcolor Gold"/>
+    <tcl command="wave group {Primary Clocks} -backgroundcolor #004466"/>
+    <tcl command="wave add -group {Primary Clocks} dma.busIf.CLK -tag ZIN1 -radix binary"/>
+    <tcl command="wave insertion [expr [wave index insertpoint] + 1]"/>
+    <tcl command="wave group {Property Signals} -backgroundcolor #006666"/>
+    <tcl command="wave add -group {Property Signals} dma.busIf.A0 -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Property Signals} dma.busIf.A1 -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Property Signals} dma.busIf.A2 -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Property Signals} dma.busIf.A3 -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Property Signals} dma.busIf.CS_N -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Property Signals} dma.busIf.HLDA -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Property Signals} dma.busIf.IOR_N -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Property Signals} dma.busIf.IOW_N -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Property Signals} dma.check1.busIf.RESET -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Property Signals} dma.d.intRegIf.commandReg -tag ZIN1 -radix decimal"/>
+    <tcl command="wave add -group {Property Signals} dma.d.intRegIf.modeReg -tag ZIN1 -radix hexadecimal"/>
+    <tcl command="wave add -group {Property Signals} dma.d.ioAddressBuffer -tag ZIN1 -radix hexadecimal"/>
+    <tcl command="wave add -group {Property Signals} dma.intSigIf.loadAddr -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Property Signals} dma.intSigIf.programCondition -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Property Signals} dma.pL.busIf.CLK -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Property Signals} dma.tC.TCbusIf.DACK -tag ZIN1 -radix hexadecimal"/>
+    <tcl command="wave add -group {Property Signals} dma.tC.state -tag ZIN1 -radix mnemonic"/>
+    <tcl command="wave insertion [expr [wave index insertpoint] + 1]"/>
+    <tcl command="wave group {Control Point Signals} -backgroundcolor #216600"/>
+    <tcl command="wave add -group {Control Point Signals} dma.busIf.A0 -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Control Point Signals} dma.busIf.A1 -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Control Point Signals} dma.busIf.A2 -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Control Point Signals} dma.busIf.A3 -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Control Point Signals} dma.busIf.CS_N -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Control Point Signals} dma.busIf.DREQ -tag ZIN1 -radix hexadecimal"/>
+    <tcl command="wave add -group {Control Point Signals} dma.busIf.HLDA -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Control Point Signals} dma.busIf.IOR_N -tag ZIN1 -radix binary"/>
+    <tcl command="wave add -group {Control Point Signals} dma.busIf.IOW_N -tag ZIN1 -radix binary"/>
+    <tcl command="wave insertion [expr [wave index insertpoint] + 1]"/>
+    <tcl command="wave marker add Start 10 LimeGreen"/>
+    <tcl command="wave marker add Fire 70 Orange"/>
+    <tcl command="wave update on"/>
+    <tcl command="wave top 14"/>
+    <tcl command=""/>
+   </wavetclcommands>
+   <markerList numMarkers="2">
+    <marker RGBcolor="#32cd32" name="Start">
+     <time hightime="0" lowtime="10"/>
+    </marker>
+    <marker RGBcolor="#ffa500" name="Fire">
+     <time hightime="0" lowtime="70"/>
+    </marker>
+   </markerList>
+  </waveWindow>
+ </wave_mgr>
  <windows/>
  <dut selection="dma"/>
 </session>

@@ -3,7 +3,7 @@ Questa Version 10.7b linux_x86_64 12 Jun 2018
 
 -------------------------------------------------------------------------------
 Design Report
-Created Sun Nov 14 22:59:34 2021
+Created Fri Dec  3 21:33:16 2021
 -------------------------------------------------------------------------------
 
 
@@ -17,11 +17,11 @@ Design Summary                    Count
 Clocks                                1
   User-specified                      1
   Inferred                            0
-Control Point Bits                   90
+Control Point Bits                   85
   DUT Input Bits                     37
   Cut Point Bits                      0
   Black Box Output Bits               0
-  Undriven Wire Bits                 53
+  Undriven Wire Bits                 48
 State Bits                          376
   Design Register Bits              376
   Design Latch Bits                   0
@@ -54,8 +54,6 @@ Undriven Wires
   d.temporaryReg  (8 bits)
   intRegIf.maskReg  (4 bits)
   intRegIf.requestReg  (3 bits)
-  pL.busIf.HRQ  (1 bit)
-  tC.PLbusIf.DACK  (4 bits)
   tC.intSigIf.deassertDACK  (1 bit)
   tC.stateIndex  (32 bits)
 

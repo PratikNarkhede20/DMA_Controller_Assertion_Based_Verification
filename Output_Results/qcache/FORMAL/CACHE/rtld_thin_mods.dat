@@ -163,8 +163,8 @@ c0
 <1
 >1
 >2
-20
-0:24:priorityLogic_1349834258
+19
+0:23:priorityLogic_558148854
 1:13:priorityLogic
 2:4:work
 3:82:/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/priorityLogic.sv
@@ -173,21 +173,20 @@ c0
 6:10:busIf.DACK
 7:10:busIf.DREQ
 8:10:busIf.HLDA
-9:9:busIf.HRQ
-10:11:busIf.RESET
-11:8:intRegIf
-12:19:intRegIf.commandReg
-13:16:intRegIf.maskReg
-14:19:intRegIf.requestReg
-15:8:intSigIf
-16:19:intSigIf.assertDACK
-17:21:intSigIf.deassertDACK
-18:13:priorityOrder
-19:17:priorityOrderTemp
+9:11:busIf.RESET
+10:8:intRegIf
+11:19:intRegIf.commandReg
+12:16:intRegIf.maskReg
+13:19:intRegIf.requestReg
+14:8:intSigIf
+15:19:intSigIf.assertDACK
+16:21:intSigIf.deassertDACK
+17:13:priorityOrder
+18:17:priorityOrderTemp
 <2
 >3
 10
-0:542:11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/priorityLogic.sv" 1 0  6  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HRQ" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0
+0:499:11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/priorityLogic.sv" 1 0  5  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0
 1:37:7 "scalar" "<zin_internal>" 0 0 1 0 0
 2:121:10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0
 3:36:7 "logic" "<zin_internal>" 0 0 1 0 0
@@ -199,38 +198,36 @@ c0
 9:211:10 "logic[3:0][1:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 10 "logic[1:0]" "<zin_internal>" 0 4 1 7 "integer[1:0]" "<zin_internal>" 0 10 32 1 0 7 "logic" "<zin_internal>" 0 0 1 0 0
 <3
 >4
-#2e1b2f3l1.73t0;
+#2e1b2f3l1.74t0;
 <4
 >5
-b16@4l1knt0;
+b15@4l1knt0;
 @5l1knt1;
 @6l1knt2;
 @7l1knt2;
 @8l1knt3;
-@9l1knt3;
-@10l1knt1;
-@11l1knt4;
-@12l1knt5;
-@13l1knt6;
-@14l1knt7;
-@15l1knt8;
+@9l1knt1;
+@10l1knt4;
+@11l1knt5;
+@12l1knt6;
+@13l1knt7;
+@14l1knt8;
+@15l1knt3;
 @16l1knt3;
-@17l1knt3;
+@17l3knt9;
 @18l3knt9;
-@19l3knt9;
 <5
 >6
-b11@5l1x2t1;
-@10l1x7t1;
+b10@5l1x2t1;
+@9l1x6t1;
 @7l1x4t2;
 @8l1x5t3;
-@9l1d1x6t3;
 @6l1d1x3t2;
-@12l1x9t5;
-@13l1x10t6;
-@14l1x11t7;
+@11l1x8t5;
+@12l1x9t6;
+@13l1x10t7;
+@15l1x12t3;
 @16l1x13t3;
-@17l1x14t3;
 <6
 >7
 c0
@@ -238,8 +235,8 @@ c0
 <1
 >1
 >2
-45
-0:26:timingAndControl_198560092
+42
+0:27:timingAndControl_1245176609
 1:16:timingAndControl
 2:4:work
 3:85:/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/timingAndControl.sv
@@ -263,47 +260,43 @@ c0
 21:4:memr
 22:4:memw
 23:9:nextState
-24:7:PLbusIf
-25:11:PLbusIf.CLK
-26:12:PLbusIf.DACK
-27:12:PLbusIf.DREQ
-28:12:PLbusIf.HLDA
-29:11:PLbusIf.HRQ
-30:13:PLbusIf.RESET
-31:5:state
-32:10:stateIndex
-33:7:TCbusIf
-34:13:TCbusIf.ADSTB
-35:11:TCbusIf.AEN
-36:11:TCbusIf.CLK
-37:12:TCbusIf.CS_N
-38:13:TCbusIf.EOP_N
-39:13:TCbusIf.IOR_N
-40:13:TCbusIf.IOW_N
-41:14:TCbusIf.MEMR_N
-42:14:TCbusIf.MEMW_N
-43:13:TCbusIf.READY
-44:13:TCbusIf.RESET
+24:5:state
+25:10:stateIndex
+26:7:TCbusIf
+27:13:TCbusIf.ADSTB
+28:11:TCbusIf.AEN
+29:11:TCbusIf.CLK
+30:12:TCbusIf.CS_N
+31:12:TCbusIf.DACK
+32:12:TCbusIf.DREQ
+33:13:TCbusIf.EOP_N
+34:12:TCbusIf.HLDA
+35:11:TCbusIf.HRQ
+36:13:TCbusIf.IOR_N
+37:13:TCbusIf.IOW_N
+38:14:TCbusIf.MEMR_N
+39:14:TCbusIf.MEMW_N
+40:13:TCbusIf.READY
+41:13:TCbusIf.RESET
 <2
 >3
-11
+10
 0:36:7 "logic" "<zin_internal>" 0 0 1 0 0
 1:1000:11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/timingAndControl.sv" 1 0  3  "modeReg" 10 "struct[3:0]" "<zin_internal>" 0 0 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 11 "struct" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/dmaInternalRegistersIf.sv" 27 0  4  "modeSelect" 10 "logic[1:0]" "<zin_internal>" 0 4 1 7 "integer[1:0]" "<zin_internal>" 0 10 32 1 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "addressSelect" 7 "logic" "<zin_internal>" 0 0 1 0 0 "autoinitialization" 7 "logic" "<zin_internal>" 0 0 1 0 0 "transferType" 10 "logic[1:0]" "<zin_internal>" 0 4 1 7 "integer[1:0]" "<zin_internal>" 0 10 32 1 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "temporaryWordCountReg" 10 "logic[15:0]" "<zin_internal>" 0 4 1 7 "integer[15:0]" "<zin_internal>" 0 10 32 15 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "temporaryAddressReg" 10 "logic[15:0]" "<zin_internal>" 0 4 1 7 "integer[15:0]" "<zin_internal>" 0 10 32 15 0 7 "logic" "<zin_internal>" 0 0 1 0 0
 2:583:10 "struct[3:0]" "<zin_internal>" 0 0 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 11 "struct" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/dmaInternalRegistersIf.sv" 27 0  4  "modeSelect" 10 "logic[1:0]" "<zin_internal>" 0 4 1 7 "integer[1:0]" "<zin_internal>" 0 10 32 1 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "addressSelect" 7 "logic" "<zin_internal>" 0 0 1 0 0 "autoinitialization" 7 "logic" "<zin_internal>" 0 0 1 0 0 "transferType" 10 "logic[1:0]" "<zin_internal>" 0 4 1 7 "integer[1:0]" "<zin_internal>" 0 10 32 1 0 7 "logic" "<zin_internal>" 0 0 1 0 0
 3:124:10 "logic[15:0]" "<zin_internal>" 0 4 1 7 "integer[15:0]" "<zin_internal>" 0 10 32 15 0 7 "logic" "<zin_internal>" 0 0 1 0 0
 4:618:11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/timingAndControl.sv" 1 0  9  "assertDACK" 7 "logic" "<zin_internal>" 0 0 1 0 0 "deassertDACK" 7 "logic" "<zin_internal>" 0 0 1 0 0 "intEOP" 7 "logic" "<zin_internal>" 0 0 1 0 0 "loadAddr" 7 "logic" "<zin_internal>" 0 0 1 0 0 "programCondition" 7 "logic" "<zin_internal>" 0 0 1 0 0 "updateCurrentWordCountReg" 7 "logic" "<zin_internal>" 0 0 1 0 0 "updateCurrentAddressReg" 7 "logic" "<zin_internal>" 0 0 1 0 0 "decrTemporaryWordCountReg" 7 "logic" "<zin_internal>" 0 0 1 0 0 "incrTemporaryAddressReg" 7 "logic" "<zin_internal>" 0 0 1 0 0
 5:183:8 "enum" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/timingAndControl.sv" 24 0 6 5 0 6 "SI" "6'b1" "SO" "6'h2" "S1" "6'h4" "S2" "6'h8" "S3" "6'h10" "S4" "6'h20"
-6:542:11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/priorityLogic.sv" 1 0  6  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HRQ" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0
-7:37:7 "scalar" "<zin_internal>" 0 0 1 0 0
-8:121:10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0
-9:219:8 "enum" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/timingAndControl.sv" 17 2 32 31 0 6 "SIIndex" "32'b0" "SOIndex" "32'b1" "S1Index" "32'h2" "S2Index" "32'h3" "S3Index" "32'h4" "S4Index" "32'h5"
-10:608:11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/timingAndControl.sv" 1 0  11  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "READY" 7 "logic" "<zin_internal>" 0 0 1 0 0 "EOP_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "AEN" 7 "logic" "<zin_internal>" 0 0 1 0 0 "ADSTB" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMR_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMW_N" 7 "logic" "<zin_internal>" 0 0 1 0 0
+6:219:8 "enum" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/timingAndControl.sv" 17 2 32 31 0 6 "SIIndex" "32'b0" "SOIndex" "32'b1" "S1Index" "32'h2" "S2Index" "32'h3" "S3Index" "32'h4" "S4Index" "32'h5"
+7:953:11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/timingAndControl.sv" 1 0  15  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "READY" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "EOP_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "AEN" 7 "logic" "<zin_internal>" 0 0 1 0 0 "ADSTB" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HRQ" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMR_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMW_N" 7 "logic" "<zin_internal>" 0 0 1 0 0
+8:37:7 "scalar" "<zin_internal>" 0 0 1 0 0
+9:121:10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0
 <3
 >4
-#3e1b2f3l1.192t0;
+#3e1b2f3l1.213t0;
 <4
 >5
-b41@4l10knt0;
+b38@4l10knt0;
 @5l1knt1;
 @6l1knt2;
 @7l1knt3;
@@ -323,46 +316,41 @@ b41@4l10knt0;
 @21l6knt0;
 @22l7knt0;
 @23l24knt5;
-@24l1knt6;
-@25l1knt7;
-@26l1knt8;
-@27l1knt8;
+@24l24knt5;
+@25l17knt6;
+@26l1knt7;
+@27l1knt0;
 @28l1knt0;
-@29l1knt0;
-@30l1knt7;
-@31l24knt5;
-@32l17knt9;
-@33l1knt10;
+@29l1knt8;
+@30l1knt0;
+@31l1knt9;
+@32l1knt9;
+@33l1knt8;
 @34l1knt0;
 @35l1knt0;
-@36l1knt7;
-@37l1knt0;
-@38l1knt7;
-@39l1knt7;
-@40l1knt7;
-@41l1knt0;
-@42l1knt0;
-@43l1knt0;
-@44l1knt7;
+@36l1knt8;
+@37l1knt8;
+@38l1knt0;
+@39l1knt0;
+@40l1knt0;
+@41l1knt8;
 <5
 >6
-b29@36l1x33t7;
-@44l1x41t7;
-@37l1x34t0;
-@43l1x40t0;
-@38l1d2x35t7;
-@39l1d2x36t7;
-@40l1d2x37t7;
+b27@29l1x26t8;
+@41l1x38t8;
+@30l1x27t0;
+@40l1x37t0;
+@32l1x29t9;
+@34l1x31t0;
+@31l1x28t9;
+@33l1d2x30t8;
+@36l1d2x33t8;
+@37l1d2x34t8;
+@28l1d1x25t0;
+@27l1d1x24t0;
 @35l1d1x32t0;
-@34l1d1x31t0;
-@41l1d1x38t0;
-@42l1d1x39t0;
-@25l1x22t7;
-@30l1x27t7;
-@27l1x24t8;
-@28l1x25t0;
-@29l1d1x26t0;
-@26l1d1x23t8;
+@38l1d1x35t0;
+@39l1d1x36t0;
 @6l1x3t2;
 @8l1x5t3;
 @7l1x4t3;
@@ -478,7 +466,7 @@ c0
 >3
 17
 0:215:10 "logic[3:0][15:0]" "<zin_internal>" 0 0 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 10 "logic[15:0]" "<zin_internal>" 0 4 1 7 "integer[15:0]" "<zin_internal>" 0 10 32 15 0 7 "logic" "<zin_internal>" 0 0 1 0 0
-1:3718:11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/datapath.sv" 1 0  27  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "MEMR_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMW_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "READY" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "ADSTB" 7 "logic" "<zin_internal>" 0 0 1 0 0 "AEN" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HRQ" 7 "logic" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "EOP_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A0" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A1" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A2" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A3" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A4" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A5" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A6" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A7" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DB" 10 "scalar[7:0]" "<zin_internal>" 0 4 1 7 "integer[7:0]" "<zin_internal>" 0 10 32 7 0 7 "scalar" "<zin_internal>" 0 0 1 0 0 "timingAndControl" 11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/timingAndControl.sv" 1 0  11  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "READY" 7 "logic" "<zin_internal>" 0 0 1 0 0 "EOP_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "AEN" 7 "logic" "<zin_internal>" 0 0 1 0 0 "ADSTB" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMR_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMW_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "priorityLogic" 11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/priorityLogic.sv" 1 0  6  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HRQ" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "dataPath" 11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/busInterface.sv" 58 0  17  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A0" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A1" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A2" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A3" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DB" 10 "scalar[7:0]" "<zin_internal>" 0 4 1 7 "integer[7:0]" "<zin_internal>" 0 10 32 7 0 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A4" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A5" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A6" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A7" 7 "logic" "<zin_internal>" 0 0 1 0 0
+1:4020:11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/datapath.sv" 1 0  27  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "MEMR_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMW_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "READY" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "ADSTB" 7 "logic" "<zin_internal>" 0 0 1 0 0 "AEN" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HRQ" 7 "logic" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "EOP_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A0" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A1" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A2" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A3" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A4" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A5" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A6" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A7" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DB" 10 "scalar[7:0]" "<zin_internal>" 0 4 1 7 "integer[7:0]" "<zin_internal>" 0 10 32 7 0 7 "scalar" "<zin_internal>" 0 0 1 0 0 "timingAndControl" 11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/timingAndControl.sv" 1 0  15  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "READY" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "EOP_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "AEN" 7 "logic" "<zin_internal>" 0 0 1 0 0 "ADSTB" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HRQ" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMR_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMW_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "priorityLogic" 11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/priorityLogic.sv" 1 0  5  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "dataPath" 11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/busInterface.sv" 61 0  17  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A0" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A1" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A2" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A3" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DB" 10 "scalar[7:0]" "<zin_internal>" 0 4 1 7 "integer[7:0]" "<zin_internal>" 0 10 32 7 0 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A4" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A5" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A6" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A7" 7 "logic" "<zin_internal>" 0 0 1 0 0
 2:37:7 "scalar" "<zin_internal>" 0 0 1 0 0
 3:36:7 "logic" "<zin_internal>" 0 0 1 0 0
 4:121:10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0
@@ -630,7 +618,7 @@ c0
 >1
 >2
 31
-0:25:dma_checker_sva_826184537
+0:25:dma_checker_sva_107765124
 1:15:dma_checker_sva
 2:4:work
 3:76:/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv
@@ -664,7 +652,7 @@ c0
 <2
 >3
 6
-0:3718:11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/datapath.sv" 1 0  27  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "MEMR_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMW_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "READY" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "ADSTB" 7 "logic" "<zin_internal>" 0 0 1 0 0 "AEN" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HRQ" 7 "logic" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "EOP_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A0" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A1" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A2" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A3" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A4" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A5" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A6" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A7" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DB" 10 "scalar[7:0]" "<zin_internal>" 0 4 1 7 "integer[7:0]" "<zin_internal>" 0 10 32 7 0 7 "scalar" "<zin_internal>" 0 0 1 0 0 "timingAndControl" 11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/timingAndControl.sv" 1 0  11  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "READY" 7 "logic" "<zin_internal>" 0 0 1 0 0 "EOP_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "AEN" 7 "logic" "<zin_internal>" 0 0 1 0 0 "ADSTB" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMR_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMW_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "priorityLogic" 11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/priorityLogic.sv" 1 0  6  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HRQ" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "dataPath" 11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/busInterface.sv" 58 0  17  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A0" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A1" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A2" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A3" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DB" 10 "scalar[7:0]" "<zin_internal>" 0 4 1 7 "integer[7:0]" "<zin_internal>" 0 10 32 7 0 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A4" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A5" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A6" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A7" 7 "logic" "<zin_internal>" 0 0 1 0 0
+0:4020:11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/datapath.sv" 1 0  27  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "MEMR_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMW_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "READY" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "ADSTB" 7 "logic" "<zin_internal>" 0 0 1 0 0 "AEN" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HRQ" 7 "logic" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "EOP_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A0" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A1" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A2" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A3" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A4" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A5" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A6" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A7" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DB" 10 "scalar[7:0]" "<zin_internal>" 0 4 1 7 "integer[7:0]" "<zin_internal>" 0 10 32 7 0 7 "scalar" "<zin_internal>" 0 0 1 0 0 "timingAndControl" 11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/timingAndControl.sv" 1 0  15  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "READY" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "EOP_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "AEN" 7 "logic" "<zin_internal>" 0 0 1 0 0 "ADSTB" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HRQ" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMR_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMW_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "priorityLogic" 11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/priorityLogic.sv" 1 0  5  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "dataPath" 11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/busInterface.sv" 61 0  17  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A0" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A1" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A2" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A3" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DB" 10 "scalar[7:0]" "<zin_internal>" 0 4 1 7 "integer[7:0]" "<zin_internal>" 0 10 32 7 0 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A4" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A5" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A6" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A7" 7 "logic" "<zin_internal>" 0 0 1 0 0
 1:37:7 "scalar" "<zin_internal>" 0 0 1 0 0
 2:36:7 "logic" "<zin_internal>" 0 0 1 0 0
 3:121:10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0
@@ -672,7 +660,7 @@ c0
 5:36:7 "event" "<zin_internal>" 0 0 1 0 0
 <3
 >4
-#5e1b2f3l1.23t0C1B4P3S4E4;
+#5e1b2f3l1.114t0C1B4P3S12E12;
 <4
 >5
 b26@5l1knt0;
@@ -700,33 +688,33 @@ b26@5l1knt0;
 @27l1knt2;
 @28l1knt2;
 @29l1knt1;
-@30l4knt5;
+@30l12knt5;
 <5
 >6
-b24@16l4x12t1;
-@29l4x25t1;
-@24l4d2x20t1;
-@25l4d2x21t1;
-@26l4d2x22t2;
-@27l4d2x23t2;
-@28l4d2x24t2;
-@22l4d2x18t2;
-@14l4d2x10t2;
-@15l4d2x11t2;
-@23l4d2x19t2;
-@17l4d2x13t2;
-@18l4d2x14t3;
-@20l4d2x16t3;
-@21l4d2x17t1;
-@6l4d2x2t1;
-@7l4d2x3t1;
-@8l4d2x4t1;
-@9l4d2x5t1;
-@10l4d2x6t2;
-@11l4d2x7t2;
-@12l4d2x8t2;
-@13l4d2x9t2;
-@19l4d2x15t4;
+b24@16l12x12t1;
+@29l12x25t1;
+@24l12d2x20t1;
+@25l12d2x21t1;
+@26l12d2x22t2;
+@27l12d2x23t2;
+@28l12d2x24t2;
+@22l12d2x18t2;
+@14l12d2x10t2;
+@15l12d2x11t2;
+@23l12d2x19t2;
+@17l12d2x13t2;
+@18l12d2x14t3;
+@20l12d2x16t3;
+@21l12d2x17t1;
+@6l12d2x2t1;
+@7l12d2x3t1;
+@8l12d2x4t1;
+@9l12d2x5t1;
+@10l12d2x6t2;
+@11l12d2x7t2;
+@12l12d2x8t2;
+@13l12d2x9t2;
+@19l12d2x15t4;
 <6
 >7
 c0
@@ -773,7 +761,7 @@ c0
 <2
 >3
 5
-0:3718:11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/datapath.sv" 1 0  27  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "MEMR_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMW_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "READY" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "ADSTB" 7 "logic" "<zin_internal>" 0 0 1 0 0 "AEN" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HRQ" 7 "logic" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "EOP_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A0" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A1" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A2" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A3" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A4" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A5" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A6" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A7" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DB" 10 "scalar[7:0]" "<zin_internal>" 0 4 1 7 "integer[7:0]" "<zin_internal>" 0 10 32 7 0 7 "scalar" "<zin_internal>" 0 0 1 0 0 "timingAndControl" 11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/timingAndControl.sv" 1 0  11  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "READY" 7 "logic" "<zin_internal>" 0 0 1 0 0 "EOP_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "AEN" 7 "logic" "<zin_internal>" 0 0 1 0 0 "ADSTB" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMR_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMW_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "priorityLogic" 11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/priorityLogic.sv" 1 0  6  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HRQ" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "dataPath" 11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/busInterface.sv" 58 0  17  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A0" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A1" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A2" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A3" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DB" 10 "scalar[7:0]" "<zin_internal>" 0 4 1 7 "integer[7:0]" "<zin_internal>" 0 10 32 7 0 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A4" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A5" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A6" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A7" 7 "logic" "<zin_internal>" 0 0 1 0 0
+0:4020:11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/datapath.sv" 1 0  27  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "MEMR_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMW_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "READY" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "ADSTB" 7 "logic" "<zin_internal>" 0 0 1 0 0 "AEN" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HRQ" 7 "logic" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "EOP_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A0" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A1" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A2" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A3" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A4" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A5" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A6" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A7" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DB" 10 "scalar[7:0]" "<zin_internal>" 0 4 1 7 "integer[7:0]" "<zin_internal>" 0 10 32 7 0 7 "scalar" "<zin_internal>" 0 0 1 0 0 "timingAndControl" 11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/timingAndControl.sv" 1 0  15  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "READY" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "EOP_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "AEN" 7 "logic" "<zin_internal>" 0 0 1 0 0 "ADSTB" 7 "logic" "<zin_internal>" 0 0 1 0 0 "HRQ" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMR_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "MEMW_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "priorityLogic" 11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/priorityLogic.sv" 1 0  5  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "dataPath" 11 "interface" "/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/busInterface.sv" 61 0  17  "CLK" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "RESET" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "CS_N" 7 "logic" "<zin_internal>" 0 0 1 0 0 "IOR_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "IOW_N" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DREQ" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "DACK" 10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0 "HLDA" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A0" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A1" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A2" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A3" 7 "scalar" "<zin_internal>" 0 0 1 0 0 "DB" 10 "scalar[7:0]" "<zin_internal>" 0 4 1 7 "integer[7:0]" "<zin_internal>" 0 10 32 7 0 7 "scalar" "<zin_internal>" 0 0 1 0 0 "A4" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A5" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A6" 7 "logic" "<zin_internal>" 0 0 1 0 0 "A7" 7 "logic" "<zin_internal>" 0 0 1 0 0
 1:37:7 "scalar" "<zin_internal>" 0 0 1 0 0
 2:36:7 "logic" "<zin_internal>" 0 0 1 0 0
 3:121:10 "logic[3:0]" "<zin_internal>" 0 4 1 7 "integer[3:0]" "<zin_internal>" 0 10 32 3 0 7 "logic" "<zin_internal>" 0 0 1 0 0
@@ -841,7 +829,7 @@ c6
 #4@30i54l13x3 7 0 172;
 @31i50l5x3 6 0 0;
 #1@32i51l7x3 6 0 0;
-#2@33i52l9x3 7 0 40;
-#3@34i53l11x3 7 0 112;
+#2@33i52l9x3 7 0 36;
+#3@34i53l11x3 7 0 104;
 <7
 <1
