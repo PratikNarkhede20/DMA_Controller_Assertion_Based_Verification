@@ -14,12 +14,6 @@ default clocking c0 @(posedge busIf.CLK); endclocking
 CS_NisLow_assume : assume property (busIf.CS_N == 1'b0);
 HLDAisActive_assume : assume property (busIf.HLDA == 1'b1);
 
-//cover for Data request
-//DREQ0isOne_c : cover property (busIf.DREQ == 4'b0001);
-//DREQ1isOne_c : cover property (busIf.DREQ == 4'b0010);
-//DREQ2isOne_c : cover property (busIf.DREQ == 4'b0100);
-//DREQ3isOne_c : cover property (busIf.DREQ == 4'b1000);
-
 //cover for data acknowledgement
 DACK0isOne_c : cover property (busIf.DACK == 4'b0001);
 DACK1isOne_c : cover property (busIf.DACK == 4'b0010);
@@ -27,10 +21,10 @@ DACK2isOne_c : cover property (busIf.DACK == 4'b0100);
 DACK3isOne_c : cover property (busIf.DACK == 4'b1000);
 
 //cover for input output read or write signal from timing and control
-ioRead_c : cover property (busIf.IOR_N == 1'b0);
-ioWrite_c : cover property (busIf.IOW_N == 1'b0);
-memoryRead_c : cover property (busIf.MEMR_N == 1'b0);
-memoryWrite_c : cover property (busIf.MEMW_N == 1'b0);
+ioRead_c : cover property (##5 busIf.IOR_N == 1'b0);
+ioWrite_c : cover property (##10 busIf.IOW_N == 1'b0);
+memoryRead_c : cover property (##5 busIf.MEMR_N == 1'b0);
+memoryWrite_c : cover property (##10 busIf.MEMW_N == 1'b0);
 
 AENactive_c : cover property (busIf.AEN == 1'b1);
 ADSTBactive_c : cover property (busIf.ADSTB == 1'b1);
@@ -41,7 +35,7 @@ stateSO_c : cover property (dma.tC.state == `SO);
 stateS1_c : cover property (dma.tC.state == `S1);
 stateS2_c : cover property (dma.tC.state == `S2);
 stateS4_c : cover property (dma.tC.state == `S4);
-//stateTransistions_a : cover property ((dma.tC.state == `SI) ##10 (dma.tC.state == `SO) ##1 (dma.tC.state == `S1) ##1 (dma.tC.state == `S2) ##1 (dma.tC.state == `S4) ##1 (dma.tC.state == `SI));
+stateTransistions_a : cover property ((dma.tC.state == `SI) ##10 (dma.tC.state == `SO) ##1 (dma.tC.state == `S1) ##1 (dma.tC.state == `S2) ##1 (dma.tC.state == `S4) ##1 (dma.tC.state == `SI));
 
 stateTransistionSItoSO_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `SI) ) |-> ##[0:$] (dma.tC.nextState == `SO) );
 stateTransistionSOtoS1_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `SO) ) |-> (dma.tC.nextState == `S1) );
@@ -74,13 +68,12 @@ DACKisZeroOnReset_a : assert property (busIf.RESET |=> busIf.DACK == 4'b0000);
                                                                             dma.d.baseAddressReg[i] == '0
                                                                          ) );*/
 //busIf.RESET == 1'b0;
-/*
 DREQ0011ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b0011) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) ) );
 DREQ0111ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b0111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) ) );
 DREQ1111ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b1111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) ) );
 DREQ1110ToDACK0010_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b1110) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0010) ) );
 //&&  (!dma.intRegIf.commandReg.priorityType) && (dma.intSigIf.assertDACK)
-
+/*
 property DACKforDREQ (inputDREQ, expectedDACK);
   logic [3:0] inputDREQ, expectedDACK;
   disable iff (busIf.RESET)
