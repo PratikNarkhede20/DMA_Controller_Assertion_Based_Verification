@@ -106,7 +106,7 @@ generate
 endgenerate
 */
 
-commandRegConfig_a : assert property ( disable iff (busIf.RESET) ##2 (intSigIf.programCondition & !busIf.CS_N & busIf.IOR_N & !busIf.IOW_N & busIf.A3 & !busIf.A2 & !busIf.A1 & !busIf.A0) |=> ##1 (dma.intRegIf.commandReg == $past(busIf.DB,2) ) );
+commandRegConfig_a : assert property ( disable iff (busIf.RESET) ##2 (intSigIf.programCondition & !busIf.CS_N & busIf.IOR_N & !busIf.IOW_N & busIf.A3 & !busIf.A2 & !busIf.A1 & !busIf.A0) |=> (dma.intRegIf.commandReg == $past(busIf.DB,2) ) );
 
 `endif
 
