@@ -113,7 +113,7 @@ endgenerate
 */
 
 //working on these assertions
-loadIoDataBufferFromDB_a : assert property ( ( !busIf.CS_N & !busIf.IOW_N & !referenceModel.readStatusReg & !dma.intSigIf.loadAddr & referenceModel.readCurrentAddressReg & referenceModel.readCurrentWordCountReg )  |=> (dma.d.ioDataBuffer == $past(busIf.DB)));
+loadIoDataBufferFromDB_a : assert property ( ( !busIf.CS_N & !busIf.IOW_N & !dma.intSigIf.loadAddr & !(referenceModel.readStatusReg  | referenceModel.readCurrentAddressReg | referenceModel.readCurrentWordCountReg) )  |=> (dma.d.ioDataBuffer == $past(busIf.DB)));
 //readIoDataBuffer_a : assert property (##4 (!busIf.CS_N & !busIf.IOR_N) |-> (dma.d.ioDataBuffer == busIf.DB));
 loadCommandReg_a : assert property (##7 referenceModel.loadCommandReg |=> (dma.intRegIf.commandReg == $past(dma.d.ioDataBuffer) ) );
 loadModeReg_a : assert property (##8 referenceModel.loadModeReg |=> (dma.intRegIf.modeReg[$past(dma.d.ioDataBuffer[1:0])] == $past(dma.d.ioDataBuffer[7:2])));
