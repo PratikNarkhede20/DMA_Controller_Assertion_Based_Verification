@@ -79,5 +79,15 @@ interface busInterface(input logic CLK, RESET);
     output A6,
     output A7);
 
+  modport referenceModel(
+    input CS_N,
+    input IOR_N,
+    input IOW_N,
+    input A0,
+    input A1,
+    input A2,
+    input A3,
+  );
+
 
 endinterface
