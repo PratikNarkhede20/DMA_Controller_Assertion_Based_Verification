@@ -1,6 +1,6 @@
 module referenceModel(busInterface.referenceModel busIf, programCondition);
 
-  input programCondition
+  input programCondition;
   logic loadCommandReg;
   logic loadModeReg;
   logic loadBaseAddressReg;
