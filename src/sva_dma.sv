@@ -11,7 +11,7 @@ module dma_checker_sva(busInterface busIf);
 
 default clocking c0 @(posedge busIf.CLK); endclocking
 `ifdef Run
-default disable iff (busIf.RESET)
+default disable iff (busIf.RESET);
 `endif
 
 `ifdef Run
