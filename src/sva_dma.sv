@@ -8,8 +8,7 @@ module dma_checker_sva(busInterface busIf);
 `define S3 6'b010000
 `define S4 6'b100000
 
-parameter programCondition = 1'b0;
-
+logic programCondition;
 
 default clocking c0 @(posedge busIf.CLK); endclocking
 `ifdef Run
