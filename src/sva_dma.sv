@@ -10,6 +10,9 @@ module dma_checker_sva(busInterface busIf);
 
 
 default clocking c0 @(posedge busIf.CLK); endclocking
+`ifdef Run
+default disable iff (busIf.RESET)
+`endif
 
 `ifdef Run
 CS_NisLow_assume : assume property (busIf.CS_N == 1'b0); //assume the DMA controller is always active
@@ -40,11 +43,11 @@ stateS4_c : cover property (dma.tC.state == `S4);
 stateTransistions_a : cover property ((dma.tC.state == `SI) ##10 (dma.tC.state == `SO) ##1 (dma.tC.state == `S1) ##1 (dma.tC.state == `S2) ##1 (dma.tC.state == `S4) ##1 (dma.tC.state == `SI));
 
 //state machine assertions
-stateTransistionSItoSO_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `SI) ) |-> ##[0:$] (dma.tC.nextState == `SO) );
-stateTransistionSOtoS1_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `SO) ) |-> (dma.tC.nextState == `S1) );
-stateTransistionS1toS2_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `S1) ) |-> (dma.tC.nextState == `S2) );
-stateTransistionS2toS4_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `S4) );
-stateTransistionS4toSI_a : assert property ( disable iff (busIf.RESET) ( !busIf.CS_N && (dma.tC.state == `S4) ) |-> (dma.tC.nextState == `SI) );
+stateTransistionSItoSO_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `SI) ) |-> ##[0:$] (dma.tC.nextState == `SO) );
+stateTransistionSOtoS1_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `SO) ) |-> (dma.tC.nextState == `S1) );
+stateTransistionS1toS2_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S1) ) |-> (dma.tC.nextState == `S2) );
+stateTransistionS2toS4_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `S4) );
+stateTransistionS4toSI_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S4) ) |-> (dma.tC.nextState == `SI) );
 //|TCbusIf.DREQ && intSigIf.programCondition && configured
 `endif
 
@@ -76,10 +79,10 @@ DACKisZeroOnReset_a : assert property (busIf.RESET |=> busIf.DACK == 4'b0000);
 
 `ifdef Run
 //assertions for priority logic
-DREQ0011ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b0011) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) ) );
-DREQ0111ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b0111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) ) );
-DREQ1111ToDACK0001_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b1111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) ) );
-DREQ1110ToDACK0010_a : assert property ( disable iff (busIf.RESET) ( ( (busIf.DREQ == 4'b1110) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0010) ) );
+DREQ0011ToDACK0001_a : assert property ( ( (busIf.DREQ == 4'b0011) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) );
+DREQ0111ToDACK0001_a : assert property ( ( (busIf.DREQ == 4'b0111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) );
+DREQ1111ToDACK0001_a : assert property ( ( (busIf.DREQ == 4'b1111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) );
+DREQ1110ToDACK0010_a : assert property ( ( (busIf.DREQ == 4'b1110) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0010) );
 //&&  (!dma.intRegIf.commandReg.priorityType) && (dma.intSigIf.assertDACK)
 
 //this below code is for exhaustive testcases for DREQ in generate block. there are few errors which we are still trying to figure out.
@@ -107,8 +110,8 @@ endgenerate
 */
 
 //working on these assertions
-//commandRegConfig_a : assert property ( disable iff (busIf.RESET) ##4 (intSigIf.programCondition & !busIf.CS_N & busIf.IOR_N & !busIf.IOW_N & busIf.A3 & !busIf.A2 & !busIf.A1 & !busIf.A0) |=> (dma.intRegIf.commandReg == $past(busIf.DB,2) ) );
+ioDataBufferConfig_a : assert property (##4 (!busIf.CS_N & !busIf.IOW_N) |=> (dma.d.ioDataBuffer == busIf.DB));
+commandRegConfig_a : assert property (##7 (intSigIf.programCondition & !busIf.CS_N & busIf.IOR_N & !busIf.IOW_N & busIf.A3 & !busIf.A2 & !busIf.A1 & !busIf.A0) |=> (dma.intRegIf.commandReg == $past(dma.d.ioDataBuffer) ) );
 
-`endif
 
 endmodule
