@@ -8,10 +8,13 @@ module dma_checker_sva(busInterface busIf);
 `define S3 6'b010000
 `define S4 6'b100000
 
+parameter programCondition = 1'b0;
+
 
 default clocking c0 @(posedge busIf.CLK); endclocking
 `ifdef Run
-referenceModel referenceModel(busIf.referenceModel, dma.intSigIf.programCondition);
+assign programCondition = dma.intSigIf.programCondition;
+referenceModel referenceModel(busIf.referenceModel, programCondition);
 default disable iff (busIf.RESET);
 `endif
 
