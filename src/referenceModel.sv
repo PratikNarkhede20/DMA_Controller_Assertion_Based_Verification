@@ -4,10 +4,16 @@ module referenceModel(busInterface.referenceModel busIf, input logic programCond
   logic loadModeReg;
   logic loadBaseAddressReg;
   logic readCurrentAddressReg;
-  logic ldBaseWordCountReg;
+  logic loadBaseWordCountReg;
   logic readCurrentWordCountReg;
   logic readStatusReg;
   logic clearInternalFF;
+  
+  logic loadIoDataBufferFromDB;
+  logic loadIoDataBufferFromStatus;
+  
+  //assign loadIoDataBufferFromDB = ( !busIf.CS_N & !busIf.IOW_N & !dma.intSigIf.loadAddr & !(readStatusReg|readCurrentAddressReg|readCurrentWordCountReg) );
+  assign loadIoDataBufferFromStatus = ( !busIf.CS_N & readStatusReg & !dma.intSigIf.loadAddr & !(readCurrentAddressReg|readCurrentWordCountReg) );
 
   always_comb
     begin
@@ -24,7 +30,7 @@ module referenceModel(busInterface.referenceModel busIf, input logic programCond
       readCurrentAddressReg = (programCondition & !busIf.CS_N & !busIf.IOR_N & busIf.IOW_N & !busIf.A3 & !busIf.A0 & {busIf.A2, busIf.A1} inside {2'b00, 2'b01, 2'b10, 2'b11}) ? 1'b1 : 1'b0;
 
       //Register Code for writing Base Word Count Register is CS_N=0, IOR_N=1, IOW_N=0, A3=0, A0=1. A2, A1 decides the channel. For channel0 A2=0, A1=0. For channel1 A2=0, A1=1. For channel2 A2=1, A1=0. For channel3 A2=1, A1=1
-      ldBaseWordCountReg = (programCondition & !busIf.CS_N & busIf.IOR_N & !busIf.IOW_N & !busIf.A3 & busIf.A0 & {busIf.A2, busIf.A1} inside {2'b00, 2'b01, 2'b10, 2'b11}) ? 1'b1 : 1'b0;
+      loadBaseWordCountReg = (programCondition & !busIf.CS_N & busIf.IOR_N & !busIf.IOW_N & !busIf.A3 & busIf.A0 & {busIf.A2, busIf.A1} inside {2'b00, 2'b01, 2'b10, 2'b11}) ? 1'b1 : 1'b0;
 
       //Register Code for reading Current Word Count Register is CS_N=0, IOR_N=0, IOW_N=1, A3=0, A0=1. A2, A1 decides the channel. For channel0 A2=0, A1=0. For channel1 A2=0, A1=1. For channel2 A2=1, A1=0. For channel3 A2=1, A1=1
       readCurrentWordCountReg = (programCondition & !busIf.CS_N & !busIf.IOR_N & busIf.IOW_N & !busIf.A3 & busIf.A0 & {busIf.A2, busIf.A1} inside {2'b00, 2'b01, 2'b10, 2'b11}) ? 1'b1 : 1'b0;

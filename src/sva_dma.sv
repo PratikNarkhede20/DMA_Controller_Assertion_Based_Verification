@@ -9,9 +9,11 @@ module dma_checker_sva(busInterface busIf);
 `define S4 6'b100000
 
 logic programCondition;
+logic address;
 
 default clocking c0 @(posedge busIf.CLK); endclocking
 `ifdef Run
+//assign address = busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0
 assign programCondition = dma.intSigIf.programCondition;
 referenceModel referenceModel(busIf.referenceModel, programCondition);
 default disable iff (busIf.RESET);
@@ -19,7 +21,19 @@ default disable iff (busIf.RESET);
 
 `ifdef Run
 CS_NisLow_assume : assume property (busIf.CS_N == 1'b0); //assume the DMA controller is always active
-HLDAisActive_assume : assume property (busIf.HLDA == 1'b1); //assume the DMA Controller always gets hold acknowledgement signal from CPU
+//HLDAisActive_assume : assume property (busIf.HLDA == 1'b1); //assume the DMA Controller always gets hold acknowledgement signal from CPU
+
+ReadOrWriteTransferType_assume : assume property ( ( (dma.intRegIf.modeReg[0].transferType != 2'b00) || (dma.intRegIf.modeReg[0].transferType != 2'b11) ) &&
+											       ( (dma.intRegIf.modeReg[1].transferType != 2'b00) || (dma.intRegIf.modeReg[1].transferType != 2'b11) ) &&
+											       ( (dma.intRegIf.modeReg[2].transferType != 2'b00) || (dma.intRegIf.modeReg[2].transferType != 2'b11) ) &&
+											       ( (dma.intRegIf.modeReg[3].transferType != 2'b00) || (dma.intRegIf.modeReg[3].transferType != 2'b11) ) );
+											  
+/*singleTransferMode_assume : assume property (dma.intRegIf.modeReg[0].modeSelect == 2'b01 ||
+											 dma.intRegIf.modeReg[1].modeSelect == 2'b01 ||
+											 dma.intRegIf.modeReg[2].modeSelect == 2'b01 ||
+											 dma.intRegIf.modeReg[3].modeSelect == 2'b01);*/
+											  
+											  
 
 //cover for data acknowledgement. check if inidividual channels are working
 DACK0isOne_c : cover property (busIf.DACK == 4'b0001);
@@ -47,7 +61,7 @@ stateTransistions_a : cover property ((dma.tC.state == `SI) ##10 (dma.tC.state =
 
 //state machine assertions
 stateTransistionSItoSO_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `SI) ) |-> ##[0:$] (dma.tC.nextState == `SO) );
-stateTransistionSOtoS1_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `SO) ) |-> (dma.tC.nextState == `S1) );
+stateTransistionSOtoS1_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `SO) && busIf.HLDA ) |-> (dma.tC.nextState == `S1) );
 stateTransistionS1toS2_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S1) ) |-> (dma.tC.nextState == `S2) );
 stateTransistionS2toS4_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `S4) );
 stateTransistionS4toSI_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S4) ) |-> (dma.tC.nextState == `SI) );
@@ -113,11 +127,26 @@ endgenerate
 */
 
 //working on these assertions
-loadIoDataBufferFromDB_a : assert property ( ( !busIf.CS_N & !busIf.IOW_N & !dma.intSigIf.loadAddr & !(referenceModel.readStatusReg  | referenceModel.readCurrentAddressReg | referenceModel.readCurrentWordCountReg) )  |=> (dma.d.ioDataBuffer == $past(busIf.DB)));
+loadIoDataBufferFromDB_a : assert property ( ( !busIf.CS_N & !busIf.IOW_N & !dma.intSigIf.loadAddr & !(referenceModel.readStatusReg | referenceModel.readCurrentAddressReg | referenceModel.readCurrentWordCountReg))  |=> (dma.d.ioDataBuffer == $past(busIf.DB)));
 //readIoDataBuffer_a : assert property (##4 (!busIf.CS_N & !busIf.IOR_N) |-> (dma.d.ioDataBuffer == busIf.DB));
 loadCommandReg_a : assert property (##7 referenceModel.loadCommandReg |=> (dma.intRegIf.commandReg == $past(dma.d.ioDataBuffer) ) );
-loadModeReg_a : assert property (##8 referenceModel.loadModeReg |=> (dma.intRegIf.modeReg[$past(dma.d.ioDataBuffer[1:0])] == $past(dma.d.ioDataBuffer[7:2])));
-readStatusReg_a : assert property (##10 referenceModel.readStatusReg |=> (dma.d.ioDataBuffer == $past(dma.intRegIf.statusReg)));
+//loadModeReg_a : assert property (##8 referenceModel.loadModeReg |=> (dma.intRegIf.modeReg[$past(dma.d.ioDataBuffer[1:0])] == $past(dma.d.ioDataBuffer[7:2])));
+readStatusReg_a : assert property (##10 referenceModel.loadIoDataBufferFromStatus |=> (dma.d.ioDataBuffer == $past(dma.intRegIf.statusReg)));
+internalFFzero_a : assert property (##5 (referenceModel.clearInternalFF & !dma.d.enUpperAddress) |=> (dma.d.internalFF == 1'b0));
+internalFFone_a : assert property(##6 (!referenceModel.clearInternalFF & dma.d.enUpperAddress) |=> (dma.d.internalFF == 1'b1));
+loadWriteBuffer_a : assert property(##5 (referenceModel.loadCommandReg & referenceModel.loadBaseAddressReg & referenceModel.loadBaseWordCountReg)|=> (dma.d.writeBuffer == $past(dma.d.ioDataBuffer)));
+
+
+addressEnable_a : assert property ( ##2 $rose(busIf.HLDA) |=> busIf.AEN );
+addressStrobeActive_a : assert property ( ##2 $rose(busIf.HLDA) |=> busIf.ADSTB );
+addressStrobeLow_a : assert property ( $rose(busIf.ADSTB) |=> $fell(busIf.ADSTB) );
+
+addressBusValid : assert property (busIf.ADSTB |-> !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0}));
+dataBusValid : assert property ((busIf.ADSTB & busIf.AEN) |-> !$isunknown(busIf.DB));
+
+noReadWriteAtSameTime : assert property (!(!busIf.IOW_N && !busIf.IOR_N));
+addressValidOnReadWrite : assert property( ((busIf.IOW_N && !busIf.IOR_N) || (!busIf.IOW_N && busIf.IOR_N)) |-> !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0} ) );
+dataValidOnReadWrite : assert property ( (!busIf.IOW_N || !busIf.IOR_N) |-> !$isunknown(busIf.DB) );
 `endif
 
 endmodule

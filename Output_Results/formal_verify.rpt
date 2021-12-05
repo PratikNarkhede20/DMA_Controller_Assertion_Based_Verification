@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Questa PropCheck Version 10.7b linux_x86_64 12 Jun 2018
 -------------------------------------------------------------------------------
-Report Generated               : Sun Dec  5 04:05:24 2021
+Report Generated               : Sun Dec  5 08:30:00 2021
 -------------------------------------------------------------------------------
 
 Command-line arguments:
@@ -64,12 +64,12 @@ busIf.RESET = 1'b0
 Assumptions (2)
 -------------------------------------------------------------------------------
 check1.CS_NisLow_assume
-check1.HLDAisActive_assume
+check1.ReadOrWriteTransferType_assume
 -------------------------------------------------------------------------------
 
 
 -------------------------------------------------------------------------------
-Active Targets (30)
+Active Targets (40)
 -------------------------------------------------------------------------------
 check1.ADSTBactive_c
 check1.AENactive_c
@@ -82,13 +82,23 @@ check1.DREQ0111ToDACK0001_a
 check1.DREQ1110ToDACK0010_a
 check1.DREQ1111ToDACK0001_a
 check1.HRQactive_c
+check1.addressBusValid
+check1.addressEnable_a
+check1.addressStrobeActive_a
+check1.addressStrobeLow_a
+check1.addressValidOnReadWrite
+check1.dataBusValid
+check1.dataValidOnReadWrite
+check1.internalFFone_a
+check1.internalFFzero_a
 check1.ioRead_c
 check1.ioWrite_c
 check1.loadCommandReg_a
-check1.loadIoDataBuffer_a
-check1.loadModeReg_a
+check1.loadIoDataBufferFromDB_a
+check1.loadWriteBuffer_a
 check1.memoryRead_c
 check1.memoryWrite_c
+check1.noReadWriteAtSameTime
 check1.readStatusReg_a
 check1.stateS1_c
 check1.stateS2_c
@@ -107,7 +117,7 @@ check1.stateTransistions_a
 -------------------------------------------------------------------------------
 X Registers in Starting State
 -------------------------------------------------------------------------------
-  2 registers (5.4% of 37 in sequential fanin of properties)
+  2 registers (5.3% of 38 in sequential fanin of properties)
 -------------------------------------------------------------------------------
   d.enUpperAddress (File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/datapath.sv, Line 35) 1'bx
   d.intRegIf.temporaryAddressReg (File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/datapath.sv, Line 1) 16'bxxxxxxxxxxxxxxxx
@@ -117,7 +127,7 @@ X Registers in Starting State
 -------------------------------------------------------------------------------
 Z Registers in Starting State
 -------------------------------------------------------------------------------
-  0 registers (0.0% of 37 in sequential fanin of properties)
+  0 registers (0.0% of 38 in sequential fanin of properties)
 -------------------------------------------------------------------------------
 
 
@@ -125,31 +135,37 @@ Z Registers in Starting State
 Formal Netlist Statistics         Count
 ---------------------------------------
 Control Point Bits                   36
-  DUT Input Bits                     20
+  DUT Input Bits                     22
   Cut Point Bits                      8
   Black Box Output Bits               0
-  Undriven Wire Bits                  2
+  Undriven Wire Bits                  0
   Modeling Bits                       6
-State Bits                          282
+State Bits                          290
   Counter State Bits                 16
   RAM State Bits                      0
-  Register State Bits               131
-  Property State Bits               135
-Logic Gates                         834
-  Design Gates                      671
-  Property Gates                    163
+  Register State Bits               115
+  Property State Bits               159
+Logic Gates                         818
+  Design Gates                      645
+  Property Gates                    173
 ---------------------------------------
 
 
 -------------------------------------------------------------------------------
-Targets Proven (11)
+Targets Proven (17)
 -------------------------------------------------------------------------------
 check1.DREQ0011ToDACK0001_a
 check1.DREQ0111ToDACK0001_a
 check1.DREQ1110ToDACK0010_a
 check1.DREQ1111ToDACK0001_a
+check1.addressBusValid
+check1.addressStrobeLow_a
+check1.addressValidOnReadWrite
+check1.dataBusValid
+check1.dataValidOnReadWrite
+check1.internalFFone_a
+check1.internalFFzero_a
 check1.loadCommandReg_a
-check1.loadModeReg_a
 check1.stateTransistionS1toS2_a
 check1.stateTransistionS2toS4_a
 check1.stateTransistionS4toSI_a
@@ -159,9 +175,19 @@ check1.stateTransistionSOtoS1_a
 
 
 -------------------------------------------------------------------------------
-Targets Fired (2)
+Targets Vacuously Proven (1)
 -------------------------------------------------------------------------------
-check1.loadIoDataBuffer_a
+check1.loadWriteBuffer_a
+-------------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------------
+Targets Fired (5)
+-------------------------------------------------------------------------------
+check1.addressEnable_a
+check1.addressStrobeActive_a
+check1.loadIoDataBufferFromDB_a
+check1.noReadWriteAtSameTime
 check1.readStatusReg_a
 -------------------------------------------------------------------------------
 
@@ -192,8 +218,7 @@ check1.stateTransistions_a
 -------------------------------------------------------------------------------
 Assumptions Used in Proofs
 -------------------------------------------------------------------------------
-Target:  check1.stateTransistionSOtoS1_a
-		check1.HLDAisActive_assume
+<no assumptions used in proofs>
 -------------------------------------------------------------------------------
 
 
@@ -219,7 +244,7 @@ Assumptions Used in Bounded Unsatisfiable Sanity Checks
 
 
 -------------------------------------------------------------------------------
-Target Waveforms (19)
+Target Waveforms (22)
 -------------------------------------------------------------------------------
   TB Time(ns) Dist  Target
 -------------------------------------------------------------------------------
@@ -230,11 +255,14 @@ Target Waveforms (19)
            40    3  check1.DACK2isOne_c
            40    3  check1.DACK3isOne_c
            30    2  check1.HRQactive_c
+           50    4  check1.addressEnable_a
+           50    4  check1.addressStrobeActive_a
            70    6  check1.ioRead_c
           120   11  check1.ioWrite_c
-           60    5  check1.loadIoDataBuffer_a
+           30    2  check1.loadIoDataBufferFromDB_a
            70    6  check1.memoryRead_c
           120   11  check1.memoryWrite_c
+           20    1  check1.noReadWriteAtSameTime
           130   12  check1.readStatusReg_a
            40    3  check1.stateS1_c
            50    4  check1.stateS2_c
@@ -250,16 +278,17 @@ Target Waveforms Summary by Distance
 ---------------------------------------
 Distance                          Count
 ---------------------------------------
-  2 cycles                            2
+  1 cycle                             1
+  2 cycles                            3
   3 cycles                            7
-  4 cycles                            1
-  5 cycles                            2
+  4 cycles                            3
+  5 cycles                            1
   6 cycles                            3
  11 cycles                            2
  12 cycles                            1
  15 cycles                            1
 ---------------------------------------
-Total                                19
+Total                                22
 ---------------------------------------
 
 
@@ -275,9 +304,9 @@ Engine Performance
 ---------------------- Proofs -------------------------- Waveforms ------------
    Engine |  Safety Liveness Vacuity  Sanity |  Safety Liveness Vacuity  Sanity
 -------------------------------------------------------------------------------
-        0 |       5        0       0       0 |       0        0       0       0
-        7 |       5        0       0       0 |      16        0       8       0
-       10 |       1        0       0       0 |       3        0       5       0
+        0 |      11        0       1       0 |       0        0       0       0
+        7 |       2        0       0       0 |      18        0       4       0
+       10 |       5        0       0       0 |       4        0      18       0
 -------------------------------------------------------------------------------
 
 
@@ -285,36 +314,37 @@ Engine Performance
 Property Summary                  Count
 ---------------------------------------
 Assumed                               2
-Proven                               11
+Proven                               18
+  Vacuous                             1
 Covered                              17
 Inconclusive                          0
-Fired                                 2
+Fired                                 5
 Uncoverable                           0
 ---------------------------------------
-Total                                32
+Total                                42
 ---------------------------------------
 
 
 --------- Process Statistics ----------
-Elapsed Time                       1 s 
+Elapsed Time                       2 s 
 -------- Orchestration Process --------
---------- mo.ece.pdx.edu:4645 ---------
-CPU Time                           0 s 
+-------- mo.ece.pdx.edu:18711 ---------
+CPU Time                           1 s 
 Peak Memory                      0.2 GB
 ---------- Engine Processes -----------
---------- mo.ece.pdx.edu:4664 ---------
+-------- mo.ece.pdx.edu:18731 ---------
 CPU Time                           0 s 
 Peak Memory                      0.1 GB
 CPU Utilization                    0 % 
---------- mo.ece.pdx.edu:4666 ---------
+-------- mo.ece.pdx.edu:18742 ---------
 CPU Time                           2 s 
 Peak Memory                      0.3 GB
 CPU Utilization                  100 % 
---------- mo.ece.pdx.edu:4667 ---------
+-------- mo.ece.pdx.edu:18741 ---------
 CPU Time                           0 s 
 Peak Memory                      0.1 GB
 CPU Utilization                    0 % 
---------- mo.ece.pdx.edu:4665 ---------
+-------- mo.ece.pdx.edu:18743 ---------
 CPU Time                           0 s 
 Peak Memory                      0.1 GB
 CPU Utilization                    0 % 

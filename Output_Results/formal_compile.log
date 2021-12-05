@@ -2,7 +2,7 @@
 # Questa Static Verification System
 # Version 10.7b linux_x86_64 12 Jun 2018
 
-log created Sun Dec  5 04:05:16 2021 by pratik2 on mo.ece.pdx.edu
+log created Sun Dec  5 08:29:52 2021 by pratik2 on mo.ece.pdx.edu
 
 
 Command: netlist elaborate
@@ -32,8 +32,9 @@ Analyzing design...
 -- Loading module z0in_work.timingAndControl
 -- Loading module z0in_work.datapath
 -- Loading module z0in_work.dma_checker_sva
+-- Loading module z0in_work.referenceModel
 -- Loading interface z0in_work.busInterface
-Optimizing 10 design-units (inlining 0/8 module instances):
+Optimizing 11 design-units (inlining 0/9 module instances):
 -- Optimizing package z0in_work.my_bind_sva(fast)
 -- Optimizing package z0in_work.dmaRegConfigPkg(fast)
 -- Optimizing interface z0in_work.busInterface(fast)
@@ -42,18 +43,19 @@ Optimizing 10 design-units (inlining 0/8 module instances):
 -- Optimizing module z0in_work.priorityLogic(fast)
 -- Optimizing module z0in_work.timingAndControl(fast)
 -- Optimizing module z0in_work.datapath(fast)
+-- Optimizing module z0in_work.referenceModel(fast)
 -- Optimizing module z0in_work.dma_checker_sva(fast)
 -- Optimizing module z0in_work.dma(fast)
 Optimized design name is zi_opt_csl_1402776646_1
 Identified prefix 'dma'.
-End of log Sun Dec  5 04:05:18 2021
+End of log Sun Dec  5 08:29:53 2021
 
 
 # 
 # Questa Static Verification System
 # Version 10.7b linux_x86_64 12 Jun 2018
 
-log created Sun Dec  5 04:05:18 2021 by pratik2 on mo.ece.pdx.edu
+log created Sun Dec  5 08:29:53 2021 by pratik2 on mo.ece.pdx.edu
 
 
 Command: netlist create
@@ -77,21 +79,23 @@ Processing module 'timingAndControl'
 Elaborating module 'timingAndControl'.
 Processing module 'datapath'
 Elaborating module 'datapath'.
+Processing module 'referenceModel'
+Elaborating module 'referenceModel'.
 Processing module 'dma_checker_sva'
 Elaborating module 'dma_checker_sva'.
 Processing module 'dma'
 Elaborating module 'dma'.
 
-##Time Taken (Synthesis) = 214.000000 ticks = 2.140000 secs
+##Time Taken (Synthesis) = 231.000000 ticks = 2.310000 secs
 
-End of log Sun Dec  5 04:05:21 2021
+End of log Sun Dec  5 08:29:56 2021
 
 
 # 
 # Questa Static Verification System
 # Version 10.7b linux_x86_64 12 Jun 2018
 
-log created Sun Dec  5 04:05:21 2021 by pratik2 on mo.ece.pdx.edu
+log created Sun Dec  5 08:29:57 2021 by pratik2 on mo.ece.pdx.edu
 
 
 Command: formal compile
@@ -114,6 +118,8 @@ Processing module 'timingAndControl'
 Restoring module 'timingAndControl'.
 Processing module 'datapath'
 Restoring module 'datapath'.
+Processing module 'referenceModel'
+Restoring module 'referenceModel'.
 Processing module 'dma_checker_sva'
 Restoring module 'dma_checker_sva'.
 Processing module 'dma'
@@ -123,6 +129,7 @@ Flattening design 'dmaInternalSignalsIf'.
 Flattening design 'priorityLogic'.
 Flattening design 'timingAndControl'.
 Flattening design 'datapath'.
+Flattening design 'referenceModel'.
 Flattening design 'dma_checker_sva'.
 Flattening design 'dma'.
 Flattening design 'dma'.
@@ -159,8 +166,8 @@ Formal model has been created.
 
 Property Summary
 -------------------------------------------------------------------------------
-Total  Directives :32
-Assert Directives :13
+Total  Directives :42
+Assert Directives :23
 Assume Directives :2
 Cover  Directives :17
 
@@ -168,7 +175,7 @@ SVA Summary
 -------------------------------------------------------------------------------
 SVA Directive Type        Directives           Checkers
 -------------------------------------------------------------------------------
-Assert                        13                  13
+Assert                        23                  23
 Assume                         2                   2
 Cover                         17                  17
 -------------------------------------------------------------------------------
@@ -177,10 +184,9 @@ Design Checks Summary
 -------------------------------------------------------------------------------
 Check                              Found
 -------------------------------------------------------------------------------
-PORT_UNDRIVEN                          2
 REG_MULTIPLY_DRIVEN                    5
 -------------------------------------------------------------------------------
-Total                                  7
+Total                                  5
 -------------------------------------------------------------------------------
 
 
@@ -196,7 +202,7 @@ Count  Type     Message ID         Summary
     1  Info     netlist-11         Detected clock.
     1  Info     netlist-12         Detected reset.
 
-Final Process Statistics: Max memory 606MB, CPU time 4s, Total time 7s
-End of log Sun Dec  5 04:05:23 2021
+Final Process Statistics: Max memory 610MB, CPU time 5s, Total time 6s
+End of log Sun Dec  5 08:29:59 2021
 
 

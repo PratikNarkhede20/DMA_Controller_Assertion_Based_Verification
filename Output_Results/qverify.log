@@ -16,7 +16,7 @@
 # Questa Static Verification System
 # Version 10.7b linux_x86_64 12 Jun 2018
 # 
-# log created Sun Dec  5 04:05:16 2021 by pratik2 on mo.ece.pdx.edu
+# log created Sun Dec  5 08:29:52 2021 by pratik2 on mo.ece.pdx.edu
 # 
 # 
 # Command: netlist elaborate
@@ -46,8 +46,9 @@
 # -- Loading module z0in_work.timingAndControl
 # -- Loading module z0in_work.datapath
 # -- Loading module z0in_work.dma_checker_sva
+# -- Loading module z0in_work.referenceModel
 # -- Loading interface z0in_work.busInterface
-# Optimizing 10 design-units (inlining 0/8 module instances):
+# Optimizing 11 design-units (inlining 0/9 module instances):
 # -- Optimizing package z0in_work.my_bind_sva(fast)
 # -- Optimizing package z0in_work.dmaRegConfigPkg(fast)
 # -- Optimizing interface z0in_work.busInterface(fast)
@@ -56,18 +57,19 @@
 # -- Optimizing module z0in_work.priorityLogic(fast)
 # -- Optimizing module z0in_work.timingAndControl(fast)
 # -- Optimizing module z0in_work.datapath(fast)
+# -- Optimizing module z0in_work.referenceModel(fast)
 # -- Optimizing module z0in_work.dma_checker_sva(fast)
 # -- Optimizing module z0in_work.dma(fast)
 # Optimized design name is zi_opt_csl_1402776646_1
 # Identified prefix 'dma'.
-# End of log Sun Dec  5 04:05:18 2021
+# End of log Sun Dec  5 08:29:53 2021
 # 
 # 
 # 
 # Questa Static Verification System
 # Version 10.7b linux_x86_64 12 Jun 2018
 # 
-# log created Sun Dec  5 04:05:18 2021 by pratik2 on mo.ece.pdx.edu
+# log created Sun Dec  5 08:29:53 2021 by pratik2 on mo.ece.pdx.edu
 # 
 # 
 # Command: netlist create
@@ -91,21 +93,23 @@
 # Elaborating module 'timingAndControl'.
 # Processing module 'datapath'
 # Elaborating module 'datapath'.
+# Processing module 'referenceModel'
+# Elaborating module 'referenceModel'.
 # Processing module 'dma_checker_sva'
 # Elaborating module 'dma_checker_sva'.
 # Processing module 'dma'
 # Elaborating module 'dma'.
 # 
-##Time Taken (Synthesis) = 214.000000 ticks = 2.140000 secs
+##Time Taken (Synthesis) = 231.000000 ticks = 2.310000 secs
 # 
-# End of log Sun Dec  5 04:05:21 2021
+# End of log Sun Dec  5 08:29:56 2021
 # 
 # 
 # 
 # Questa Static Verification System
 # Version 10.7b linux_x86_64 12 Jun 2018
 # 
-# log created Sun Dec  5 04:05:21 2021 by pratik2 on mo.ece.pdx.edu
+# log created Sun Dec  5 08:29:57 2021 by pratik2 on mo.ece.pdx.edu
 # 
 # 
 # Command: formal compile
@@ -128,6 +132,8 @@
 # Restoring module 'timingAndControl'.
 # Processing module 'datapath'
 # Restoring module 'datapath'.
+# Processing module 'referenceModel'
+# Restoring module 'referenceModel'.
 # Processing module 'dma_checker_sva'
 # Restoring module 'dma_checker_sva'.
 # Processing module 'dma'
@@ -137,6 +143,7 @@
 # Flattening design 'priorityLogic'.
 # Flattening design 'timingAndControl'.
 # Flattening design 'datapath'.
+# Flattening design 'referenceModel'.
 # Flattening design 'dma_checker_sva'.
 # Flattening design 'dma'.
 # Flattening design 'dma'.
@@ -173,8 +180,8 @@
 # 
 # Property Summary
 # -------------------------------------------------------------------------------
-# Total  Directives :32
-# Assert Directives :13
+# Total  Directives :42
+# Assert Directives :23
 # Assume Directives :2
 # Cover  Directives :17
 # 
@@ -182,7 +189,7 @@
 # -------------------------------------------------------------------------------
 # SVA Directive Type        Directives           Checkers
 # -------------------------------------------------------------------------------
-# Assert                        13                  13
+# Assert                        23                  23
 # Assume                         2                   2
 # Cover                         17                  17
 # -------------------------------------------------------------------------------
@@ -191,10 +198,9 @@
 # -------------------------------------------------------------------------------
 # Check                              Found
 # -------------------------------------------------------------------------------
-# PORT_UNDRIVEN                          2
 # REG_MULTIPLY_DRIVEN                    5
 # -------------------------------------------------------------------------------
-# Total                                  7
+# Total                                  5
 # -------------------------------------------------------------------------------
 # 
 # 
@@ -210,8 +216,8 @@
 #     1  Info     netlist-11         Detected clock.
 #     1  Info     netlist-12         Detected reset.
 # 
-# Final Process Statistics: Max memory 606MB, CPU time 4s, Total time 7s
-# End of log Sun Dec  5 04:05:23 2021
+# Final Process Statistics: Max memory 610MB, CPU time 5s, Total time 6s
+# End of log Sun Dec  5 08:29:59 2021
 # 
 # 
 # 
@@ -222,77 +228,88 @@
 # 
 # Info    : Using initialization sequence file to initialize design state.  File 'qs_files/myinit.init'.  [formal-205]
 # Applying synthesis semantics.
-# [00:00:00] Status: Done 0/30, Update 0/30, Proof radius min=0, avg=0.00, Mem=0GB
-# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=4664.
-# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=4666.
-# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=4667.
-# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=4665.
+# [00:00:00] Status: Done 0/40, Update 0/40, Proof radius min=0, avg=0.00, Mem=0GB
+# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=18731.
+# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=18742.
+# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=18741.
+# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=18743.
 # [00:00:00] Covered @3: check1.DACK0isOne_c
-# [00:00:00] Proven: check1.DREQ0111ToDACK0001_a
+# [00:00:00] Proven: check1.stateTransistionS1toS2_a
 # [00:00:00] Covered @3: check1.DACK1isOne_c
 # [00:00:00] Covered @3: check1.DACK2isOne_c
-# [00:00:00] Proven: check1.DREQ1111ToDACK0001_a
 # [00:00:00] Covered @3: check1.DACK3isOne_c
-# [00:00:00] Proven: check1.DREQ1110ToDACK0010_a
-# [00:00:00] Covered @5: check1.stateS4_c
 # [00:00:00] Covered @6: check1.ioRead_c
+# [00:00:00] Proven: check1.internalFFone_a
+# [00:00:00] Proven: check1.stateTransistionS2toS4_a
+# [00:00:00] Vacuously Proven: check1.loadWriteBuffer_a
+# [00:00:00] Proven: check1.stateTransistionS4toSI_a
+# [00:00:00] Proven: check1.DREQ0011ToDACK0001_a
 # [00:00:00] Covered @11: check1.ioWrite_c
+# [00:00:00] Proven: check1.DREQ0111ToDACK0001_a
 # [00:00:00] Covered @6: check1.memoryRead_c
 # [00:00:00] Covered @11: check1.memoryWrite_c
-# [00:00:00] Fired @5: check1.loadIoDataBuffer_a
+# [00:00:00] Fired @4: check1.addressEnable_a
+# [00:00:00] Proven: check1.DREQ1111ToDACK0001_a
 # [00:00:00] Covered @3: check1.AENactive_c
+# [00:00:00] Proven: check1.DREQ1110ToDACK0010_a
 # [00:00:00] Covered @3: check1.ADSTBactive_c
 # [00:00:00] Covered @2: check1.HRQactive_c
 # [00:00:00] Covered @6: check1.stateSI_c
+# [00:00:00] Fired @2: check1.loadIoDataBufferFromDB_a
 # [00:00:00] Covered @2: check1.stateSO_c
 # [00:00:00] Covered @3: check1.stateS1_c
+# [00:00:00] Fired @4: check1.addressStrobeActive_a
 # [00:00:00] Covered @4: check1.stateS2_c
-# [00:00:00] Covered @15: check1.stateTransistions_a
+# [00:00:00] Covered @5: check1.stateS4_c
 # [00:00:00] Proven: check1.stateTransistionSItoSO_a
+# [00:00:00] Covered @15: check1.stateTransistions_a
+# [00:00:00] Proven: check1.addressStrobeLow_a
 # [00:00:00] Proven: check1.stateTransistionSOtoS1_a
-# [00:00:00] Proven: check1.stateTransistionS1toS2_a
-# [00:00:00] Proven: check1.stateTransistionS2toS4_a
-# [00:00:00] Proven: check1.stateTransistionS4toSI_a
-# [00:00:00] Proven: check1.DREQ0011ToDACK0001_a
 # [00:00:00] Proven: check1.loadCommandReg_a
-# [00:00:00] Proven: check1.loadModeReg_a
+# [00:00:00] Proven: check1.addressBusValid
+# [00:00:00] Proven: check1.dataBusValid
+# [00:00:00] Fired @1: check1.noReadWriteAtSameTime
+# [00:00:00] Proven: check1.addressValidOnReadWrite
+# [00:00:00] Proven: check1.dataValidOnReadWrite
+# [00:00:00] Proven: check1.internalFFzero_a
 # [00:00:00] Fired @12: check1.readStatusReg_a
-# [00:00:01] Status: Done 30/30, Update 30/30, Proof radius min=N/A, avg=N/A, Mem=1GB
+# [00:00:02] Status: Done 40/40, Update 40/40, Proof radius min=N/A, avg=N/A, Mem=1GB
 # 
 # ---------------------------------------
 # Property Summary                  Count
 # ---------------------------------------
 # Assumed                               2
-# Proven                               11
+# Proven                               18
+#   Vacuous                             1
 # Covered                              17
 # Inconclusive                          0
-# Fired                                 2
+# Fired                                 5
 # Uncoverable                           0
 # ---------------------------------------
-# Total                                32
+# Total                                42
 # ---------------------------------------
 # 
 # 
 # --------- Process Statistics ----------
-# Elapsed Time                       1 s 
+# Elapsed Time                       2 s 
 # -------- Orchestration Process --------
-# --------- mo.ece.pdx.edu:4645 ---------
-# CPU Time                           0 s 
+# -------- mo.ece.pdx.edu:18711 ---------
+# CPU Time                           1 s 
 # Peak Memory                      0.2 GB
 # ---------- Engine Processes -----------
-# --------- mo.ece.pdx.edu:4664 ---------
+# -------- mo.ece.pdx.edu:18731 ---------
 # CPU Time                           0 s 
 # Peak Memory                      0.1 GB
 # CPU Utilization                    0 % 
-# --------- mo.ece.pdx.edu:4666 ---------
+# -------- mo.ece.pdx.edu:18742 ---------
 # CPU Time                           2 s 
 # Peak Memory                      0.3 GB
 # CPU Utilization                  100 % 
-# --------- mo.ece.pdx.edu:4667 ---------
+# -------- mo.ece.pdx.edu:18741 ---------
 # CPU Time                           0 s 
 # Peak Memory                      0.1 GB
 # CPU Utilization                    0 % 
-# --------- mo.ece.pdx.edu:4665 ---------
+# -------- mo.ece.pdx.edu:18743 ---------
 # CPU Time                           0 s 
 # Peak Memory                      0.1 GB
 # CPU Utilization                    0 % 
@@ -305,11 +322,11 @@
 # ---------------------------------------------------------------------------
 #     1  Info     formal-205         Using initialization sequence file to initialize design state.
 # 
-# Final Process Statistics: Peak Memory 0.28GB, Cumulative CPU Time 2s, Elapsed Time 2s
+# Final Process Statistics: Peak Memory 0.28GB, Cumulative CPU Time 3s, Elapsed Time 2s
 # 
 # To see results in the GUI run:
 # qverify /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/formal_verify.db
 # 
-# End of log Sun Dec  5 04:05:27 2021
+# End of log Sun Dec  5 08:30:03 2021
 # 
 # 

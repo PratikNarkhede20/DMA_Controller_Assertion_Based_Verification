@@ -3,7 +3,7 @@ Questa Version 10.7b linux_x86_64 12 Jun 2018
 
 -------------------------------------------------------------------------------
 Design Report
-Created Sun Dec  5 04:05:23 2021
+Created Sun Dec  5 08:29:59 2021
 -------------------------------------------------------------------------------
 
 
@@ -51,11 +51,11 @@ Black Box Outputs
 
 Undriven Wires
 --------------
+  check1.address  (1 bit)
+  check1.referenceModel.loadIoDataBufferFromDB  (1 bit)
   d.temporaryReg  (8 bits)
   intRegIf.maskReg  (4 bits)
   intRegIf.requestReg  (3 bits)
-  tC.TCbusIf.MEMR_N  (1 bit)
-  tC.TCbusIf.MEMW_N  (1 bit)
   tC.intSigIf.deassertDACK  (1 bit)
   tC.stateIndex  (32 bits)
 
@@ -120,6 +120,7 @@ Count  Module          Location
    1   dmaInternalSignalsIf /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/dmaInternalSignalsIf.sv (Line 1)
    1   dma_checker_sva /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv (Line 1)
    1   priorityLogic   /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/priorityLogic.sv (Line 1)
+   1   referenceModel  /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/referenceModel.sv (Line 1)
    1   timingAndControl /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/timingAndControl.sv (Line 1)
 
 

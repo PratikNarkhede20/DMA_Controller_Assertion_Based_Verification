@@ -11,15 +11,15 @@ Z0 d/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification
 YbusInterface
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
 Z2 DXx4 work 15 dmaRegConfigPkg 0 22 V0[j_Bh<Y:[nc[jSc0:In2
-Z3 !s110 1638705914
+Z3 !s110 1638721790
 !i10b 1
-!s100 17HzjO<MM95@An0C]G@S>3
-IV]CV=l8lR7;J^A<kF_Z@F0
+!s100 3fIN78I[zk1C=o]a?K<7n0
+IWCoIlkIbj<hjLcd4l3Ykd2
 Z4 VDg1SIo80bB@j0V0VzS_@n1
 !s105 busInterface_sv_unit
 S1
 R0
-w1638134383
+w1638711155
 8./src/busInterface.sv
 F./src/busInterface.sv
 L0 1
@@ -27,7 +27,7 @@ Z5 OL;L;10.6b;65
 r1
 !s85 0
 31
-Z6 !s108 1638705914.000000
+Z6 !s108 1638721790.000000
 Z7 !s107 ./src/dma.sv|./src/priorityLogic.sv|./src/datapath.sv|./src/timingAndControl.sv|./src/dmaInternalSignalsIf.sv|./src/dmaInternalRegistersIf.sv|./src/busInterface.sv|./src/dmaInternalRegistersPkg.sv|./src/dmaRegConfigPkg.sv|
 Z8 !s90 ./src/dmaRegConfigPkg.sv|./src/dmaInternalRegistersPkg.sv|./src/busInterface.sv|./src/dmaInternalRegistersIf.sv|./src/dmaInternalSignalsIf.sv|./src/timingAndControl.sv|./src/datapath.sv|./src/priorityLogic.sv|./src/dma.sv|
 !i113 0
@@ -86,28 +86,28 @@ R9
 R10
 vdma_checker_sva
 R1
-DXx4 work 11 my_bind_sva 0 22 ogMc9Rn8=E:7@jF8J[5463
+DXx4 work 11 my_bind_sva 0 22 2VhnB;Q4nkUezK11B<VaP3
 R4
 r1
 !s85 0
 31
 !i10b 1
-!s100 I]E<;cDZd32[:Kh1calQk1
-IESKIK;7g[kgMoXYK8DZN<2
-!s105 my_bind_sva
+!s100 zlXV]nVN7[mZVNTGVh@:21
+IHld0XhL2H2PRY@IFE[UBb3
+Z11 !s105 my_bind_sva
 S1
 R0
-Z11 w1638705883
-Z12 8./src/sva_dma.sv
-Z13 F./src/sva_dma.sv
+Z12 w1638721789
+Z13 8./src/sva_dma.sv
+Z14 F./src/sva_dma.sv
 L0 1
 R5
 R6
-Z14 !s107 ./src/sva_dma.sv|./src/sva_bind.sv|
-Z15 !s90 -sv|-mfcu|-cuname|my_bind_sva|./src/sva_bind.sv|+define+Run|./src/sva_dma.sv|
+Z15 !s107 ./src/sva_dma.sv|./src/sva_bind.sv|./src/referenceModel.sv|
+Z16 !s90 -sv|-mfcu|-cuname|my_bind_sva|./src/referenceModel.sv|./src/sva_bind.sv|+define+Run|./src/sva_dma.sv|
 !i113 0
-Z16 o-sv -mfcu -cuname my_bind_sva -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-Z17 !s92 -sv -mfcu -cuname my_bind_sva +define+Run -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z17 o-sv -mfcu -cuname my_bind_sva -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z18 !s92 -sv -mfcu -cuname my_bind_sva +define+Run -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R10
 YdmaInternalRegistersIf
 R1
@@ -120,7 +120,7 @@ R4
 !s105 dmaInternalRegistersIf_sv_unit
 S1
 R0
-Z18 w1636888566
+Z19 w1636888566
 8./src/dmaInternalRegistersIf.sv
 F./src/dmaInternalRegistersIf.sv
 L0 1
@@ -170,7 +170,7 @@ R4
 !s105 dmaInternalSignalsIf_sv_unit
 S1
 R0
-R18
+R19
 8./src/dmaInternalSignalsIf.sv
 F./src/dmaInternalSignalsIf.sv
 L0 1
@@ -194,7 +194,7 @@ IV0[j_Bh<Y:[nc[jSc0:In2
 VV0[j_Bh<Y:[nc[jSc0:In2
 S1
 R0
-R18
+R19
 8./src/dmaRegConfigPkg.sv
 F./src/dmaRegConfigPkg.sv
 L0 1
@@ -211,29 +211,31 @@ R10
 ndma@reg@config@pkg
 Xmy_bind_sva
 R1
-VogMc9Rn8=E:7@jF8J[5463
+V2VhnB;Q4nkUezK11B<VaP3
 r1
 !s85 0
 31
 !i10b 1
-!s100 CTg0gzgTkPE6G`BZ?lVdG3
-IogMc9Rn8=E:7@jF8J[5463
+!s100 3UWD4:AD]Tg06U^D?@kz<0
+I2VhnB;Q4nkUezK11B<VaP3
 !i103 1
 S1
 R0
-R11
+R12
+Z20 8./src/referenceModel.sv
+Z21 F./src/referenceModel.sv
 8./src/sva_bind.sv
 F./src/sva_bind.sv
-R12
 R13
+R14
 L0 1
 R5
 R6
-R14
 R15
-!i113 0
 R16
+!i113 0
 R17
+R18
 R10
 vpriorityLogic
 R1
@@ -260,17 +262,43 @@ R8
 R9
 R10
 npriority@logic
+vreferenceModel
+R1
+!s110 1638721791
+!i10b 1
+!s100 llQhJjhg5Ugi:9mWc1JOb0
+IM2U>]PIG>aOlJ3LHDi7[@3
+R4
+R11
+S1
+R0
+w1638718694
+R20
+R21
+L0 1
+R5
+r1
+!s85 0
+31
+R6
+R15
+R16
+!i113 0
+R17
+R18
+R10
+nreference@model
 vtimingAndControl
 R1
 R3
 !i10b 1
-!s100 ;e]?OV5bL;]:X1?;aQS112
-I:j2gU?PJ]<cYhjb4J9K:V1
+!s100 Hb=8>B6^YOR[kL4O_]G690
+IX[IcK`df3FRSbdNR<Rhof0
 R4
 !s105 timingAndControl_sv_unit
 S1
 R0
-w1638704726
+w1638716239
 8./src/timingAndControl.sv
 F./src/timingAndControl.sv
 L0 1

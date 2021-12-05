@@ -6,7 +6,7 @@ Server Initialized ...
 Mentor Graphics software version 10.7b-QCF (Build on Jun  7 2018)
 Copyright (C) 1999-2021 by Mentor Graphics All rights reserved.
    from_mega_agent
-   +outputDir+/tmp/visscratch.PFvjGz
+   +outputDir+/tmp/visscratch.J5S9mh
    +tcl
    -I/pkgs/mentor/questa_cdc_formal/10.7b/linux_x86_64/share/modeltech/bin/../linux_x86_64/Visualizer/bin/../tb/incl
    +designfile+/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qcache/VISUALIZER/design.bin
@@ -18,7 +18,7 @@ Copyright (C) 1999-2021 by Mentor Graphics All rights reserved.
    +designfile+Output_Results/qcache/VISUALIZER/design.bin
 
 Command line option(s) :
-   +outputDir+/tmp/visscratch.PFvjGz
+   +outputDir+/tmp/visscratch.J5S9mh
    +tcl
    -I/pkgs/mentor/questa_cdc_formal/10.7b/linux_x86_64/share/modeltech/bin/../linux_x86_64/Visualizer/bin/../tb/incl
    +designfile+/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qcache/VISUALIZER/design.bin
@@ -43,16 +43,17 @@ Inference engine run completed.
 Design Statistics
         Simple flops = 1
             SR flops = 17
-         Always Comb = 4
-            CA-Muxes = 2
-        Cont-Assigns = 3
-          SVA-Assert = 13
+         Always Comb = 5
+            CA-Muxes = 4
+        Cont-Assigns = 5
+          SVA-Assert = 23
            SVA-Cover = 17
 End of Design Statistics
 design loaded ...
 Reading file /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/dma.sv
-completed (0.01 (s)).
-Reading file /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/busInterface.sv
-Reading file /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/dmaInternalSignalsIf.sv
-Reading file /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/dmaInternalRegistersIf.sv
-Reading file /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/datapath.sv
+completed (0.02 (s)).
+Window layout Default has been saved in file /u/pratik2/.visualizer/layout.xml
+Start  : Sun Dec  5 08:30:05 2021
+End    : Sun Dec  5 08:30:41 2021
+VMSize : 2444804 kB
+VMPeak : 2513404 kB

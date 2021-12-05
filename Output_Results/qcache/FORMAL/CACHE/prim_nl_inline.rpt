@@ -8,3 +8,4 @@ priorityLogic                                      | 1                    | 0   
 timingAndControl                                   | 1                    | 0                    | 0          |                               
 datapath                                           | 1                    | 0                    | 0          |                               
 dma_checker_sva                                    | 1                    | 0                    | 0          |                               
+referenceModel                                     | 1                    | 0                    | 0          |                               
