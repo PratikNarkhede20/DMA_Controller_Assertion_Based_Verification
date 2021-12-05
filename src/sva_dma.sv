@@ -110,9 +110,11 @@ endgenerate
 */
 
 //working on these assertions
-ioDataBufferConfig_a : assert property (##4 (!busIf.CS_N & !busIf.IOW_N) |=> (dma.d.ioDataBuffer == $past(busIf.DB));
-commandRegConfig_a : assert property (##7 (intSigIf.programCondition & !busIf.CS_N & busIf.IOR_N & !busIf.IOW_N & busIf.A3 & !busIf.A2 & !busIf.A1 & !busIf.A0) |=> (dma.intRegIf.commandReg == $past(dma.d.ioDataBuffer) ) );
-modeRegConfig_a : assert property (##7 (intSigIf.programCondition & !busIf.CS_N & busIf.IOR_N & !busIf.IOW_N & busIf.A3 & !busIf.A2 & busIf.A1 & busIf.A0) |=> (dma.intRegIf.modeReg[$past(dma.d.ioDataBuffer[1:0])] == $past(dma.d.ioDataBuffer[7:2])));
+loadIoDataBuffer_a : assert property ( (!busIf.CS_N && !busIf.IOW_N && dma.tC.state == `S2) |=> (dma.d.ioDataBuffer == $past(busIf.DB)));
+//readIoDataBuffer_a : assert property (##4 (!busIf.CS_N & !busIf.IOR_N) |-> (dma.d.ioDataBuffer == busIf.DB));
+loadCommandReg_a : assert property (##7 (intSigIf.programCondition & !busIf.CS_N & busIf.IOR_N & !busIf.IOW_N & busIf.A3 & !busIf.A2 & !busIf.A1 & !busIf.A0) |=> (dma.intRegIf.commandReg == $past(dma.d.ioDataBuffer) ) );
+loadModeReg_a : assert property (##8 (intSigIf.programCondition & !busIf.CS_N & busIf.IOR_N & !busIf.IOW_N & busIf.A3 & !busIf.A2 & busIf.A1 & busIf.A0) |=> (dma.intRegIf.modeReg[$past(dma.d.ioDataBuffer[1:0])] == $past(dma.d.ioDataBuffer[7:2])));
+readStatusReg_a : assert property (##10 (intSigIf.programCondition & !busIf.CS_N & !busIf.IOR_N & busIf.IOW_N & busIf.A3 & !busIf.A2 & !busIf.A1 & !busIf.A0) |=> (dma.d.ioDataBuffer == $past(dma.intRegIf.statusReg)));
 `endif
 
 endmodule

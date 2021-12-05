@@ -3,7 +3,7 @@ Questa Version 10.7b linux_x86_64 12 Jun 2018
 
 -------------------------------------------------------------------------------
 Design Report
-Created Sun Dec  5 01:38:36 2021
+Created Sun Dec  5 04:05:23 2021
 -------------------------------------------------------------------------------
 
 
@@ -17,11 +17,11 @@ Design Summary                    Count
 Clocks                                1
   User-specified                      1
   Inferred                            0
-Control Point Bits                   85
+Control Point Bits                   95
   DUT Input Bits                     37
-  Cut Point Bits                      0
+  Cut Point Bits                      8
   Black Box Output Bits               0
-  Undriven Wire Bits                 48
+  Undriven Wire Bits                 50
 State Bits                          376
   Design Register Bits              376
   Design Latch Bits                   0
@@ -43,7 +43,7 @@ busIf.CLK                                  10              0 5    PE
 ------------------------------------------------------------------------------
 Cut Points
 ----------
-  <none>
+  d.ioDataBuffer  (8 bits) 
 
 Black Box Outputs
 -----------------
@@ -54,6 +54,8 @@ Undriven Wires
   d.temporaryReg  (8 bits)
   intRegIf.maskReg  (4 bits)
   intRegIf.requestReg  (3 bits)
+  tC.TCbusIf.MEMR_N  (1 bit)
+  tC.TCbusIf.MEMW_N  (1 bit)
   tC.intSigIf.deassertDACK  (1 bit)
   tC.stateIndex  (32 bits)
 
@@ -124,11 +126,6 @@ Count  Module          Location
 
 Design Checks Details
 ===============================================================================
-Type      : REG_MULTIPLY_DRIVEN
-Module    : datapath
-Name      : ioDataBuffer
-Instance  : d
-
 Type      : REG_MULTIPLY_DRIVEN
 Module    : datapath
 Name      : ioAddressBuffer

@@ -35,9 +35,12 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegist
     end
 
   assign TCbusIf.IOR_N = (ior)? 1'b0 : 1'bz;
-  assign TCbusIf.MEMW_N = (memw)? 1'b0 : 1'bz;
+  //assign TCbusIf.MEMW_N = (memw)? 1'b0 : 1'bz;
   assign TCbusIf.IOW_N = (iow)? 1'b0 : 1'bz;
-  assign TCbusIf.MEMR_N = (memr)? 1'b0 : 1'bz;
+  //assign TCbusIf.MEMR_N = (memr)? 1'b0 : 1'bz;
+  
+  //assign TCbusIf.IOR_N = 1'bz;
+  //assign TCbusIf.IOW_N = 1'bz;
 
   //Next state Logic
   always_comb

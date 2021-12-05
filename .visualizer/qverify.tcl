@@ -2,7 +2,7 @@ Perspective_Version   1
 #
 pref::section perspective 
 set perspective_Name      qverify
-set perspective_DateTime  2021-12-05T01:40:09
+set perspective_DateTime  2021-12-05T04:05:52
 set perspective_Directory /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification
 set perspective_USER      pratik2
 set perspective_VisId   10.7b-QCF
@@ -18,6 +18,8 @@ pref::set -type font -category General.Font -name ApplicationFont -value {Libera
 override the system default font is true} -label {Application Font}
 pref::set -type font -category General.Font -name WindowFont -value {Liberation Sans,12,-1,5,50,0,0,0,0,0} -description {Specifies the font for window titles} -label {Window Font}
 pref::set -type font -category General.Font -name TooltipFont -value {Liberation Sans,12,-1,5,50,0,0,0,0,0} -description {Specifies the font for tooltips} -label {Tooltip Font}
+pref::set -type bool -category {Source Browser} -name EnableValueAnnotation -value true -description {Displays signal values below their names if true} -label {Enable Value Annotation}
+pref::set -type bool -category {Source Browser} -name EnableValueTooltip -value true -description {Tooltips containing signal values will appear if the mouse hovers over a signal name} -label {Enable Value Tooltip}
 pref::set -type bool -category Waveform -name PanToCursor -value false -description {Pan wave window to primary cursor time if true} -label {Pan to Primary Cursor Time}
 pref::set -type font -category Waveform.Font -name WaveformFont -value {Liberation Sans,12,-1,5,50,0,0,0,0,0} -description {Font used within wave window for signal, names, values, etc.} -label {Waveform Font}
 pref::set -type category -value Schematic

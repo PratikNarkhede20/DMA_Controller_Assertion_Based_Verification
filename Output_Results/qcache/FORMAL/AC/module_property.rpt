@@ -5,7 +5,7 @@ Module: dma_checker_sva
 ===============================================================================
 Summary
 -------------------------------------------------------------------------------
-Assertions   : 12 
+Assertions   : 13 
 Assumptions  : 2 
 Covers       : 17 
 -------------------------------------------------------------------------------
@@ -68,23 +68,29 @@ assert DREQ1110ToDACK0010_a (sva)
   Stats:  gates=35 flops=3
   SAFETY_EMPTY (Safety empty property) (warning) 
 
-assert ioDataBufferConfig_a (sva)
-  Instance: check1.ioDataBufferConfig_a
+assert loadIoDataBuffer_a (sva)
+  Instance: check1.loadIoDataBuffer_a
   Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 113
   Severity: error
-  Stats:   depth=6 gates=19 flops=5
+  Stats:   depth=2 gates=16 flops=1
 
-assert commandRegConfig_a (sva)
-  Instance: check1.commandRegConfig_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 114
+assert loadCommandReg_a (sva)
+  Instance: check1.loadCommandReg_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 115
   Severity: error
   Stats:   depth=9 gates=31 flops=8
 
-assert modeRegConfig_a (sva)
-  Instance: check1.modeRegConfig_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 115
+assert loadModeReg_a (sva)
+  Instance: check1.loadModeReg_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 116
   Severity: error
-  Stats:   depth=9 gates=29 flops=8
+  Stats:   depth=10 gates=30 flops=9
+
+assert readStatusReg_a (sva)
+  Instance: check1.readStatusReg_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 117
+  Severity: error
+  Stats:   depth=12 gates=34 flops=11
 
 assume CS_NisLow_assume (sva)
   Instance: check1.CS_NisLow_assume

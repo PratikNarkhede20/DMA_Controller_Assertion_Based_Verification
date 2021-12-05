@@ -33,6 +33,8 @@ module datapath(busInterface busIf, dmaInternalRegistersIf intRegIf, dmaInternal
   logic rdStatusReg;
   logic clearInternalFF;
   bit enUpperAddress;
+  
+  logic [7:0] testIoDataBuffer;
 
 
   //Data Buffer
@@ -41,9 +43,12 @@ module datapath(busInterface busIf, dmaInternalRegistersIf intRegIf, dmaInternal
       if(busIf.RESET)
         ioDataBuffer <= '0;
       else if(!busIf.CS_N & !busIf.IOW_N)
+	  begin
         ioDataBuffer <= busIf.DB;
+		testIoDataBuffer <= busIf.DB;
+		end
       else
-        ioDataBuffer <= ioDataBuffer;
+        ioDataBuffer <= '0;
     end
 
   assign busIf.DB = (!busIf.CS_N & !busIf.IOR_N) ? ioDataBuffer : 'z;  //UNCOMMENT LATER

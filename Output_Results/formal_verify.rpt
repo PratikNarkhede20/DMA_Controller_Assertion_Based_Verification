@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Questa PropCheck Version 10.7b linux_x86_64 12 Jun 2018
 -------------------------------------------------------------------------------
-Report Generated               : Sun Dec  5 01:38:37 2021
+Report Generated               : Sun Dec  5 04:05:24 2021
 -------------------------------------------------------------------------------
 
 Command-line arguments:
@@ -69,7 +69,7 @@ check1.HLDAisActive_assume
 
 
 -------------------------------------------------------------------------------
-Active Targets (29)
+Active Targets (30)
 -------------------------------------------------------------------------------
 check1.ADSTBactive_c
 check1.AENactive_c
@@ -82,13 +82,14 @@ check1.DREQ0111ToDACK0001_a
 check1.DREQ1110ToDACK0010_a
 check1.DREQ1111ToDACK0001_a
 check1.HRQactive_c
-check1.commandRegConfig_a
-check1.ioDataBufferConfig_a
 check1.ioRead_c
 check1.ioWrite_c
+check1.loadCommandReg_a
+check1.loadIoDataBuffer_a
+check1.loadModeReg_a
 check1.memoryRead_c
 check1.memoryWrite_c
-check1.modeRegConfig_a
+check1.readStatusReg_a
 check1.stateS1_c
 check1.stateS2_c
 check1.stateS4_c
@@ -106,7 +107,7 @@ check1.stateTransistions_a
 -------------------------------------------------------------------------------
 X Registers in Starting State
 -------------------------------------------------------------------------------
-  2 registers (5.1% of 39 in sequential fanin of properties)
+  2 registers (5.4% of 37 in sequential fanin of properties)
 -------------------------------------------------------------------------------
   d.enUpperAddress (File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/datapath.sv, Line 35) 1'bx
   d.intRegIf.temporaryAddressReg (File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/datapath.sv, Line 1) 16'bxxxxxxxxxxxxxxxx
@@ -116,27 +117,27 @@ X Registers in Starting State
 -------------------------------------------------------------------------------
 Z Registers in Starting State
 -------------------------------------------------------------------------------
-  0 registers (0.0% of 39 in sequential fanin of properties)
+  0 registers (0.0% of 37 in sequential fanin of properties)
 -------------------------------------------------------------------------------
 
 
 ---------------------------------------
 Formal Netlist Statistics         Count
 ---------------------------------------
-Control Point Bits                   35
-  DUT Input Bits                     22
-  Cut Point Bits                      0
+Control Point Bits                   36
+  DUT Input Bits                     20
+  Cut Point Bits                      8
   Black Box Output Bits               0
-  Undriven Wire Bits                  0
-  Modeling Bits                      13
-State Bits                          177
+  Undriven Wire Bits                  2
+  Modeling Bits                       6
+State Bits                          282
   Counter State Bits                 16
   RAM State Bits                      0
-  Register State Bits                57
-  Property State Bits               104
-Logic Gates                         500
-  Design Gates                      353
-  Property Gates                    147
+  Register State Bits               131
+  Property State Bits               135
+Logic Gates                         834
+  Design Gates                      671
+  Property Gates                    163
 ---------------------------------------
 
 
@@ -147,8 +148,8 @@ check1.DREQ0011ToDACK0001_a
 check1.DREQ0111ToDACK0001_a
 check1.DREQ1110ToDACK0010_a
 check1.DREQ1111ToDACK0001_a
-check1.commandRegConfig_a
-check1.modeRegConfig_a
+check1.loadCommandReg_a
+check1.loadModeReg_a
 check1.stateTransistionS1toS2_a
 check1.stateTransistionS2toS4_a
 check1.stateTransistionS4toSI_a
@@ -158,9 +159,10 @@ check1.stateTransistionSOtoS1_a
 
 
 -------------------------------------------------------------------------------
-Targets Fired (1)
+Targets Fired (2)
 -------------------------------------------------------------------------------
-check1.ioDataBufferConfig_a
+check1.loadIoDataBuffer_a
+check1.readStatusReg_a
 -------------------------------------------------------------------------------
 
 
@@ -217,7 +219,7 @@ Assumptions Used in Bounded Unsatisfiable Sanity Checks
 
 
 -------------------------------------------------------------------------------
-Target Waveforms (18)
+Target Waveforms (19)
 -------------------------------------------------------------------------------
   TB Time(ns) Dist  Target
 -------------------------------------------------------------------------------
@@ -228,11 +230,12 @@ Target Waveforms (18)
            40    3  check1.DACK2isOne_c
            40    3  check1.DACK3isOne_c
            30    2  check1.HRQactive_c
-           70    6  check1.ioDataBufferConfig_a
            70    6  check1.ioRead_c
           120   11  check1.ioWrite_c
+           60    5  check1.loadIoDataBuffer_a
            70    6  check1.memoryRead_c
           120   11  check1.memoryWrite_c
+          130   12  check1.readStatusReg_a
            40    3  check1.stateS1_c
            50    4  check1.stateS2_c
            60    5  check1.stateS4_c
@@ -250,12 +253,13 @@ Distance                          Count
   2 cycles                            2
   3 cycles                            7
   4 cycles                            1
-  5 cycles                            1
-  6 cycles                            4
+  5 cycles                            2
+  6 cycles                            3
  11 cycles                            2
+ 12 cycles                            1
  15 cycles                            1
 ---------------------------------------
-Total                                18
+Total                                19
 ---------------------------------------
 
 
@@ -272,8 +276,8 @@ Engine Performance
    Engine |  Safety Liveness Vacuity  Sanity |  Safety Liveness Vacuity  Sanity
 -------------------------------------------------------------------------------
         0 |       5        0       0       0 |       0        0       0       0
-        7 |       5        0       0       0 |      14        0       6       0
-       10 |       1        0       0       0 |       4        0       6       0
+        7 |       5        0       0       0 |      16        0       8       0
+       10 |       1        0       0       0 |       3        0       5       0
 -------------------------------------------------------------------------------
 
 
@@ -284,33 +288,33 @@ Assumed                               2
 Proven                               11
 Covered                              17
 Inconclusive                          0
-Fired                                 1
+Fired                                 2
 Uncoverable                           0
 ---------------------------------------
-Total                                31
+Total                                32
 ---------------------------------------
 
 
 --------- Process Statistics ----------
-Elapsed Time                       2 s 
+Elapsed Time                       1 s 
 -------- Orchestration Process --------
--------- mo.ece.pdx.edu:17033 ---------
+--------- mo.ece.pdx.edu:4645 ---------
 CPU Time                           0 s 
 Peak Memory                      0.2 GB
 ---------- Engine Processes -----------
--------- mo.ece.pdx.edu:17051 ---------
+--------- mo.ece.pdx.edu:4664 ---------
 CPU Time                           0 s 
 Peak Memory                      0.1 GB
 CPU Utilization                    0 % 
--------- mo.ece.pdx.edu:17048 ---------
+--------- mo.ece.pdx.edu:4666 ---------
 CPU Time                           2 s 
 Peak Memory                      0.3 GB
 CPU Utilization                  100 % 
--------- mo.ece.pdx.edu:17049 ---------
+--------- mo.ece.pdx.edu:4667 ---------
 CPU Time                           0 s 
 Peak Memory                      0.1 GB
 CPU Utilization                    0 % 
--------- mo.ece.pdx.edu:17050 ---------
+--------- mo.ece.pdx.edu:4665 ---------
 CPU Time                           0 s 
 Peak Memory                      0.1 GB
 CPU Utilization                    0 % 

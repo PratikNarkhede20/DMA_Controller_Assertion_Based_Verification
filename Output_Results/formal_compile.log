@@ -2,7 +2,7 @@
 # Questa Static Verification System
 # Version 10.7b linux_x86_64 12 Jun 2018
 
-log created Sun Dec  5 01:38:28 2021 by pratik2 on mo.ece.pdx.edu
+log created Sun Dec  5 04:05:16 2021 by pratik2 on mo.ece.pdx.edu
 
 
 Command: netlist elaborate
@@ -46,14 +46,14 @@ Optimizing 10 design-units (inlining 0/8 module instances):
 -- Optimizing module z0in_work.dma(fast)
 Optimized design name is zi_opt_csl_1402776646_1
 Identified prefix 'dma'.
-End of log Sun Dec  5 01:38:29 2021
+End of log Sun Dec  5 04:05:18 2021
 
 
 # 
 # Questa Static Verification System
 # Version 10.7b linux_x86_64 12 Jun 2018
 
-log created Sun Dec  5 01:38:30 2021 by pratik2 on mo.ece.pdx.edu
+log created Sun Dec  5 04:05:18 2021 by pratik2 on mo.ece.pdx.edu
 
 
 Command: netlist create
@@ -82,16 +82,16 @@ Elaborating module 'dma_checker_sva'.
 Processing module 'dma'
 Elaborating module 'dma'.
 
-##Time Taken (Synthesis) = 229.000000 ticks = 2.290000 secs
+##Time Taken (Synthesis) = 214.000000 ticks = 2.140000 secs
 
-End of log Sun Dec  5 01:38:33 2021
+End of log Sun Dec  5 04:05:21 2021
 
 
 # 
 # Questa Static Verification System
 # Version 10.7b linux_x86_64 12 Jun 2018
 
-log created Sun Dec  5 01:38:33 2021 by pratik2 on mo.ece.pdx.edu
+log created Sun Dec  5 04:05:21 2021 by pratik2 on mo.ece.pdx.edu
 
 
 Command: formal compile
@@ -150,7 +150,6 @@ Inferred directives
 ------------------------------------------------------------------------------
 
 Design is linked for formal analysis.  Design 'dma'.
-Info    : Multiply-driven register/latch found.  Register: 'd.ioDataBuffer'.  [formal-280]
 Info    : Multiply-driven register/latch found.  Register: 'd.ioAddressBuffer'.  [formal-280]
 Info    : Multiply-driven register/latch found.  Register: 'd.intRegIf.temporaryAddressReg'.  [formal-280]
 Info    : Multiply-driven register/latch found.  Register: 'd.outputAddressBuffer'.  [formal-280]
@@ -160,8 +159,8 @@ Formal model has been created.
 
 Property Summary
 -------------------------------------------------------------------------------
-Total  Directives :31
-Assert Directives :12
+Total  Directives :32
+Assert Directives :13
 Assume Directives :2
 Cover  Directives :17
 
@@ -169,7 +168,7 @@ SVA Summary
 -------------------------------------------------------------------------------
 SVA Directive Type        Directives           Checkers
 -------------------------------------------------------------------------------
-Assert                        12                  12
+Assert                        13                  13
 Assume                         2                   2
 Cover                         17                  17
 -------------------------------------------------------------------------------
@@ -178,9 +177,10 @@ Design Checks Summary
 -------------------------------------------------------------------------------
 Check                              Found
 -------------------------------------------------------------------------------
-REG_MULTIPLY_DRIVEN                    6
+PORT_UNDRIVEN                          2
+REG_MULTIPLY_DRIVEN                    5
 -------------------------------------------------------------------------------
-Total                                  6
+Total                                  7
 -------------------------------------------------------------------------------
 
 
@@ -192,11 +192,11 @@ Message Summary
 ---------------------------------------------------------------------------
 Count  Type     Message ID         Summary
 ---------------------------------------------------------------------------
-    6  Info     formal-280         Multiply-driven register/latch found.
+    5  Info     formal-280         Multiply-driven register/latch found.
     1  Info     netlist-11         Detected clock.
     1  Info     netlist-12         Detected reset.
 
-Final Process Statistics: Max memory 606MB, CPU time 5s, Total time 8s
-End of log Sun Dec  5 01:38:36 2021
+Final Process Statistics: Max memory 606MB, CPU time 4s, Total time 7s
+End of log Sun Dec  5 04:05:23 2021
 
 
