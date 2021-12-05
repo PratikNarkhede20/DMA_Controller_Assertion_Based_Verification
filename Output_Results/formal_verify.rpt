@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Questa PropCheck Version 10.7b linux_x86_64 12 Jun 2018
 -------------------------------------------------------------------------------
-Report Generated               : Fri Dec  3 21:33:17 2021
+Report Generated               : Sun Dec  5 01:38:37 2021
 -------------------------------------------------------------------------------
 
 Command-line arguments:
@@ -69,7 +69,7 @@ check1.HLDAisActive_assume
 
 
 -------------------------------------------------------------------------------
-Active Targets (26)
+Active Targets (29)
 -------------------------------------------------------------------------------
 check1.ADSTBactive_c
 check1.AENactive_c
@@ -82,10 +82,13 @@ check1.DREQ0111ToDACK0001_a
 check1.DREQ1110ToDACK0010_a
 check1.DREQ1111ToDACK0001_a
 check1.HRQactive_c
+check1.commandRegConfig_a
+check1.ioDataBufferConfig_a
 check1.ioRead_c
 check1.ioWrite_c
 check1.memoryRead_c
 check1.memoryWrite_c
+check1.modeRegConfig_a
 check1.stateS1_c
 check1.stateS2_c
 check1.stateS4_c
@@ -120,35 +123,44 @@ Z Registers in Starting State
 ---------------------------------------
 Formal Netlist Statistics         Count
 ---------------------------------------
-Control Point Bits                   29
-  DUT Input Bits                     19
+Control Point Bits                   35
+  DUT Input Bits                     22
   Cut Point Bits                      0
   Black Box Output Bits               0
   Undriven Wire Bits                  0
-  Modeling Bits                      10
-State Bits                           96
+  Modeling Bits                      13
+State Bits                          177
   Counter State Bits                 16
   RAM State Bits                      0
-  Register State Bits                31
-  Property State Bits                49
-Logic Gates                         381
-  Design Gates                      305
-  Property Gates                     76
+  Register State Bits                57
+  Property State Bits               104
+Logic Gates                         500
+  Design Gates                      353
+  Property Gates                    147
 ---------------------------------------
 
 
 -------------------------------------------------------------------------------
-Targets Proven (9)
+Targets Proven (11)
 -------------------------------------------------------------------------------
 check1.DREQ0011ToDACK0001_a
 check1.DREQ0111ToDACK0001_a
 check1.DREQ1110ToDACK0010_a
 check1.DREQ1111ToDACK0001_a
+check1.commandRegConfig_a
+check1.modeRegConfig_a
 check1.stateTransistionS1toS2_a
 check1.stateTransistionS2toS4_a
 check1.stateTransistionS4toSI_a
 check1.stateTransistionSItoSO_a
 check1.stateTransistionSOtoS1_a
+-------------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------------
+Targets Fired (1)
+-------------------------------------------------------------------------------
+check1.ioDataBufferConfig_a
 -------------------------------------------------------------------------------
 
 
@@ -205,7 +217,7 @@ Assumptions Used in Bounded Unsatisfiable Sanity Checks
 
 
 -------------------------------------------------------------------------------
-Target Waveforms (17)
+Target Waveforms (18)
 -------------------------------------------------------------------------------
   TB Time(ns) Dist  Target
 -------------------------------------------------------------------------------
@@ -216,6 +228,7 @@ Target Waveforms (17)
            40    3  check1.DACK2isOne_c
            40    3  check1.DACK3isOne_c
            30    2  check1.HRQactive_c
+           70    6  check1.ioDataBufferConfig_a
            70    6  check1.ioRead_c
           120   11  check1.ioWrite_c
            70    6  check1.memoryRead_c
@@ -238,11 +251,11 @@ Distance                          Count
   3 cycles                            7
   4 cycles                            1
   5 cycles                            1
-  6 cycles                            3
+  6 cycles                            4
  11 cycles                            2
  15 cycles                            1
 ---------------------------------------
-Total                                17
+Total                                18
 ---------------------------------------
 
 
@@ -258,9 +271,9 @@ Engine Performance
 ---------------------- Proofs -------------------------- Waveforms ------------
    Engine |  Safety Liveness Vacuity  Sanity |  Safety Liveness Vacuity  Sanity
 -------------------------------------------------------------------------------
-        0 |       7        0       0       0 |       0        0       0       0
-        7 |       2        0       0       0 |      11        0       2       0
-       10 |       0        0       0       0 |       6        0       7       0
+        0 |       5        0       0       0 |       0        0       0       0
+        7 |       5        0       0       0 |      14        0       6       0
+       10 |       1        0       0       0 |       4        0       6       0
 -------------------------------------------------------------------------------
 
 
@@ -268,36 +281,36 @@ Engine Performance
 Property Summary                  Count
 ---------------------------------------
 Assumed                               2
-Proven                                9
+Proven                               11
 Covered                              17
 Inconclusive                          0
-Fired                                 0
+Fired                                 1
 Uncoverable                           0
 ---------------------------------------
-Total                                28
+Total                                31
 ---------------------------------------
 
 
 --------- Process Statistics ----------
 Elapsed Time                       2 s 
 -------- Orchestration Process --------
--------- mo.ece.pdx.edu:25699 ---------
+-------- mo.ece.pdx.edu:17033 ---------
 CPU Time                           0 s 
 Peak Memory                      0.2 GB
 ---------- Engine Processes -----------
--------- mo.ece.pdx.edu:25718 ---------
+-------- mo.ece.pdx.edu:17051 ---------
 CPU Time                           0 s 
 Peak Memory                      0.1 GB
 CPU Utilization                    0 % 
--------- mo.ece.pdx.edu:25715 ---------
+-------- mo.ece.pdx.edu:17048 ---------
 CPU Time                           2 s 
 Peak Memory                      0.3 GB
 CPU Utilization                  100 % 
--------- mo.ece.pdx.edu:25717 ---------
+-------- mo.ece.pdx.edu:17049 ---------
 CPU Time                           0 s 
 Peak Memory                      0.1 GB
 CPU Utilization                    0 % 
--------- mo.ece.pdx.edu:25716 ---------
+-------- mo.ece.pdx.edu:17050 ---------
 CPU Time                           0 s 
 Peak Memory                      0.1 GB
 CPU Utilization                    0 % 

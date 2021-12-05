@@ -16,7 +16,7 @@
 # Questa Static Verification System
 # Version 10.7b linux_x86_64 12 Jun 2018
 # 
-# log created Fri Dec  3 21:33:09 2021 by pratik2 on mo.ece.pdx.edu
+# log created Sun Dec  5 01:38:28 2021 by pratik2 on mo.ece.pdx.edu
 # 
 # 
 # Command: netlist elaborate
@@ -60,14 +60,14 @@
 # -- Optimizing module z0in_work.dma(fast)
 # Optimized design name is zi_opt_csl_1402776646_1
 # Identified prefix 'dma'.
-# End of log Fri Dec  3 21:33:10 2021
+# End of log Sun Dec  5 01:38:29 2021
 # 
 # 
 # 
 # Questa Static Verification System
 # Version 10.7b linux_x86_64 12 Jun 2018
 # 
-# log created Fri Dec  3 21:33:10 2021 by pratik2 on mo.ece.pdx.edu
+# log created Sun Dec  5 01:38:30 2021 by pratik2 on mo.ece.pdx.edu
 # 
 # 
 # Command: netlist create
@@ -96,16 +96,16 @@
 # Processing module 'dma'
 # Elaborating module 'dma'.
 # 
-##Time Taken (Synthesis) = 236.000000 ticks = 2.360000 secs
+##Time Taken (Synthesis) = 229.000000 ticks = 2.290000 secs
 # 
-# End of log Fri Dec  3 21:33:13 2021
+# End of log Sun Dec  5 01:38:33 2021
 # 
 # 
 # 
 # Questa Static Verification System
 # Version 10.7b linux_x86_64 12 Jun 2018
 # 
-# log created Fri Dec  3 21:33:13 2021 by pratik2 on mo.ece.pdx.edu
+# log created Sun Dec  5 01:38:33 2021 by pratik2 on mo.ece.pdx.edu
 # 
 # 
 # Command: formal compile
@@ -174,8 +174,8 @@
 # 
 # Property Summary
 # -------------------------------------------------------------------------------
-# Total  Directives :28
-# Assert Directives :9
+# Total  Directives :31
+# Assert Directives :12
 # Assume Directives :2
 # Cover  Directives :17
 # 
@@ -183,7 +183,7 @@
 # -------------------------------------------------------------------------------
 # SVA Directive Type        Directives           Checkers
 # -------------------------------------------------------------------------------
-# Assert                         9                   9
+# Assert                        12                  12
 # Assume                         2                   2
 # Cover                         17                  17
 # -------------------------------------------------------------------------------
@@ -211,7 +211,7 @@
 #     1  Info     netlist-12         Detected reset.
 # 
 # Final Process Statistics: Max memory 606MB, CPU time 5s, Total time 8s
-# End of log Fri Dec  3 21:33:16 2021
+# End of log Sun Dec  5 01:38:36 2021
 # 
 # 
 # 
@@ -222,73 +222,76 @@
 # 
 # Info    : Using initialization sequence file to initialize design state.  File 'qs_files/myinit.init'.  [formal-205]
 # Applying synthesis semantics.
-# [00:00:00] Status: Done 0/26, Update 0/26, Proof radius min=0, avg=0.00, Mem=0GB
-# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=25718.
-# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=25716.
-# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=25715.
-# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=25717.
-# [00:00:00] Covered @2: check1.stateSO_c
+# [00:00:00] Status: Done 0/29, Update 0/29, Proof radius min=0, avg=0.00, Mem=0GB
+# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=17051.
+# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=17048.
+# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=17049.
+# [00:00:00] Established connection with process, Hostname=mo.ece.pdx.edu, pid=17050.
 # [00:00:00] Covered @3: check1.DACK0isOne_c
-# [00:00:00] Covered @3: check1.DACK1isOne_c
-# [00:00:00] Covered @3: check1.DACK2isOne_c
-# [00:00:00] Covered @3: check1.stateS1_c
-# [00:00:00] Proven: check1.stateTransistionS4toSI_a
-# [00:00:00] Covered @3: check1.DACK3isOne_c
-# [00:00:00] Proven: check1.DREQ0011ToDACK0001_a
-# [00:00:00] Covered @4: check1.stateS2_c
 # [00:00:00] Proven: check1.DREQ0111ToDACK0001_a
-# [00:00:00] Covered @6: check1.ioRead_c
 # [00:00:00] Proven: check1.DREQ1111ToDACK0001_a
+# [00:00:00] Covered @3: check1.DACK1isOne_c
+# [00:00:00] Covered @4: check1.stateS2_c
 # [00:00:00] Proven: check1.DREQ1110ToDACK0010_a
+# [00:00:00] Covered @3: check1.DACK2isOne_c
+# [00:00:00] Covered @3: check1.DACK3isOne_c
+# [00:00:00] Covered @6: check1.ioRead_c
 # [00:00:00] Covered @5: check1.stateS4_c
 # [00:00:00] Covered @11: check1.ioWrite_c
+# [00:00:00] Fired @6: check1.ioDataBufferConfig_a
 # [00:00:00] Covered @6: check1.memoryRead_c
-# [00:00:00] Covered @6: check1.stateSI_c
 # [00:00:00] Covered @11: check1.memoryWrite_c
-# [00:00:00] Proven: check1.stateTransistionS2toS4_a
-# [00:00:00] Proven: check1.stateTransistionSItoSO_a
-# [00:00:00] Proven: check1.stateTransistionS1toS2_a
-# [00:00:00] Proven: check1.stateTransistionSOtoS1_a
-# [00:00:00] Covered @2: check1.HRQactive_c
 # [00:00:00] Covered @3: check1.AENactive_c
 # [00:00:00] Covered @3: check1.ADSTBactive_c
+# [00:00:00] Covered @2: check1.HRQactive_c
+# [00:00:00] Covered @6: check1.stateSI_c
+# [00:00:00] Covered @2: check1.stateSO_c
+# [00:00:00] Covered @3: check1.stateS1_c
 # [00:00:00] Covered @15: check1.stateTransistions_a
-# [00:00:02] Status: Done 26/26, Update 26/26, Proof radius min=N/A, avg=N/A, Mem=1GB
+# [00:00:00] Proven: check1.stateTransistionSItoSO_a
+# [00:00:00] Proven: check1.stateTransistionSOtoS1_a
+# [00:00:00] Proven: check1.stateTransistionS1toS2_a
+# [00:00:00] Proven: check1.stateTransistionS2toS4_a
+# [00:00:00] Proven: check1.stateTransistionS4toSI_a
+# [00:00:00] Proven: check1.DREQ0011ToDACK0001_a
+# [00:00:00] Proven: check1.commandRegConfig_a
+# [00:00:00] Proven: check1.modeRegConfig_a
+# [00:00:02] Status: Done 29/29, Update 29/29, Proof radius min=N/A, avg=N/A, Mem=1GB
 # 
 # ---------------------------------------
 # Property Summary                  Count
 # ---------------------------------------
 # Assumed                               2
-# Proven                                9
+# Proven                               11
 # Covered                              17
 # Inconclusive                          0
-# Fired                                 0
+# Fired                                 1
 # Uncoverable                           0
 # ---------------------------------------
-# Total                                28
+# Total                                31
 # ---------------------------------------
 # 
 # 
 # --------- Process Statistics ----------
 # Elapsed Time                       2 s 
 # -------- Orchestration Process --------
-# -------- mo.ece.pdx.edu:25699 ---------
+# -------- mo.ece.pdx.edu:17033 ---------
 # CPU Time                           0 s 
 # Peak Memory                      0.2 GB
 # ---------- Engine Processes -----------
-# -------- mo.ece.pdx.edu:25718 ---------
+# -------- mo.ece.pdx.edu:17051 ---------
 # CPU Time                           0 s 
 # Peak Memory                      0.1 GB
 # CPU Utilization                    0 % 
-# -------- mo.ece.pdx.edu:25715 ---------
+# -------- mo.ece.pdx.edu:17048 ---------
 # CPU Time                           2 s 
 # Peak Memory                      0.3 GB
 # CPU Utilization                  100 % 
-# -------- mo.ece.pdx.edu:25717 ---------
+# -------- mo.ece.pdx.edu:17049 ---------
 # CPU Time                           0 s 
 # Peak Memory                      0.1 GB
 # CPU Utilization                    0 % 
-# -------- mo.ece.pdx.edu:25716 ---------
+# -------- mo.ece.pdx.edu:17050 ---------
 # CPU Time                           0 s 
 # Peak Memory                      0.1 GB
 # CPU Utilization                    0 % 
@@ -306,6 +309,6 @@
 # To see results in the GUI run:
 # qverify /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/formal_verify.db
 # 
-# End of log Fri Dec  3 21:33:20 2021
+# End of log Sun Dec  5 01:38:39 2021
 # 
 # 

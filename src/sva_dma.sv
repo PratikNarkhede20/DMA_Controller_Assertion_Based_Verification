@@ -112,6 +112,7 @@ endgenerate
 //working on these assertions
 ioDataBufferConfig_a : assert property (##4 (!busIf.CS_N & !busIf.IOW_N) |=> (dma.d.ioDataBuffer == busIf.DB));
 commandRegConfig_a : assert property (##7 (intSigIf.programCondition & !busIf.CS_N & busIf.IOR_N & !busIf.IOW_N & busIf.A3 & !busIf.A2 & !busIf.A1 & !busIf.A0) |=> (dma.intRegIf.commandReg == $past(dma.d.ioDataBuffer) ) );
+modeRegConfig_a : assert property (##7 (intSigIf.programCondition & !busIf.CS_N & busIf.IOR_N & !busIf.IOW_N & busIf.A3 & !busIf.A2 & busIf.A1 & busIf.A0) |=> (dma.intRegIf.modeReg[$past(dma.d.ioDataBuffer[1:0])] == $past(dma.d.ioDataBuffer[7:2])));
 `endif
 
 endmodule

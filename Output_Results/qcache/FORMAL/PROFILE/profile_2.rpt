@@ -3,14 +3,14 @@
                                                           Calls Real-Time  Parent  Virt-Time  Parent 
                                                                    (secs) fraction    (secs) fraction
 
-    <zixl_543IiP35>~_zixl                                                1       2.1 (100.0%)       0.0 (100.0%)
-  zixl_5A5-ZAiL~_zixl                                                    1       2.1                0.0         
-    zixl_5eAt1-I3L~_zixl                                                 1       2.1 ( 99.5%)       0.0 (100.0%)
-      zixl_95eAt1-I3L-2IAL56PIZ~_zixl                                    1       1.9 ( 89.8%)       0.0 (100.0%)
-        zixl_i21-4Ar8Aq1~_zixl                                         380       1.9 ( 98.9%)       0.0 ( 62.0%)
-          zixl_i21-rI1A21~_zixl                                        380       1.9 (100.0%)       0.0 (100.0%)
-        <zixl_I152>~_zixl                                                        0.0 (  0.9%)       0.0 ( 38.0%)
-      <zixl_I152>~_zixl                                                          0.2 ( 10.2%)       0.0 (  0.0%)
+    <zixl_543IiP35>~_zixl                                                1       2.2 (100.0%)       0.0 (100.0%)
+  zixl_5A5-ZAiL~_zixl                                                    1       2.2                0.0         
+    zixl_5eAt1-I3L~_zixl                                                 1       2.2 ( 99.7%)       0.0 (100.0%)
+      zixl_95eAt1-I3L-2IAL56PIZ~_zixl                                    1       2.0 ( 89.5%)       0.0 (100.0%)
+        zixl_i21-4Ar8Aq1~_zixl                                         499       1.9 ( 97.5%)       0.0 ( 56.6%)
+          zixl_i21-rI1A21~_zixl                                        499       1.9 (100.0%)       0.0 (100.0%)
+        <zixl_I152>~_zixl                                                        0.0 (  2.1%)       0.0 ( 43.4%)
+      <zixl_I152>~_zixl                                                          0.2 ( 10.4%)       0.0 (  0.0%)
 
 
 ================================================================================
@@ -22,8 +22,7 @@
   zixl_5A5-ZAiL~_zixl                                                    1     164.0         
     zixl_5eAt1-I3L~_zixl                                                 1     164.0 (100.0%)
       zixl_95eAt1-I3L-2IAL56PIZ~_zixl                                    1     164.0 (100.0%)
-        zixl_i21-4Ar8Aq1~_zixl                                         380     140.0 ( 85.4%)
-          zixl_i21-rI1A21~_zixl                                        380     140.0 (100.0%)
-        zixl_IUTe-y3ieS-6IPZ-AIIAO~_zixl                                 1       4.0 (  2.4%)
-        <zixl_I152>~_zixl                                                       20.0 ( 12.2%)
+        zixl_i21-4Ar8Aq1~_zixl                                         499     140.0 ( 85.4%)
+          zixl_i21-rI1A21~_zixl                                        499     140.0 (100.0%)
+        <zixl_I152>~_zixl                                                       24.0 ( 14.6%)
 
