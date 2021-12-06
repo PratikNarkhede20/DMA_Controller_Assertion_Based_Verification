@@ -130,6 +130,25 @@ DREQ1101ToDACK0001_a : assert property ( DACKforDREQ(4'b1101, 4'b0001) );
 DREQ1110ToDACK0010_a : assert property ( DACKforDREQ(4'b1110, 4'b0010) );
 DREQ1111ToDACK0001_a : assert property ( DACKforDREQ(4'b1111, 4'b0001) );
 //&&  (!dma.intRegIf.commandReg.priorityType) && (dma.intSigIf.assertDACK)
+genvar i;
+generate
+  for(i=0; i<16; i=i+1)
+   begin
+     if(i[0]==1'b1)
+		 DACKforDREQfixedPriority_a1 : assert property DACKforDREQ (i, 4'b0001);
+
+     else if(i[1]==1'b1)
+		 DACKforDREQfixedPriority_a2 : assert property DACKforDREQ (i, 4'b0010);
+
+     else if(i[2]==1'b1)
+		 DACKforDREQfixedPriority_a3 : assert property DACKforDREQ (i, 4'b0100);
+
+     else if(i[3]==1'b1)
+		 DACKforDREQfixedPriority_a4 : assert property DACKforDREQ (i, 4'b1000);
+
+     else;
+   end
+endgenerate
 
 //this below code is for exhaustive testcases for DREQ in generate block. there are few errors which we are still trying to figure out.
 //the compile errors are due to tool not able to process local variables in assertions.
