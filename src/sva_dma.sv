@@ -133,20 +133,21 @@ DREQ1111ToDACK0001_a : assert property ( DACKforDREQ(4'b1111, 4'b0001) );
 genvar i;
 generate
   for(i=0; i<16; i=i+1)
-   begin
+   begin : g1
      if(i[0]==1'b1)
-		 DACKforDREQfixedPriority_a1 : assert property ( DACKforDREQ (i, 4'b0001) );
+		 DACK0001forDREQfixedPriority_a : assert property ( DACKforDREQ (i, 4'b0001) );
 
      else if(i[1]==1'b1)
-		 DACKforDREQfixedPriority_a2 : assert property ( DACKforDREQ (i, 4'b0010) );
+		 DACK0010forDREQfixedPriority_a : assert property ( DACKforDREQ (i, 4'b0010) );
 
      else if(i[2]==1'b1)
-		 DACKforDREQfixedPriority_a3 : assert property ( DACKforDREQ (i, 4'b0100) );
+		 DACK0100forDREQfixedPriority_a : assert property ( DACKforDREQ (i, 4'b0100) );
 
      else if(i[3]==1'b1)
-		 DACKforDREQfixedPriority_a4 : assert property ( DACKforDREQ (i, 4'b1000) );
+		 DACK1000forDREQfixedPriority_a : assert property ( DACKforDREQ (i, 4'b1000) );
 
-     else;
+     else
+		 DACK0000forDREQfixedPriority_a : assert property ( DACKforDREQ (i, 4'b0000) );
    end
 endgenerate
 
