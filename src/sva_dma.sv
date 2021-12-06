@@ -74,7 +74,7 @@ stateTransistionS4toSI_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `
 
 `ifdef EOP
 EOP_NisLow_assume : assume property (busIf.EOP_N == 1'b1);
-stateTransistionSOtoSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `SI) ) |-> (dma.tC.nextState == `SI) );
+stateTransistionSItoSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `SI) ) |-> (dma.tC.nextState == `SI) );
 stateTransistionSOtoSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `SO) ) |-> (dma.tC.nextState == `SI) );
 stateTransistionS1toSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `S1) ) |-> (dma.tC.nextState == `SI) );
 stateTransistionS2toSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `SI) );
