@@ -135,16 +135,16 @@ generate
   for(i=0; i<16; i=i+1)
    begin
      if(i[0]==1'b1)
-		 DACKforDREQfixedPriority_a1 : assert property DACKforDREQ (i, 4'b0001);
+		 DACKforDREQfixedPriority_a1 : assert property ( DACKforDREQ (i, 4'b0001) );
 
      else if(i[1]==1'b1)
-		 DACKforDREQfixedPriority_a2 : assert property DACKforDREQ (i, 4'b0010);
+		 DACKforDREQfixedPriority_a2 : assert property ( DACKforDREQ (i, 4'b0010) );
 
      else if(i[2]==1'b1)
-		 DACKforDREQfixedPriority_a3 : assert property DACKforDREQ (i, 4'b0100);
+		 DACKforDREQfixedPriority_a3 : assert property ( DACKforDREQ (i, 4'b0100) );
 
      else if(i[3]==1'b1)
-		 DACKforDREQfixedPriority_a4 : assert property DACKforDREQ (i, 4'b1000);
+		 DACKforDREQfixedPriority_a4 : assert property ( DACKforDREQ (i, 4'b1000) );
 
      else;
    end
