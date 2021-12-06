@@ -135,7 +135,10 @@ generate
   for(i=0; i<16; i=i+1)
    begin : g1
      if(i[0]==1'b1)
-		 DACK0001forDREQfixedPriority_a : assert property ( DACKforDREQ (i, 4'b0001) );
+		 begin
+		  DACK0001forDREQfixedPriority_a : assert property ( DACKforDREQ (i, 4'b0001) );
+			DACK0001forDREQ_c : cover property (busIf.DREQ == i && busIf.DACK == 4'b0001);
+	   end
 
      else if(i[1]==1'b1)
 		 DACK0010forDREQfixedPriority_a : assert property ( DACKforDREQ (i, 4'b0010) );
