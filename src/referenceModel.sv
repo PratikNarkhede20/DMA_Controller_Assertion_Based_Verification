@@ -13,7 +13,7 @@ module referenceModel(busInterface.referenceModel busIf, input logic programCond
   logic loadIoDataBufferFromStatus;
 
   //assign loadIoDataBufferFromDB = ( !busIf.CS_N & !busIf.IOW_N & !dma.intSigIf.loadAddr & !(readStatusReg|readCurrentAddressReg|readCurrentWordCountReg) );
-  assign loadIoDataBufferFromStatus = ( !busIf.CS_N & !busIf.IOW_N & readStatusReg & !dma.intSigIf.loadAddr & !(readCurrentAddressReg|readCurrentWordCountReg) );
+  assign loadIoDataBufferFromStatus = ( !busIf.CS_N & !busIf.IOR_N & readStatusReg & !dma.intSigIf.loadAddr & !(readCurrentAddressReg|readCurrentWordCountReg) );
 
   always_comb
     begin
