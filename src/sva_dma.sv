@@ -23,6 +23,8 @@ default disable iff (busIf.RESET);
 CS_NisLow_assume : assume property (busIf.CS_N == 1'b0); //assume the DMA controller is always active
 //HLDAisActive_assume : assume property (busIf.HLDA == 1'b1); //assume the DMA Controller always gets hold acknowledgement signal from CPU
 
+EOP_NisHigh_assume : assume property (busIf.EOP_N == 1'b1);
+
 ReadOrWriteTransferType_assume : assume property ( ( (dma.intRegIf.modeReg[0].transferType != 2'b00) || (dma.intRegIf.modeReg[0].transferType != 2'b11) ) &&
 											       ( (dma.intRegIf.modeReg[1].transferType != 2'b00) || (dma.intRegIf.modeReg[1].transferType != 2'b11) ) &&
 											       ( (dma.intRegIf.modeReg[2].transferType != 2'b00) || (dma.intRegIf.modeReg[2].transferType != 2'b11) ) &&
