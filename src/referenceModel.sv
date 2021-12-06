@@ -1,5 +1,5 @@
 module referenceModel(busInterface.referenceModel busIf, input logic programCondition);
-  
+
   logic loadCommandReg;
   logic loadModeReg;
   logic loadBaseAddressReg;
@@ -8,12 +8,12 @@ module referenceModel(busInterface.referenceModel busIf, input logic programCond
   logic readCurrentWordCountReg;
   logic readStatusReg;
   logic clearInternalFF;
-  
+
   logic loadIoDataBufferFromDB;
   logic loadIoDataBufferFromStatus;
-  
+
   //assign loadIoDataBufferFromDB = ( !busIf.CS_N & !busIf.IOW_N & !dma.intSigIf.loadAddr & !(readStatusReg|readCurrentAddressReg|readCurrentWordCountReg) );
-  assign loadIoDataBufferFromStatus = ( !busIf.CS_N & readStatusReg & !dma.intSigIf.loadAddr & !(readCurrentAddressReg|readCurrentWordCountReg) );
+  assign loadIoDataBufferFromStatus = ( !busIf.CS_N & !busIf.IOW_N & readStatusReg & !dma.intSigIf.loadAddr & !(readCurrentAddressReg|readCurrentWordCountReg) );
 
   always_comb
     begin
