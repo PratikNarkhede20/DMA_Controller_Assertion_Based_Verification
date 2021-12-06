@@ -224,7 +224,7 @@ validReadWriteSignalsOnHLDA_a : assert property ( ##5 busIf.HLDA |-> ( !$isunkno
 validAddressBusOnHLDA_a : assert property ( ##5 busIf.HLDA |-> !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0}) );
 
 loadBaseUpperAddress_a : assert property ( (referenceModel.loadBaseAddressReg && dma.d.internalFF) |=> ( dma.d.baseAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
-loadBaseLowerAddress_a : assert property ( (referenceModel.loadBaseAddressReg && dma.d.internalFF) |=> ( dma.d.baseAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
+loadBaseLowerAddress_a : assert property ( (referenceModel.loadBaseAddressReg && !dma.d.internalFF) |=> ( dma.d.baseAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
 
 `endif
 
