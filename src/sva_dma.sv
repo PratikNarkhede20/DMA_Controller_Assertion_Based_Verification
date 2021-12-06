@@ -68,13 +68,15 @@ stateTransistionS1toS2_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `
 stateTransistionS2toS4_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `S4) );
 stateTransistionS4toSI_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S4) ) |-> (dma.tC.nextState == `SI) );
 //|TCbusIf.DREQ && intSigIf.programCondition && configured
+`endif
 
+`ifdef EOP
+EOP_NisLow_assume : assume property (busIf.EOP_N == 1'b1);
 stateTransistionSOtoSIonEOP_a : assert property ( ( !busIf.EOP_N && (dma.tC.state == `SO) ) |-> (dma.tC.nextState == `SI) );
 stateTransistionS1toSIonEOP_a : assert property ( ( !busIf.EOP_N && (dma.tC.state == `S1) ) |-> (dma.tC.nextState == `SI) );
 stateTransistionS2toSIonEOP_a : assert property ( ( !busIf.EOP_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `SI) );
 stateTransistionS4toSIonEOP_a : assert property ( ( !busIf.EOP_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `SI) );
 `endif
-
 
 `ifdef Reset
 //assertions are signals/registers on reset

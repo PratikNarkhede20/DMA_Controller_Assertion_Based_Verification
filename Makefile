@@ -8,7 +8,7 @@ compile:
 	vmap work work
 	vlog ./src/dmaRegConfigPkg.sv ./src/dmaInternalRegistersPkg.sv ./src/busInterface.sv ./src/dmaInternalRegistersIf.sv ./src/dmaInternalSignalsIf.sv ./src/timingAndControl.sv ./src/datapath.sv ./src/priorityLogic.sv ./src/dma.sv
 	vlog -sv -mfcu -cuname my_bind_sva ./src/referenceModel.sv \
-		./src/sva_bind.sv +define+Run ./src/sva_dma.sv
+		./src/sva_bind.sv +define+Run +define+EOP ./src/sva_dma.sv
 
 formal:
 	qverify -c -od Output_Results -do "\
