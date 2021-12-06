@@ -105,10 +105,14 @@ DACKisZeroOnReset_a : assert property (busIf.RESET |=> busIf.DACK == 4'b0000);
 
 `ifdef Run
 //assertions for priority logic
+property DACKforDREQ (logic [3:0] inputDREQ, expectedDACK);
+  ( ( (busIf.DREQ == inputDREQ) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == expectedDACK) );
+endproperty
 DREQ0011ToDACK0001_a : assert property ( ( (busIf.DREQ == 4'b0011) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) );
 DREQ0111ToDACK0001_a : assert property ( ( (busIf.DREQ == 4'b0111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) );
 DREQ1111ToDACK0001_a : assert property ( ( (busIf.DREQ == 4'b1111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) );
 DREQ1110ToDACK0010_a : assert property ( ( (busIf.DREQ == 4'b1110) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0010) );
+DREQ1010ToDACK0010_a : assert property ( DACKforDREQ(4'b1010, 4'b0010) );
 //&&  (!dma.intRegIf.commandReg.priorityType) && (dma.intSigIf.assertDACK)
 
 //this below code is for exhaustive testcases for DREQ in generate block. there are few errors which we are still trying to figure out.
