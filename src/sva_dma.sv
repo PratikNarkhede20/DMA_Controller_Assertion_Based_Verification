@@ -25,10 +25,10 @@ CS_NisLow_assume : assume property (busIf.CS_N == 1'b0); //assume the DMA contro
 
 EOP_NisHigh_assume : assume property (busIf.EOP_N == 1'b1);
 
-ReadOrWriteTransferType_assume : assume property ( ( (dma.intRegIf.modeReg[0].transferType != 2'b00) || (dma.intRegIf.modeReg[0].transferType != 2'b11) ) &&
-											       ( (dma.intRegIf.modeReg[1].transferType != 2'b00) || (dma.intRegIf.modeReg[1].transferType != 2'b11) ) &&
-											       ( (dma.intRegIf.modeReg[2].transferType != 2'b00) || (dma.intRegIf.modeReg[2].transferType != 2'b11) ) &&
-											       ( (dma.intRegIf.modeReg[3].transferType != 2'b00) || (dma.intRegIf.modeReg[3].transferType != 2'b11) ) );
+ReadOrWriteTransferType_assume : assume property ( ( (dma.intRegIf.modeReg[0].transferType == 2'b01) || (dma.intRegIf.modeReg[0].transferType == 2'b10) ) &&
+											       											 ( (dma.intRegIf.modeReg[1].transferType == 2'b01) || (dma.intRegIf.modeReg[1].transferType == 2'b10) ) &&
+											       							 				 ( (dma.intRegIf.modeReg[2].transferType == 2'b01) || (dma.intRegIf.modeReg[2].transferType == 2'b10) ) &&
+											       											 ( (dma.intRegIf.modeReg[3].transferType == 2'b01) || (dma.intRegIf.modeReg[3].transferType == 2'b10) ) );
 
 /*singleTransferMode_assume : assume property (dma.intRegIf.modeReg[0].modeSelect == 2'b01 ||
 											 dma.intRegIf.modeReg[1].modeSelect == 2'b01 ||
@@ -183,8 +183,8 @@ generate
   end
 endgenerate
 */
-
-loadIoDataBufferFromDB_a : assert property ( ( !busIf.CS_N & !busIf.IOW_N & !dma.intSigIf.loadAddr & !(referenceModel.readStatusReg | referenceModel.readCurrentAddressReg | referenceModel.readCurrentWordCountReg))  |=> (dma.d.ioDataBuffer == $past(busIf.DB)));
+//loadIoDataBufferFromDB_a : assert property ( ( !busIf.CS_N & !busIf.IOW_N & !dma.intSigIf.loadAddr & !(referenceModel.readStatusReg | referenceModel.readCurrentAddressReg | referenceModel.readCurrentWordCountReg))  |=> (dma.d.ioDataBuffer == $past(busIf.DB)));
+loadIoDataBufferFromDB_a : assert property ( ##2 ( !busIf.CS_N & !busIf.IOW_N & !dma.intSigIf.loadAddr & !referenceModel.readStatusReg)  |=> (dma.d.ioDataBuffer == $past(busIf.DB)));
 //readIoDataBuffer_a : assert property (##4 (!busIf.CS_N & !busIf.IOR_N) |-> (dma.d.ioDataBuffer == busIf.DB));
 loadCommandReg_a : assert property (##7 referenceModel.loadCommandReg |=> (dma.intRegIf.commandReg == $past(dma.d.ioDataBuffer) ) );
 //loadModeReg_a : assert property (##8 referenceModel.loadModeReg |=> (dma.intRegIf.modeReg[$past(dma.d.ioDataBuffer[1:0])] == $past(dma.d.ioDataBuffer[7:2])));
