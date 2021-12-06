@@ -27,13 +27,13 @@ ReadOrWriteTransferType_assume : assume property ( ( (dma.intRegIf.modeReg[0].tr
 											       ( (dma.intRegIf.modeReg[1].transferType != 2'b00) || (dma.intRegIf.modeReg[1].transferType != 2'b11) ) &&
 											       ( (dma.intRegIf.modeReg[2].transferType != 2'b00) || (dma.intRegIf.modeReg[2].transferType != 2'b11) ) &&
 											       ( (dma.intRegIf.modeReg[3].transferType != 2'b00) || (dma.intRegIf.modeReg[3].transferType != 2'b11) ) );
-											  
+
 /*singleTransferMode_assume : assume property (dma.intRegIf.modeReg[0].modeSelect == 2'b01 ||
 											 dma.intRegIf.modeReg[1].modeSelect == 2'b01 ||
 											 dma.intRegIf.modeReg[2].modeSelect == 2'b01 ||
 											 dma.intRegIf.modeReg[3].modeSelect == 2'b01);*/
-											  
-											  
+
+
 
 //cover for data acknowledgement. check if inidividual channels are working
 DACK0isOne_c : cover property (busIf.DACK == 4'b0001);
@@ -59,13 +59,18 @@ stateS2_c : cover property (dma.tC.state == `S2);
 stateS4_c : cover property (dma.tC.state == `S4);
 stateTransistions_a : cover property ((dma.tC.state == `SI) ##10 (dma.tC.state == `SO) ##1 (dma.tC.state == `S1) ##1 (dma.tC.state == `S2) ##1 (dma.tC.state == `S4) ##1 (dma.tC.state == `SI));
 
-//state machine assertions
+//state machine assertions on chip select loadWriteBuffer_a
 stateTransistionSItoSO_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `SI) ) |-> ##[0:$] (dma.tC.nextState == `SO) );
 stateTransistionSOtoS1_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `SO) && busIf.HLDA ) |-> (dma.tC.nextState == `S1) );
 stateTransistionS1toS2_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S1) ) |-> (dma.tC.nextState == `S2) );
 stateTransistionS2toS4_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `S4) );
 stateTransistionS4toSI_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S4) ) |-> (dma.tC.nextState == `SI) );
 //|TCbusIf.DREQ && intSigIf.programCondition && configured
+
+stateTransistionSOtoSIonEOP_a : assert property ( ( !busIf.EOP_N && (dma.tC.state == `SO) ) |-> (dma.tC.nextState == `SI) );
+stateTransistionS1toSIonEOP_a : assert property ( ( !busIf.EOP_N && (dma.tC.state == `S1) ) |-> (dma.tC.nextState == `SI) );
+stateTransistionS2toSIonEOP_a : assert property ( ( !busIf.EOP_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `SI) );
+stateTransistionS4toSIonEOP_a : assert property ( ( !busIf.EOP_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `SI) );
 `endif
 
 
@@ -133,8 +138,11 @@ loadCommandReg_a : assert property (##7 referenceModel.loadCommandReg |=> (dma.i
 //loadModeReg_a : assert property (##8 referenceModel.loadModeReg |=> (dma.intRegIf.modeReg[$past(dma.d.ioDataBuffer[1:0])] == $past(dma.d.ioDataBuffer[7:2])));
 readStatusReg_a : assert property (##10 referenceModel.loadIoDataBufferFromStatus |=> (dma.d.ioDataBuffer == $past(dma.intRegIf.statusReg)));
 internalFFzero_a : assert property (##5 (referenceModel.clearInternalFF & !dma.d.enUpperAddress) |=> (dma.d.internalFF == 1'b0));
-internalFFone_a : assert property(##6 (!referenceModel.clearInternalFF & dma.d.enUpperAddress) |=> (dma.d.internalFF == 1'b1));
-loadWriteBuffer_a : assert property(##5 (referenceModel.loadCommandReg & referenceModel.loadBaseAddressReg & referenceModel.loadBaseWordCountReg)|=> (dma.d.writeBuffer == $past(dma.d.ioDataBuffer)));
+internalFFone_a : assert property (##6 (!referenceModel.clearInternalFF & dma.d.enUpperAddress) |=> (dma.d.internalFF == 1'b1));
+loadWriteBuffer_a : assert property (##5 (referenceModel.loadCommandReg & referenceModel.loadBaseAddressReg & referenceModel.loadBaseWordCountReg)|=> (dma.d.writeBuffer == $past(dma.d.ioDataBuffer)));
+
+baseAddressShouldNotChange : assert property ( !$changed(dma.d.baseAddressReg[0]) || !$changed(dma.d.baseAddressReg[1]) || !$changed(dma.d.baseAddressReg[2]) || !$changed(dma.d.baseAddressReg[3]) );
+baseWordCountShouldNotChange : assert property ( !$changed(dma.d.baseWordCountReg[0]) || !$changed(dma.d.baseWordCountReg[1]) || !$changed(dma.d.baseWordCountReg[2]) || !$changed(dma.d.baseWordCountReg[3]) );
 
 
 addressEnable_a : assert property ( ##2 $rose(busIf.HLDA) |=> busIf.AEN );

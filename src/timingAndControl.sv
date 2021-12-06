@@ -38,7 +38,9 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegist
   assign TCbusIf.MEMW_N = (memw)? 1'b0 : 1'bz;
   assign TCbusIf.IOW_N = (iow)? 1'b0 : 1'bz;
   assign TCbusIf.MEMR_N = (memr)? 1'b0 : 1'bz;
-  
+
+  assign TCbusIf.EOP_N = (intSigIf.intEOP)? 1'b0 : 1'b1;
+
   //assign TCbusIf.IOR_N = 1'bz;
   //assign TCbusIf.IOW_N = 1'bz;
 
@@ -47,16 +49,56 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegist
     begin
       nextState = state;
       unique case (1'b1)
-        state[SIIndex]:	if (|TCbusIf.DREQ && intSigIf.programCondition && configured)
-          nextState = SO;
-        state[SOIndex]:	if (TCbusIf.HLDA )
-          nextState = S1;
+
+        state[SIIndex]:
+          begin
+            if (!TCbusIf.CS_N && |TCbusIf.DREQ && intSigIf.programCondition && configured)
+              nextState = SO;
+            else if(TCbusIf.EOP_N)
+              nextState = SI;
+            else
+              nextState = SI;
+          end
+        end
+
+        state[SOIndex]:
+          begin
+            if (!TCbusIf.CS_N && TCbusIf.HLDA )
+              nextState = S1;
+            else if(TCbusIf.EOP_N)
+              nextState = SI;
+            else
+              nextState = SO;
+          end
+
         state[S1Index]:
-          nextState = S2;
+          begin
+            if(!TCbusIf.CS_N)
+              nextState = S2;
+            else if(TCbusIf.EOP_N)
+              nextState = SI;
+            else
+              nextState = S1;
+          end
+
         state[S2Index]:
-          nextState = S4;
+          begin
+            if(!TCbusIf.CS_N)
+              nextState = S4;
+            else if(TCbusIf.EOP_N)
+              nextState = SI;
+            else
+              nextState = S2;
+          end
+
         state[S4Index]:
-          nextState = SI;
+          begin
+            if(!TCbusIf.CS_N || TCbusIf.EOP_N)
+              nextState = SI;
+            else
+              nextState = SI;
+          end
+
         default: nextState = SI;
       endcase
     end
