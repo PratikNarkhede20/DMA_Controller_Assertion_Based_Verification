@@ -3,6 +3,8 @@ run: clean compile formal debug
 
 reset: clean compileReset formalReset debug
 
+eop: clean compile formal debug
+
 compile:
 	vlib work
 	vmap work work
@@ -26,6 +28,13 @@ clean:
 	qverify_clean
 	\rm -rf work modelsim.ini *.wlf *.log replay* transcript *.db
 	\rm -rf Output_Results *.tcl
+
+compileEOP:
+	vlib work
+	vmap work work
+	vlog ./src/dmaRegConfigPkg.sv ./src/busInterface.sv ./src/dmaInternalRegistersIf.sv ./src/dmaInternalSignalsIf.sv ./src/timingAndControl.sv ./src/datapath.sv ./src/priorityLogic.sv ./src/dma.sv
+	vlog -sv -mfcu -cuname my_bind_sva ./src/referenceModel.sv \
+		./src/sva_bind.sv +define+EOP ./src/sva_dma.sv
 
 compileReset:
 	vlib work

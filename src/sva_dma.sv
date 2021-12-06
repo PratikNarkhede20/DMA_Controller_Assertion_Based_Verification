@@ -74,10 +74,11 @@ stateTransistionS4toSI_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `
 
 `ifdef EOP
 EOP_NisLow_assume : assume property (busIf.EOP_N == 1'b1);
-stateTransistionSOtoSIonEOP_a : assert property ( ( !busIf.EOP_N && (dma.tC.state == `SO) ) |-> (dma.tC.nextState == `SI) );
-stateTransistionS1toSIonEOP_a : assert property ( ( !busIf.EOP_N && (dma.tC.state == `S1) ) |-> (dma.tC.nextState == `SI) );
-stateTransistionS2toSIonEOP_a : assert property ( ( !busIf.EOP_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `SI) );
-stateTransistionS4toSIonEOP_a : assert property ( ( !busIf.EOP_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `SI) );
+stateTransistionSOtoSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `SI) ) |-> (dma.tC.nextState == `SI) );
+stateTransistionSOtoSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `SO) ) |-> (dma.tC.nextState == `SI) );
+stateTransistionS1toSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `S1) ) |-> (dma.tC.nextState == `SI) );
+stateTransistionS2toSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `SI) );
+stateTransistionS4toSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `SI) );
 `endif
 
 `ifdef Reset
@@ -213,8 +214,8 @@ noReadWriteAtSameTime_a : assert property (!(!busIf.IOW_N && !busIf.IOR_N));
 addressValidOnReadWrite_a : assert property( ((busIf.IOW_N && !busIf.IOR_N) || (!busIf.IOW_N && busIf.IOR_N)) |-> !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0} ) );
 dataValidOnReadWrite_a : assert property ( (!busIf.IOW_N || !busIf.IOR_N) |-> !$isunknown(busIf.DB) );
 
-validReadWriteSignalsOnHLDA_a : assert property ( ( !$isunknown(busIf.IOR_N) && !$isunknown(busIf.IOW_N) ) throughout busIf.HLDA[1:$]);
-validAddressBusOnHLDA_a : assert property ( !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0}) throughout busIf.HLDA[1:$] );
+validReadWriteSignalsOnHLDA_a : assert property ( ( !$isunknown(busIf.IOR_N) && !$isunknown(busIf.IOW_N) ) throughout busIf.HLDA[*]);
+validAddressBusOnHLDA_a : assert property ( !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0}) throughout busIf.HLDA[*] );
 
 
 `endif
