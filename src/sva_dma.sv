@@ -109,10 +109,7 @@ property DACKforDREQ (logic [3:0] inputDREQ, expectedDACK);
   ( ( (busIf.DREQ == inputDREQ) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == expectedDACK) );
 endproperty
 
-//DREQ0011ToDACK0001_a : assert property ( ( (busIf.DREQ == 4'b0011) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) );
-//DREQ0111ToDACK0001_a : assert property ( ( (busIf.DREQ == 4'b0111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) );
-//DREQ1111ToDACK0001_a : assert property ( ( (busIf.DREQ == 4'b1111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) );
-//DREQ1110ToDACK0010_a : assert property ( ( (busIf.DREQ == 4'b1110) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0010) );
+/*
 DREQ0000ToDACK0000_a : assert property ( DACKforDREQ(4'b0000, 4'b0000) );
 DREQ0001ToDACK0001_a : assert property ( DACKforDREQ(4'b0001, 4'b0001) );
 DREQ0010ToDACK0010_a : assert property ( DACKforDREQ(4'b0010, 4'b0010) );
@@ -130,6 +127,9 @@ DREQ1101ToDACK0001_a : assert property ( DACKforDREQ(4'b1101, 4'b0001) );
 DREQ1110ToDACK0010_a : assert property ( DACKforDREQ(4'b1110, 4'b0010) );
 DREQ1111ToDACK0001_a : assert property ( DACKforDREQ(4'b1111, 4'b0001) );
 //&&  (!dma.intRegIf.commandReg.priorityType) && (dma.intSigIf.assertDACK)
+*/
+
+//exhaustive testing fixed priority logic. DREQ 0000 to 1111 as input
 genvar i;
 generate
   for(i=0; i<16; i=i+1)
@@ -165,28 +165,6 @@ generate
      else if(inputDREQ[3]==1'b1) expectedDACK = 4'b1000;
      else expectedDACK = 4'b0000;
      DACKforDREQfixedPriority_a : assert DACKforDREQ (inputDREQ, expectedDACK);
-   end
-  end
-endgenerate
-
-//tried this version of generate block with no local variables, still the compile on this code failes
-genvar i;
-generate
-  for(i=0; i<16; i=i+1)
-   begin
-     if(i[0]==1'b1)
-		 DACKforDREQfixedPriority_a : assert DACKforDREQ (i, 4'b0001);
-
-     else if(i[1]==1'b1)
-		 DACKforDREQfixedPriority_a : assert DACKforDREQ (i, 4'b0010);
-
-     else if(i[2]==1'b1)
-		 DACKforDREQfixedPriority_a : assert DACKforDREQ (i, 4'b0100);
-
-     else if(i[3]==1'b1)
-		 DACKforDREQfixedPriority_a : assert DACKforDREQ (i, 4'b1000);
-
-     else;
    end
   end
 endgenerate
