@@ -112,12 +112,19 @@ genvar i, DACK;
 generate
   for(i=0; i<16; i=i+1)
    begin
-     if(i[0]==1'b1) DACK = 4'b0001;
-     else if(i[1]==1'b1) DACK = 4'b0010;
-     else if(i[2]==1'b1) DACK = 4'b0100;
-     else if(i[3]==1'b1) DACK = 4'b1000;
-     else expectedDACK = 4'b0000;
-     DACKforDREQfixedPriority_a : assert DACKforDREQ (i, DACK);
+     if(i[0]==1'b1)
+		 DACKforDREQfixedPriority_a : assert DACKforDREQ (i, 4'b0001);
+
+     else if(i[1]==1'b1)
+		 DACKforDREQfixedPriority_a : assert DACKforDREQ (i, 4'b0010);
+
+     else if(i[2]==1'b1)
+		 DACKforDREQfixedPriority_a : assert DACKforDREQ (i, 4'b0100);
+
+     else if(i[3]==1'b1)
+		 DACKforDREQfixedPriority_a : assert DACKforDREQ (i, 4'b1000);
+		 
+     else;
    end
   end
 endgenerate
