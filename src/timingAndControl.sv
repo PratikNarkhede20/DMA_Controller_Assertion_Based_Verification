@@ -62,7 +62,7 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegist
 
         state[SOIndex]:
           begin
-            if (!TCbusIf.CS_N && TCbusIf.HLDA && && TCbusIf.EOP_N)
+            if (!TCbusIf.CS_N && TCbusIf.HLDA && TCbusIf.EOP_N)
               nextState = S1;
             else if(!TCbusIf.EOP_N)
               nextState = SI;
