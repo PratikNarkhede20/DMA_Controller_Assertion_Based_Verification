@@ -206,17 +206,19 @@ addressStrobeActiveForTwoCycles_a : assert property ($rose(busIf.AEN) |=> ##1 $f
 addressStrobeActive_a : assert property ( ##2 ( |busIf.DREQ && $rose(busIf.HLDA) && (dma.tC.state == `SO)) |=> $rose(busIf.ADSTB) );
 addressStrobeActiveforOneCycle_a : assert property ( $rose(busIf.ADSTB) |=> $fell(busIf.ADSTB) );
 
-addressBusValid : assert property (busIf.ADSTB |-> !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0}));
-dataBusValid : assert property ((busIf.ADSTB & busIf.AEN) |-> !$isunknown(busIf.DB));
+addressBusValid_a : assert property (busIf.ADSTB |-> !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0}));
+dataBusValid_a : assert property ((busIf.ADSTB & busIf.AEN) |-> !$isunknown(busIf.DB));
 
-noReadWriteAtSameTime : assert property (!(!busIf.IOW_N && !busIf.IOR_N));
-addressValidOnReadWrite : assert property( ((busIf.IOW_N && !busIf.IOR_N) || (!busIf.IOW_N && busIf.IOR_N)) |-> !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0} ) );
-dataValidOnReadWrite : assert property ( (!busIf.IOW_N || !busIf.IOR_N) |-> !$isunknown(busIf.DB) );
+noReadWriteAtSameTime_a : assert property (!(!busIf.IOW_N && !busIf.IOR_N));
+addressValidOnReadWrite_a : assert property( ((busIf.IOW_N && !busIf.IOR_N) || (!busIf.IOW_N && busIf.IOR_N)) |-> !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0} ) );
+dataValidOnReadWrite_a : assert property ( (!busIf.IOW_N || !busIf.IOR_N) |-> !$isunknown(busIf.DB) );
 
-validReadWriteSignalsOnHLDA : assert property ( (busIf.CS_N && busIf.HLDA && busIf.EOP_N)
-																								|-> ( ( !$isunknown(busIf.IOR_N) && !$isunknown(busIf.IOW_N) ) throughout busIf.HLDA(1:$) ) );
-validAddressBusOnHLDA : assert property ( (busIf.CS_N && busIf.HLDA && busIf.EOP_N)
-																					|-> ( !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0}) throughout busIf.HLDA(1:$) ) );
+validReadWriteSignalsOnHLDA_a : assert property ( (busIf.CS_N && busIf.HLDA && busIf.EOP_N)
+																								|-> ( ( !$isunknown(busIf.IOR_N) && !$isunknown(busIf.IOW_N) ) throughout busIf.HLDA ) );
+validAddressBusOnHLDA_a : assert property ( (busIf.CS_N && busIf.HLDA && busIf.EOP_N)
+																					|-> ( !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0}) throughout busIf.HLDA ) );
+
+
 `endif
 
 endmodule
