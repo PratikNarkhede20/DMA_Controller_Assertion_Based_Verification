@@ -169,10 +169,10 @@ generate
 endgenerate
 
 
-rotatingPriority_c : ((busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0001) ##[1:$]
-											(busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0010) ##[1:$]
-											(busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0100) ##[1:$]
-											(busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b1000));
+rotatingPriority_c : cover property ((busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0001) ##[1:$]
+																		 (busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0010) ##[1:$]
+																		 (busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0100) ##[1:$]
+																		 (busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b1000));
 //this below code is for exhaustive testcases for DREQ in generate block. there are few errors which we are still trying to figure out.
 //the compile errors are due to tool not able to process local variables in assertions.
 /*
