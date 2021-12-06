@@ -108,7 +108,7 @@ DACKisZeroOnReset_a : assert property (busIf.RESET |=> busIf.DACK == 4'b0000);
 property DACKforDREQ (logic [3:0] inputDREQ, expectedDACK);
   ( ( (busIf.DREQ == inputDREQ) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == expectedDACK) );
 endproperty
-genvar [3:0] i, DACK;
+genvar i, DACK;
 generate
   for(i=0; i<16; i=i+1)
    begin
