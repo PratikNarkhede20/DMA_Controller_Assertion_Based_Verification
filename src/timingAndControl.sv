@@ -39,7 +39,7 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegist
   assign TCbusIf.IOW_N = (iow)? 1'b0 : 1'bz;
   assign TCbusIf.MEMR_N = (memr)? 1'b0 : 1'bz;
 
-  assign TCbusIf.EOP_N = (intSigIf.intEOP)? 1'b0 : 1'b1;
+  //assign TCbusIf.EOP_N = (intSigIf.intEOP)? 1'b0 : 1'b1;
 
   //assign TCbusIf.IOR_N = 1'bz;
   //assign TCbusIf.IOW_N = 1'bz;

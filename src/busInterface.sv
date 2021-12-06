@@ -16,7 +16,7 @@ interface busInterface(input logic CLK, RESET);
   logic [CHANNELS-1 : 0] DACK  ;
   logic [CHANNELS-1 : 0] DREQ  ;
 
-  wire                   EOP_N ;
+  logic                  EOP_N ;
 
   wire                   A0    ;
   wire                   A1    ;
@@ -37,8 +37,8 @@ interface busInterface(input logic CLK, RESET);
     input DREQ,
     input HLDA,
     input DACK,
+    input EOP_N,
 
-    inout EOP_N,
     inout IOR_N,
     inout IOW_N,
 
