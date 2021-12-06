@@ -238,6 +238,8 @@ loadCurrentLowerWordCount_a : assert property ( (referenceModel.loadBaseWordCoun
 readCurrentUpperAddress_a : assert property ( (referenceModel.readCurrentAddressReg && dma.d.internalFF) |=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == dma.d.readBuffer) );
 readCurrentLowerAddress_a : assert property ( (referenceModel.readCurrentAddressReg && !dma.d.internalFF) |=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == dma.d.readBuffer) );
 
+readCurrentUpperWordCount_a : assert property ( (referenceModel.readCurrentWordCountReg && dma.d.internalFF) |=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == dma.d.readBuffer) );
+readCurrentLowerWordCount_a : assert property ( (referenceModel.readCurrentWordCountReg && !dma.d.internalFF) |=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == dma.d.readBuffer) );
 
 `endif
 
