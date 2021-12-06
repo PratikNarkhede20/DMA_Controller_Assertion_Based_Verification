@@ -107,7 +107,7 @@ DACKisZeroOnReset_a : assert property (busIf.RESET |=> busIf.DACK == 4'b0000);
 
 `ifdef Run
 //assertions for priority logic
-property DACKforDREQ (logic [3:0] inputDREQ, expectedDACK);
+property DACKforDREQfixedPriority (logic [3:0] inputDREQ, expectedDACK);
   ( ( (busIf.DREQ == inputDREQ) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == expectedDACK) );
 endproperty
 /*
@@ -137,32 +137,32 @@ generate
    begin : g1
      if(i[0]==1'b1)
 		 begin : DACK0001
-			 DACK0001forDREQfixedPriority_a : assert property ( DACKforDREQ (i, 4'b0001) );
-			 DACK0001forDREQ_c : cover property (##3 (busIf.DREQ == i && busIf.DACK == 4'b0001) );
+			 DACK0001forDREQfixedPriority_a : assert property ( DACKforDREQfixedPriority (i, 4'b0001) );
+			 DACK0001forDREQ_c : cover property (##3 (busIf.DREQ == i && !dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0001) );
 	   end
 
      else if(i[1]==1'b1)
 		 begin : DACK0010
-			 DACK0010forDREQfixedPriority_a : assert property ( DACKforDREQ (i, 4'b0010) );
-			 DACK0010forDREQ_c : cover property (##3 (busIf.DREQ == i && busIf.DACK == 4'b0010) );
+			 DACK0010forDREQfixedPriority_a : assert property ( DACKforDREQfixedPriority (i, 4'b0010) );
+			 DACK0010forDREQ_c : cover property (##3 (busIf.DREQ == i && !dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0010) );
 		 end
 
      else if(i[2]==1'b1)
 		 begin : DACK0100
-			 DACK0100forDREQfixedPriority_a : assert property ( DACKforDREQ (i, 4'b0100) );
-			 DACK0100forDREQ_c : cover property (##3 (busIf.DREQ == i && busIf.DACK == 4'b0100) );
+			 DACK0100forDREQfixedPriority_a : assert property ( DACKforDREQfixedPriority (i, 4'b0100) );
+			 DACK0100forDREQ_c : cover property (##3 (busIf.DREQ == i && !dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0100) );
 	   end
 
      else if(i[3]==1'b1)
 		 begin : DACK1000
-			 DACK1000forDREQfixedPriority_a : assert property ( DACKforDREQ (i, 4'b1000) );
-			 DACK1000forDREQ_c : cover property (##3 (busIf.DREQ == i && busIf.DACK == 4'b1000) );
+			 DACK1000forDREQfixedPriority_a : assert property ( DACKforDREQfixedPriority (i, 4'b1000) );
+			 DACK1000forDREQ_c : cover property (##3 (busIf.DREQ == i && !dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b1000) );
 		 end
 
      else
 		 begin : DACK0000
-			 DACK0000forDREQfixedPriority_a : assert property ( DACKforDREQ (i, 4'b0000) );
-			 DACK0000forDREQ_c : cover property (##3 (busIf.DREQ == i && busIf.DACK == 4'b0000) );
+			 DACK0000forDREQfixedPriority_a : assert property ( DACKforDREQfixedPriority (i, 4'b0000) );
+			 DACK0000forDREQ_c : cover property (##3 (busIf.DREQ == i && !dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0000) );
 		 end
    end
 endgenerate

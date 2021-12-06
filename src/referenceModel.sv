@@ -11,9 +11,15 @@ module referenceModel(busInterface.referenceModel busIf, input logic programCond
 
   logic loadIoDataBufferFromDB;
   logic loadIoDataBufferFromStatus;
+  logic regConfigInProgress; //flag set when one of the regiter congiguration is in progess
+  logic regConfigOneHot; //flag to check if only one register is activated at a time in program condition
 
   assign loadIoDataBufferFromDB = ( !busIf.CS_N & !busIf.IOW_N & !dma.intSigIf.loadAddr & !(readStatusReg|readCurrentAddressReg|readCurrentWordCountReg) );
   assign loadIoDataBufferFromStatus = ( !busIf.CS_N & !busIf.IOR_N & readStatusReg & !dma.intSigIf.loadAddr & !(readCurrentAddressReg|readCurrentWordCountReg) );
+
+  assign regConfigInProgress = ( loadCommandReg | loadModeReg | loadBaseAddressReg | readCurrentAddressReg | loadBaseWordCountReg | readCurrentWordCountReg | readStatusReg | clearInternalFF );
+
+  assign regConfigOneHot = $onehot( {loadCommandReg, loadModeReg, loadBaseAddressReg, readCurrentAddressReg, loadBaseWordCountReg, readCurrentWordCountReg, readStatusReg, clearInternalFF} );
 
   always_comb
     begin
