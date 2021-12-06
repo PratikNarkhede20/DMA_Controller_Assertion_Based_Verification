@@ -59,7 +59,6 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegist
             else
               nextState = SI;
           end
-        end
 
         state[SOIndex]:
           begin
