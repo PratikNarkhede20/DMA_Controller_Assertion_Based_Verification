@@ -108,6 +108,20 @@ DACKisZeroOnReset_a : assert property (busIf.RESET |=> busIf.DACK == 4'b0000);
 property DACKforDREQ (logic [3:0] inputDREQ, expectedDACK);
   ( ( (busIf.DREQ == inputDREQ) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == expectedDACK) );
 endproperty
+genvar [3:0] i, DACK;
+generate
+  for(i=0; i<16; i=i+1)
+   begin
+     if(i[0]==1'b1) DACK = 4'b0001;
+     else if(i[1]==1'b1) DACK = 4'b0010;
+     else if(i[2]==1'b1) DACK = 4'b0100;
+     else if(i[3]==1'b1) DACK = 4'b1000;
+     else expectedDACK = 4'b0000;
+     DACKforDREQfixedPriority_a : assert DACKforDREQ (i, DACK);
+   end
+  end
+endgenerate
+
 DREQ0011ToDACK0001_a : assert property ( ( (busIf.DREQ == 4'b0011) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) );
 DREQ0111ToDACK0001_a : assert property ( ( (busIf.DREQ == 4'b0111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) );
 DREQ1111ToDACK0001_a : assert property ( ( (busIf.DREQ == 4'b1111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) );
