@@ -226,6 +226,16 @@ validAddressBusOnHLDA_a : assert property ( ##5 busIf.HLDA |-> !$isunknown({busI
 loadBaseUpperAddress_a : assert property ( (referenceModel.loadBaseAddressReg && dma.d.internalFF) |=> ( dma.d.baseAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
 loadBaseLowerAddress_a : assert property ( (referenceModel.loadBaseAddressReg && !dma.d.internalFF) |=> ( dma.d.baseAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
 
+loadCurrentUpperAddress_a : assert property ( (referenceModel.loadBaseAddressReg && dma.d.internalFF) |=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
+loadCurrentLowerAddress_a : assert property ( (referenceModel.loadBaseAddressReg && !dma.d.internalFF) |=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
+
+loadBaseUpperWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && dma.d.internalFF) |=> ( dma.d.baseWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
+loadBaseLowerWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && !dma.d.internalFF) |=> ( dma.d.baseWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
+
+loadCurrentUpperWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && dma.d.internalFF) |=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
+loadCurrentLowerWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && !dma.d.internalFF) |=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
+
+
 `endif
 
 endmodule
