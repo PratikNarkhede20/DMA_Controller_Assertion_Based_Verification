@@ -73,7 +73,7 @@ stateTransistionS4toSI_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `
 `endif
 
 `ifdef EOP
-EOP_NisLow_assume : assume property (busIf.EOP_N == 1'b1);
+EOP_NisLow_assume : assume property (busIf.EOP_N == 1'b0);
 stateTransistionSItoSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `SI) ) |-> (dma.tC.nextState == `SI) );
 stateTransistionSOtoSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `SO) ) |-> (dma.tC.nextState == `SI) );
 stateTransistionS1toSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `S1) ) |-> (dma.tC.nextState == `SI) );
@@ -168,6 +168,11 @@ generate
    end
 endgenerate
 
+
+rotatingPriority_c : ((busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0001) ##[1:$]
+											(busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0010) ##[1:$]
+											(busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0100) ##[1:$]
+											(busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b1000));
 //this below code is for exhaustive testcases for DREQ in generate block. there are few errors which we are still trying to figure out.
 //the compile errors are due to tool not able to process local variables in assertions.
 /*
