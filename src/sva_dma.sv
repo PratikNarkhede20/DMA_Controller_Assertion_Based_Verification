@@ -202,6 +202,7 @@ loadWriteBuffer_a : assert property (##5 (referenceModel.loadCommandReg & refere
 baseAddressShouldNotChange : assert property ( !$changed(dma.d.baseAddressReg[0]) || !$changed(dma.d.baseAddressReg[1]) || !$changed(dma.d.baseAddressReg[2]) || !$changed(dma.d.baseAddressReg[3]) );
 baseWordCountShouldNotChange : assert property ( !$changed(dma.d.baseWordCountReg[0]) || !$changed(dma.d.baseWordCountReg[1]) || !$changed(dma.d.baseWordCountReg[2]) || !$changed(dma.d.baseWordCountReg[3]) );
 
+singleRegConfigInProgramMode_a : assert property (referenceModel.regConfigInProgress |-> referenceModel.regConfigOneHot);
 
 addressEnable_a : assert property ( ##2 ( |busIf.DREQ && $rose(busIf.HLDA) && (dma.tC.state == `SO) ) |=> $rose(busIf.AEN) );
 addressStrobeActiveForTwoCycles_a : assert property ($rose(busIf.AEN) |=> ##1 $fell(busIf.AEN));
