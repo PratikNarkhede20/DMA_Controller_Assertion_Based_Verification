@@ -186,7 +186,8 @@ generate
 endgenerate
 */
 //loadIoDataBufferFromDB_a : assert property ( ( !busIf.CS_N & !busIf.IOW_N & !dma.intSigIf.loadAddr & !(referenceModel.readStatusReg | referenceModel.readCurrentAddressReg | referenceModel.readCurrentWordCountReg))  |=> (dma.d.ioDataBuffer == $past(busIf.DB)));
-loadIoDataBufferFromDB_a : assert property ( ##2 ( !busIf.CS_N & !busIf.IOW_N & !dma.intSigIf.loadAddr & !referenceModel.readStatusReg)  |=> (dma.d.ioDataBuffer == $past(busIf.DB)));
+//loadIoDataBufferFromDB_a : assert property ( ##2 ( !busIf.CS_N & !busIf.IOW_N & !dma.intSigIf.loadAddr & !referenceModel.readStatusReg)  |=> (dma.d.ioDataBuffer == $past(busIf.DB)));
+loadIoDataBufferFromDB_a : assert property ( ##2 loadIoDataBufferFromDB |=> (dma.d.ioDataBuffer == $past(busIf.DB)));
 //readIoDataBuffer_a : assert property (##4 (!busIf.CS_N & !busIf.IOR_N) |-> (dma.d.ioDataBuffer == busIf.DB));
 loadCommandReg_a : assert property (##7 referenceModel.loadCommandReg |=> (dma.intRegIf.commandReg == $past(dma.d.ioDataBuffer) ) );
 //loadModeReg_a : assert property (##8 referenceModel.loadModeReg |=> (dma.intRegIf.modeReg[$past(dma.d.ioDataBuffer[1:0])] == $past(dma.d.ioDataBuffer[7:2])));
@@ -211,6 +212,9 @@ dataBusValid : assert property ((busIf.ADSTB & busIf.AEN) |-> !$isunknown(busIf.
 noReadWriteAtSameTime : assert property (!(!busIf.IOW_N && !busIf.IOR_N));
 addressValidOnReadWrite : assert property( ((busIf.IOW_N && !busIf.IOR_N) || (!busIf.IOW_N && busIf.IOR_N)) |-> !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0} ) );
 dataValidOnReadWrite : assert property ( (!busIf.IOW_N || !busIf.IOR_N) |-> !$isunknown(busIf.DB) );
+
+validReadWriteSignalsOnHLDA : assert property ((busIf.CS_N && busIf.HLDA && busIf.EOP_N) |-> ( ( !$isunknown(busIf.IOR_N) && !$isunknown(busIf.IOW_N) ) throughout busIf.HLDA(1:$) ) );
+validAddressBusOnHLDA : assert property ((busIf.CS_N && busIf.HLDA && busIf.EOP_N) |-> ( !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0}) throughout busIf.HLDA(1:$) ) );
 `endif
 
 endmodule
