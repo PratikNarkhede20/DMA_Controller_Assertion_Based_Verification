@@ -199,9 +199,11 @@ baseAddressShouldNotChange : assert property ( !$changed(dma.d.baseAddressReg[0]
 baseWordCountShouldNotChange : assert property ( !$changed(dma.d.baseWordCountReg[0]) || !$changed(dma.d.baseWordCountReg[1]) || !$changed(dma.d.baseWordCountReg[2]) || !$changed(dma.d.baseWordCountReg[3]) );
 
 
-addressEnable_a : assert property ( ##2 ( |busIf.DREQ && $rose(busIf.HLDA) ) |=> busIf.AEN );
-addressStrobeActive_a : assert property ( ##2 ( |busIf.DREQ && $rose(busIf.HLDA) ) |=> busIf.ADSTB );
-addressStrobeLow_a : assert property ( $rose(busIf.ADSTB) |=> $fell(busIf.ADSTB) );
+addressEnable_a : assert property ( ##2 ( |busIf.DREQ && $rose(busIf.HLDA) ) |=> ##1 $rose(busIf.AEN) );
+addressStrobeActiveForTwoCycles_a : assert property ($rose(busIf.AEN) |=> ##1 $fell(busIf.AEN));
+
+addressStrobeActive_a : assert property ( ##2 ( |busIf.DREQ && $rose(busIf.HLDA) ) |=> ##1 $rose(busIf.ADSTB) );
+addressStrobeActiveforOneCycle_a : assert property ( $rose(busIf.ADSTB) |=> $fell(busIf.ADSTB) );
 
 addressBusValid : assert property (busIf.ADSTB |-> !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0}));
 dataBusValid : assert property ((busIf.ADSTB & busIf.AEN) |-> !$isunknown(busIf.DB));
