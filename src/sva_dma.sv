@@ -37,8 +37,6 @@ ReadOrWriteTransferType_assume : assume property ( ( (dma.intRegIf.modeReg[0].tr
 											 dma.intRegIf.modeReg[2].modeSelect == 2'b01 ||
 											 dma.intRegIf.modeReg[3].modeSelect == 2'b01);*/
 
-
-
 //cover for data acknowledgement. check if inidividual channels are working
 DACK0isOne_c : cover property (busIf.DACK == 4'b0001);
 DACK1isOne_c : cover property (busIf.DACK == 4'b0010);
@@ -61,46 +59,101 @@ stateSO_c : cover property (dma.tC.state == `SO);
 stateS1_c : cover property (dma.tC.state == `S1);
 stateS2_c : cover property (dma.tC.state == `S2);
 stateS4_c : cover property (dma.tC.state == `S4);
-stateTransistions_a : cover property ((dma.tC.state == `SI) ##10 (dma.tC.state == `SO) ##1 (dma.tC.state == `S1) ##1 (dma.tC.state == `S2) ##1 (dma.tC.state == `S4) ##1 (dma.tC.state == `SI));
 
-//state machine assertions on chip select loadWriteBuffer_a
-stateTransistionSItoSO_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `SI) ) |-> ##[0:$] (dma.tC.nextState == `SO) );
-stateTransistionSOtoS1_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `SO) && busIf.HLDA ) |-> (dma.tC.nextState == `S1) );
-stateTransistionS1toS2_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S1) ) |-> (dma.tC.nextState == `S2) );
-stateTransistionS2toS4_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `S4) );
-stateTransistionS4toSI_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S4) ) |-> (dma.tC.nextState == `SI) );
+stateTransistions_a : cover property ((dma.tC.state == `SI) ##10
+																			(dma.tC.state == `SO) ##1
+																			(dma.tC.state == `S1) ##1
+																			(dma.tC.state == `S2) ##1
+																			(dma.tC.state == `S4) ##1
+																			(dma.tC.state == `SI));
+
+//state machine assertions on chip select set to low
+stateTransistionSItoSO_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `SI) )
+																							 |-> ##[0:$] (dma.tC.nextState == `SO) );
+
+stateTransistionSOtoS1_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `SO) && busIf.HLDA )
+																							 |-> (dma.tC.nextState == `S1) );
+
+stateTransistionS1toS2_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S1) )
+																							 |-> (dma.tC.nextState == `S2) );
+
+stateTransistionS2toS4_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S2) )
+																							 |-> (dma.tC.nextState == `S4) );
+
+stateTransistionS4toSI_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S4) )
+																							 |-> (dma.tC.nextState == `SI) );
 //|TCbusIf.DREQ && intSigIf.programCondition && configured
 `endif
 
 `ifdef EOP
-stateTransistionSItoSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `SI) ) |-> (dma.tC.nextState == `SI) );
-stateTransistionSOtoSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `SO) ) |-> (dma.tC.nextState == `SI) );
-stateTransistionS1toSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `S1) ) |-> (dma.tC.nextState == `SI) );
-stateTransistionS2toSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `SI) );
-stateTransistionS4toSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `S2) ) |-> (dma.tC.nextState == `SI) );
+stateTransistionSItoSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `SI) )
+																												|-> (dma.tC.nextState == `SI) );
+
+stateTransistionSOtoSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `SO) )
+																												|-> (dma.tC.nextState == `SI) );
+
+stateTransistionS1toSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `S1) )
+																												|-> (dma.tC.nextState == `SI) );
+
+stateTransistionS2toSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `S2) )
+																												|-> (dma.tC.nextState == `SI) );
+
+stateTransistionS4toSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `S2) )
+																												|-> (dma.tC.nextState == `SI) );
 `endif
 
 `ifdef Reset
-//assertions are signals/registers on reset
+//assertions on signals/registers on reset
 stateTransistionOnReset_a : assert property (busIf.RESET |=> (dma.tC.state == `SI) );
+
 commandRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.commandReg == '0) );
+
 statusRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.statusReg == '0) );
-modeRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.intRegIf.modeReg[0] == '0) && (dma.intRegIf.modeReg[1] == '0) && (dma.intRegIf.modeReg[2] == '0) && (dma.intRegIf.modeReg[3] == '0) ) );
+
+modeRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.intRegIf.modeReg[0] == '0) &&
+																													(dma.intRegIf.modeReg[1] == '0) &&
+																													(dma.intRegIf.modeReg[2] == '0) &&
+																													(dma.intRegIf.modeReg[3] == '0) ) );
+
 writeBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.writeBuffer == '0));
+
 readBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.readBuffer == '0));
-baseAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.baseAddressReg[0] == '0) && (dma.d.baseAddressReg[1] == '0) && (dma.d.baseAddressReg[2] == '0) && (dma.d.baseAddressReg[3] == '0) ) );
-currentAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.currentAddressReg[0] == '0) && (dma.d.currentAddressReg[1] == '0) && (dma.d.currentAddressReg[2] == '0) && (dma.d.currentAddressReg[3] == '0) ) );
-baseWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.baseWordCountReg[0] == '0) && (dma.d.baseWordCountReg[1] == '0) && (dma.d.baseWordCountReg[2] == '0) && (dma.d.baseWordCountReg[3] == '0) ) );
-currentWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.currentWordCountReg[0] == '0) && (dma.d.currentWordCountReg[1] == '0) && (dma.d.currentWordCountReg[2] == '0) && (dma.d.currentWordCountReg[3] == '0) ) );
+
+baseAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.baseAddressReg[0] == '0) &&
+																																 (dma.d.baseAddressReg[1] == '0) &&
+																																 (dma.d.baseAddressReg[2] == '0) &&
+																																 (dma.d.baseAddressReg[3] == '0) ) );
+
+currentAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.currentAddressReg[0] == '0) &&
+																																		(dma.d.currentAddressReg[1] == '0) &&
+																																		(dma.d.currentAddressReg[2] == '0) &&
+																																		(dma.d.currentAddressReg[3] == '0) ) );
+
+baseWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.baseWordCountReg[0] == '0) &&
+																																	 (dma.d.baseWordCountReg[1] == '0) &&
+																																	 (dma.d.baseWordCountReg[2] == '0) &&
+																																	 (dma.d.baseWordCountReg[3] == '0) ) );
+
+currentWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.currentWordCountReg[0] == '0) &&
+																																			(dma.d.currentWordCountReg[1] == '0) &&
+																																			(dma.d.currentWordCountReg[2] == '0) &&
+																																			(dma.d.currentWordCountReg[3] == '0) ) );
+
 tempAddressRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.temporaryAddressReg == '0));
+
 tempWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.temporaryWordCountReg == '0));
+
 internalFFzeroOnReset_a : assert property (busIf.RESET |=> (dma.d.internalFF == 1'b0));
+
 outputAddressBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.outputAddressBuffer == '0));
+
 priorityOrderDefaultOnReset_a : assert property (busIf.RESET |=> dma.pL.priorityOrder == 8'b11_10_01_00);
+
 DACKisZeroOnReset_a : assert property (busIf.RESET |=> busIf.DACK == 4'b0000);
 `endif
 
-/*baseAddressRegZeroOnReset_a1 : assert property (int i; (busIf.RESET) |=> ( for(i=0;i<4;i=i+1)
+//tried to write assertion with local variable. but it failes on compile
+/*baseAddressRegZeroOnReset_a1 : assert property (int i; (busIf.RESET) |=> ( for(int i=0;i<4;i=i+1)
                                                                             dma.d.baseAddressReg[i] == '0
                                                                          ) );*/
 //busIf.RESET == 1'b0;
@@ -223,23 +276,35 @@ dataValidOnReadWrite_a : assert property ( (!busIf.IOW_N || !busIf.IOR_N) |-> !$
 validReadWriteSignalsOnHLDA_a : assert property ( ##5 busIf.HLDA |-> ( !$isunknown(busIf.IOR_N) && !$isunknown(busIf.IOW_N) ) );
 validAddressBusOnHLDA_a : assert property ( ##5 busIf.HLDA |-> !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0}) );
 
-loadBaseUpperAddress_a : assert property ( (referenceModel.loadBaseAddressReg && dma.d.internalFF) |=> ( dma.d.baseAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
-loadBaseLowerAddress_a : assert property ( (referenceModel.loadBaseAddressReg && !dma.d.internalFF) |=> ( dma.d.baseAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
+loadBaseUpperAddress_a : assert property ( (referenceModel.loadBaseAddressReg && dma.d.internalFF)
+																						|=> ( dma.d.baseAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
+loadBaseLowerAddress_a : assert property ( (referenceModel.loadBaseAddressReg && !dma.d.internalFF)
+																						|=> ( dma.d.baseAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
 
-loadCurrentUpperAddress_a : assert property ( (referenceModel.loadBaseAddressReg && dma.d.internalFF) |=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
-loadCurrentLowerAddress_a : assert property ( (referenceModel.loadBaseAddressReg && !dma.d.internalFF) |=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
+loadCurrentUpperAddress_a : assert property ( (referenceModel.loadBaseAddressReg && dma.d.internalFF)
+																							|=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
+loadCurrentLowerAddress_a : assert property ( (referenceModel.loadBaseAddressReg && !dma.d.internalFF)
+																							|=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
 
-loadBaseUpperWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && dma.d.internalFF) |=> ( dma.d.baseWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
-loadBaseLowerWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && !dma.d.internalFF) |=> ( dma.d.baseWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
+loadBaseUpperWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && dma.d.internalFF)
+																						 |=> ( dma.d.baseWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
+loadBaseLowerWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && !dma.d.internalFF)
+																						 |=> ( dma.d.baseWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
 
-loadCurrentUpperWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && dma.d.internalFF) |=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
-loadCurrentLowerWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && !dma.d.internalFF) |=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
+loadCurrentUpperWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && dma.d.internalFF)
+																						 		|=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
+loadCurrentLowerWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && !dma.d.internalFF)
+																						 		|=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
 
-readCurrentUpperAddress_a : assert property ( (referenceModel.readCurrentAddressReg && dma.d.internalFF) |=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == dma.d.readBuffer) );
-readCurrentLowerAddress_a : assert property ( (referenceModel.readCurrentAddressReg && !dma.d.internalFF) |=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == dma.d.readBuffer) );
+readCurrentUpperAddress_a : assert property ( (referenceModel.readCurrentAddressReg && dma.d.internalFF)
+																						 	|=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == dma.d.readBuffer) );
+readCurrentLowerAddress_a : assert property ( (referenceModel.readCurrentAddressReg && !dma.d.internalFF)
+																						 	|=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == dma.d.readBuffer) );
 
-readCurrentUpperWordCount_a : assert property ( (referenceModel.readCurrentWordCountReg && dma.d.internalFF) |=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == dma.d.readBuffer) );
-readCurrentLowerWordCount_a : assert property ( (referenceModel.readCurrentWordCountReg && !dma.d.internalFF) |=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == dma.d.readBuffer) );
+readCurrentUpperWordCount_a : assert property ( (referenceModel.readCurrentWordCountReg && dma.d.internalFF)
+																						 		|=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == dma.d.readBuffer) );
+readCurrentLowerWordCount_a : assert property ( (referenceModel.readCurrentWordCountReg && !dma.d.internalFF)
+																								|=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == dma.d.readBuffer) );
 
 `endif
 
