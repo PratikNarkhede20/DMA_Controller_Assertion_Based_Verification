@@ -108,42 +108,32 @@ DACKisZeroOnReset_a : assert property (busIf.RESET |=> busIf.DACK == 4'b0000);
 property DACKforDREQ (logic [3:0] inputDREQ, expectedDACK);
   ( ( (busIf.DREQ == inputDREQ) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == expectedDACK) );
 endproperty
-genvar i, DACK;
-generate
-  for(i=0; i<16; i=i+1)
-   begin
-     if(i[0]==1'b1)
-		 DACKforDREQfixedPriority_a : assert DACKforDREQ (i, 4'b0001);
 
-     else if(i[1]==1'b1)
-		 DACKforDREQfixedPriority_a : assert DACKforDREQ (i, 4'b0010);
-
-     else if(i[2]==1'b1)
-		 DACKforDREQfixedPriority_a : assert DACKforDREQ (i, 4'b0100);
-
-     else if(i[3]==1'b1)
-		 DACKforDREQfixedPriority_a : assert DACKforDREQ (i, 4'b1000);
-		 
-     else;
-   end
-  end
-endgenerate
-
-DREQ0011ToDACK0001_a : assert property ( ( (busIf.DREQ == 4'b0011) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) );
-DREQ0111ToDACK0001_a : assert property ( ( (busIf.DREQ == 4'b0111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) );
-DREQ1111ToDACK0001_a : assert property ( ( (busIf.DREQ == 4'b1111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) );
-DREQ1110ToDACK0010_a : assert property ( ( (busIf.DREQ == 4'b1110) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0010) );
+//DREQ0011ToDACK0001_a : assert property ( ( (busIf.DREQ == 4'b0011) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) );
+//DREQ0111ToDACK0001_a : assert property ( ( (busIf.DREQ == 4'b0111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) );
+//DREQ1111ToDACK0001_a : assert property ( ( (busIf.DREQ == 4'b1111) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0001) );
+//DREQ1110ToDACK0010_a : assert property ( ( (busIf.DREQ == 4'b1110) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == 4'b0010) );
+DREQ0000ToDACK0000_a : assert property ( DACKforDREQ(4'b0000, 4'b0000) );
+DREQ0001ToDACK0001_a : assert property ( DACKforDREQ(4'b0001, 4'b0001) );
+DREQ0010ToDACK0010_a : assert property ( DACKforDREQ(4'b0010, 4'b0010) );
+DREQ0011ToDACK0001_a : assert property ( DACKforDREQ(4'b0011, 4'b0001) );
+DREQ0100ToDACK0100_a : assert property ( DACKforDREQ(4'b0100, 4'b0100) );
+DREQ0101ToDACK0001_a : assert property ( DACKforDREQ(4'b0101, 4'b0001) );
+DREQ0110ToDACK0010_a : assert property ( DACKforDREQ(4'b0110, 4'b0010) );
+DREQ0111ToDACK0001_a : assert property ( DACKforDREQ(4'b0111, 4'b0001) );
+DREQ1000ToDACK1000_a : assert property ( DACKforDREQ(4'b1000, 4'b0100) );
+DREQ1001ToDACK0001_a : assert property ( DACKforDREQ(4'b1001, 4'b0001) );
 DREQ1010ToDACK0010_a : assert property ( DACKforDREQ(4'b1010, 4'b0010) );
+DREQ1011ToDACK0001_a : assert property ( DACKforDREQ(4'b1011, 4'b0001) );
+DREQ1100ToDACK0100_a : assert property ( DACKforDREQ(4'b1100, 4'b0100) );
+DREQ1101ToDACK0001_a : assert property ( DACKforDREQ(4'b1101, 4'b0001) );
+DREQ1110ToDACK0010_a : assert property ( DACKforDREQ(4'b1110, 4'b0010) );
+DREQ1111ToDACK0001_a : assert property ( DACKforDREQ(4'b1111, 4'b0001) );
 //&&  (!dma.intRegIf.commandReg.priorityType) && (dma.intSigIf.assertDACK)
 
 //this below code is for exhaustive testcases for DREQ in generate block. there are few errors which we are still trying to figure out.
+//the compile errors are due to tool not able to process local variables in assertions.
 /*
-property DACKforDREQ (inputDREQ, expectedDACK);
-  logic [3:0] inputDREQ, expectedDACK;
-  disable iff (busIf.RESET)
-  ( ( (busIf.DREQ == inputDREQ) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == expectedDACK) );
-endproperty
-
 genvar i;
 generate
   for(i=0; i<16; i=i+1)
@@ -158,9 +148,30 @@ generate
    end
   end
 endgenerate
+
+//tried this version of generate block with no local variables, still the compile on this code failes
+genvar i;
+generate
+  for(i=0; i<16; i=i+1)
+   begin
+     if(i[0]==1'b1)
+		 DACKforDREQfixedPriority_a : assert DACKforDREQ (i, 4'b0001);
+
+     else if(i[1]==1'b1)
+		 DACKforDREQfixedPriority_a : assert DACKforDREQ (i, 4'b0010);
+
+     else if(i[2]==1'b1)
+		 DACKforDREQfixedPriority_a : assert DACKforDREQ (i, 4'b0100);
+
+     else if(i[3]==1'b1)
+		 DACKforDREQfixedPriority_a : assert DACKforDREQ (i, 4'b1000);
+
+     else;
+   end
+  end
+endgenerate
 */
 
-//working on these assertions
 loadIoDataBufferFromDB_a : assert property ( ( !busIf.CS_N & !busIf.IOW_N & !dma.intSigIf.loadAddr & !(referenceModel.readStatusReg | referenceModel.readCurrentAddressReg | referenceModel.readCurrentWordCountReg))  |=> (dma.d.ioDataBuffer == $past(busIf.DB)));
 //readIoDataBuffer_a : assert property (##4 (!busIf.CS_N & !busIf.IOR_N) |-> (dma.d.ioDataBuffer == busIf.DB));
 loadCommandReg_a : assert property (##7 referenceModel.loadCommandReg |=> (dma.intRegIf.commandReg == $past(dma.d.ioDataBuffer) ) );
