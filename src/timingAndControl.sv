@@ -52,7 +52,7 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegist
 
         state[SIIndex]:
           begin
-            if (!TCbusIf.CS_N && |TCbusIf.DREQ && intSigIf.programCondition && configured)
+            if (!TCbusIf.CS_N && |TCbusIf.DREQ && intSigIf.programCondition && configured && TCbusIf.EOP_N)
               nextState = SO;
             else if(!TCbusIf.EOP_N)
               nextState = SI;
@@ -62,7 +62,7 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegist
 
         state[SOIndex]:
           begin
-            if (!TCbusIf.CS_N && TCbusIf.HLDA )
+            if (!TCbusIf.CS_N && TCbusIf.HLDA && && TCbusIf.EOP_N)
               nextState = S1;
             else if(!TCbusIf.EOP_N)
               nextState = SI;
@@ -72,7 +72,7 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegist
 
         state[S1Index]:
           begin
-            if(!TCbusIf.CS_N)
+            if(!TCbusIf.CS_N && TCbusIf.EOP_N)
               nextState = S2;
             else if(!TCbusIf.EOP_N)
               nextState = SI;
@@ -82,7 +82,7 @@ module timingAndControl(busInterface.timingAndControl TCbusIf, dmaInternalRegist
 
         state[S2Index]:
           begin
-            if(!TCbusIf.CS_N)
+            if(!TCbusIf.CS_N && TCbusIf.EOP_N)
               nextState = S4;
             else if(!TCbusIf.EOP_N)
               nextState = SI;
