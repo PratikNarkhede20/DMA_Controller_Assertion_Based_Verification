@@ -25,9 +25,9 @@ CS_NisLow_assume : assume property (busIf.CS_N == 1'b0); //assume the DMA contro
 
 EOP_NisHigh_assume : assume property (busIf.EOP_N == 1'b1);
 
-ReadOrWriteTransferType_assume : assume property ( ( (dma.intRegIf.modeReg[0].transferType == 2'b01) || (dma.intRegIf.modeReg[0].transferType == 2'b10) ) &&
-											       											 ( (dma.intRegIf.modeReg[1].transferType == 2'b01) || (dma.intRegIf.modeReg[1].transferType == 2'b10) ) &&
-											       							 				 ( (dma.intRegIf.modeReg[2].transferType == 2'b01) || (dma.intRegIf.modeReg[2].transferType == 2'b10) ) &&
+ReadOrWriteTransferType_assume : assume property ( ( (dma.intRegIf.modeReg[0].transferType == 2'b01) || (dma.intRegIf.modeReg[0].transferType == 2'b10) ) ||
+											       											 ( (dma.intRegIf.modeReg[1].transferType == 2'b01) || (dma.intRegIf.modeReg[1].transferType == 2'b10) ) ||
+											       							 				 ( (dma.intRegIf.modeReg[2].transferType == 2'b01) || (dma.intRegIf.modeReg[2].transferType == 2'b10) ) ||
 											       											 ( (dma.intRegIf.modeReg[3].transferType == 2'b01) || (dma.intRegIf.modeReg[3].transferType == 2'b10) ) );
 
 /*singleTransferMode_assume : assume property (dma.intRegIf.modeReg[0].modeSelect == 2'b01 ||
