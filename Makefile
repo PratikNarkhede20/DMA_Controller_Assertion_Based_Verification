@@ -3,7 +3,7 @@ run: clean compile formal debug
 
 reset: clean compileReset formalReset debug
 
-eop: clean compile formal debug
+eop: clean compileEOP formal debug
 
 compile:
 	vlib work
