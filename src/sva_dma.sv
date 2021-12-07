@@ -61,7 +61,7 @@ stateS2_c : cover property (dma.tC.state == `S2);
 stateS4_c : cover property (dma.tC.state == `S4);
 
 stateTransistions_a : cover property ((dma.tC.state == `SI) ##10
-																			(dma.tC.state == `SO) ##1
+																			(dma.tC.state == `SO) ##[1:10]
 																			(dma.tC.state == `S1) ##1
 																			(dma.tC.state == `S2) ##1
 																			(dma.tC.state == `S4) ##1
@@ -73,16 +73,20 @@ stateTransistionSItoSO_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `
 																							 |=> (dma.tC.state == `SO) );
 
 stateTransistionSOtoS1_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `SO) && busIf.HLDA )
-																							 |-> (dma.tC.nextState == `S1) );
+																							 |-> (dma.tC.nextState == `S1)
+																							 |=> (dma.tC.state == `S1) );
 
 stateTransistionS1toS2_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S1) )
-																							 |-> (dma.tC.nextState == `S2) );
+																							 |-> (dma.tC.nextState == `S2)
+																							 |=> (dma.tC.state == `S2) );
 
 stateTransistionS2toS4_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S2) )
-																							 |-> (dma.tC.nextState == `S4) );
+																							 |-> (dma.tC.nextState == `S4)
+																							 |=> (dma.tC.state == `S4) );
 
 stateTransistionS4toSI_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S4) )
-																							 |-> (dma.tC.nextState == `SI) );
+																							 |-> (dma.tC.nextState == `SI)
+																							 |=> (dma.tC.state == `SI) );
 //|TCbusIf.DREQ && intSigIf.programCondition && configured
 `endif
 
@@ -164,6 +168,24 @@ DACKisZeroOnReset_a : assert property (busIf.RESET |=> busIf.DACK == 4'b0000);
 property DACKforDREQfixedPriority (logic [3:0] inputDREQ, expectedDACK);
   ( ( (busIf.DREQ == inputDREQ) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == expectedDACK) );
 endproperty
+
+
+property DACKforDREQfixedPriority1 (logic [3:0] inputDREQ);
+	if (inputDREQ[0]) expectedDACK = 4'b0001;
+	else if (inputDREQ[1]) expectedDACK = 4'b0010;
+	else if (inputDREQ[2]) expectedDACK = 4'b0100;
+	else if (inputDREQ[3]) expectedDACK = 4'b1000;
+	else expectedDACK = 4'b0000;
+  ( ( (busIf.DREQ == inputDREQ) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == expectedDACK) );
+endproperty
+
+genvar j;
+generate
+  for(j=0; j<16; j=j+1)
+   begin : g1
+		 DACKforDREQfixedPriority1_a : assert property ( DACKforDREQfixedPriority1 (j) );
+	 end
+
 /*
 DREQ0000ToDACK0000_a : assert property ( DACKforDREQ(4'b0000, 4'b0000) );
 DREQ0001ToDACK0001_a : assert property ( DACKforDREQ(4'b0001, 4'b0001) );
