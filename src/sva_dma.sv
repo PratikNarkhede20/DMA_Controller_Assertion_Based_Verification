@@ -281,9 +281,13 @@ validAddressBusOnHLDA_a : assert property ( ##5 busIf.HLDA |-> !$isunknown({busI
 //loadBaseLowerAddress_a : assert property ( (referenceModel.loadBaseAddressReg && !dma.d.internalFF)
 //																						|=> ( dma.d.baseAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
 
-loadBaseUpperAddress_a : assert property ( int channel;
-																				 ( (referenceModel.loadBaseAddressReg && dma.d.internalFF), channel = {busIf.A2, busIf.A1} )
-																						|=> ( dma.d.baseAddressReg[channel] [15:8] == $past(dma.d.writeBuffer) ) );
+property loadBaseUpperAddress;
+	int channel;
+	( (referenceModel.loadBaseAddressReg && dma.d.internalFF), channel = {busIf.A2, busIf.A1} )
+	|=> ( dma.d.baseAddressReg[channel] [15:8] == $past(dma.d.writeBuffer) )
+endproperty
+
+loadBaseUpperAddress_a : assert property ( loadBaseUpperAddress );
 loadBaseLowerAddress_a : assert property ( (referenceModel.loadBaseAddressReg && !dma.d.internalFF)
 																						|=> ( dma.d.baseAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
 
