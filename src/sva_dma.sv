@@ -286,15 +286,33 @@ property loadBaseUpperAddress;
 	( (referenceModel.loadBaseAddressReg && dma.d.internalFF), channel = {busIf.A2, busIf.A1}, expectedWriteBuffer = dma.d.writeBuffer )
 	|=> ( dma.d.baseAddressReg[channel] [15:8] == expectedWriteBuffer )
 endproperty
-
 loadBaseUpperAddress_a : assert property ( loadBaseUpperAddress );
-loadBaseLowerAddress_a : assert property ( (referenceModel.loadBaseAddressReg && !dma.d.internalFF)
-																						|=> ( dma.d.baseAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
 
-loadCurrentUpperAddress_a : assert property ( (referenceModel.loadBaseAddressReg && dma.d.internalFF)
-																							|=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
-loadCurrentLowerAddress_a : assert property ( (referenceModel.loadBaseAddressReg && !dma.d.internalFF)
-																							|=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
+property loadBaseLowerAddress;
+	int channel, expectedWriteBuffer;
+	( (referenceModel.loadBaseAddressReg && !dma.d.internalFF), channel = {busIf.A2, busIf.A1}, expectedWriteBuffer = dma.d.writeBuffer )
+	|=> ( dma.d.baseAddressReg[channel] [7:0] == expectedWriteBuffer )
+endproperty
+loadBaseLowerAddress_a : assert property ( loadBaseLowerAddress );
+
+//loadCurrentUpperAddress_a : assert property ( (referenceModel.loadBaseAddressReg && dma.d.internalFF)
+//																							|=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
+//loadCurrentLowerAddress_a : assert property ( (referenceModel.loadBaseAddressReg && !dma.d.internalFF)
+//																							|=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
+
+property loadCurrentUpperAddress;
+	int channel, expectedWriteBuffer;
+	( (referenceModel.loadBaseAddressReg && dma.d.internalFF), channel = {busIf.A2, busIf.A1}, expectedWriteBuffer = dma.d.writeBuffer )
+	|=> ( dma.d.currentAddressReg[channel] [15:8] == expectedWriteBuffer )
+endproperty
+loadCurrentUpperAddress_a : assert property ( loadCurrentUpperAddress );
+
+property loadCurrentLowerAddress;
+	int channel, expectedWriteBuffer;
+	( (referenceModel.loadBaseAddressReg && !dma.d.internalFF), channel = {busIf.A2, busIf.A1}, expectedWriteBuffer = dma.d.writeBuffer )
+	|=> ( dma.d.currentAddressReg[channel] [7:0] == expectedWriteBuffer )
+endproperty
+loadCurrentLowerAddress_a : assert property ( loadCurrentLowerAddress );
 
 loadBaseUpperWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && dma.d.internalFF)
 																						 |=> ( dma.d.baseWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
