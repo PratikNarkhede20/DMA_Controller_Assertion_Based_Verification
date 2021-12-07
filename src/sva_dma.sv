@@ -165,11 +165,9 @@ DACKisZeroOnReset_a : assert property (busIf.RESET |=> busIf.DACK == 4'b0000);
 
 `ifdef Run
 //assertions for priority logic
-property DACKforDREQfixedPriority (logic [3:0] inputDREQ, expectedDACK);
-  ( ( (busIf.DREQ == inputDREQ) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == expectedDACK) );
-endproperty
 
-
+//doesn't compile. expected '=', expecting ++ or --. 2nd version of this is written furthur in the code
+/*
 property DACKforDREQfixedPriority1 (logic [3:0] inputDREQ);
 	if (inputDREQ[0]) expectedDACK = 4'b0001;
 	else if (inputDREQ[1]) expectedDACK = 4'b0010;
@@ -178,13 +176,7 @@ property DACKforDREQfixedPriority1 (logic [3:0] inputDREQ);
 	else expectedDACK = 4'b0000;
   ( ( (busIf.DREQ == inputDREQ) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == expectedDACK) );
 endproperty
-
-genvar j;
-generate
-  for(j=0; j<16; j=j+1)
-   begin : g1
-		 DACKforDREQfixedPriority1_a : assert property ( DACKforDREQfixedPriority1 (j) );
-	 end
+*/
 
 /*
 DREQ0000ToDACK0000_a : assert property ( DACKforDREQ(4'b0000, 4'b0000) );
@@ -203,8 +195,10 @@ DREQ1100ToDACK0100_a : assert property ( DACKforDREQ(4'b1100, 4'b0100) );
 DREQ1101ToDACK0001_a : assert property ( DACKforDREQ(4'b1101, 4'b0001) );
 DREQ1110ToDACK0010_a : assert property ( DACKforDREQ(4'b1110, 4'b0010) );
 DREQ1111ToDACK0001_a : assert property ( DACKforDREQ(4'b1111, 4'b0001) );
-//&&  (!dma.intRegIf.commandReg.priorityType) && (dma.intSigIf.assertDACK)
 */
+property DACKforDREQfixedPriority (logic [3:0] inputDREQ, expectedDACK);
+  ( ( (busIf.DREQ == inputDREQ) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == expectedDACK) );
+endproperty
 
 //exhaustive testing fixed priority logic. DREQ 0000 to 1111 as input
 genvar i;
@@ -275,12 +269,27 @@ endproperty
 loadIoDataBufferFromDB_a : assert property ( loadIoDataBufferFromDB );
 
 //readIoDataBuffer_a : assert property (##4 (!busIf.CS_N & !busIf.IOR_N) |-> (dma.d.ioDataBuffer == busIf.DB));
-loadCommandReg_a : assert property (##7 referenceModel.loadCommandReg |=> (dma.intRegIf.commandReg == $past(dma.d.ioDataBuffer) ) );
+
+//loadCommandReg_a : assert property (##7 referenceModel.loadCommandReg |=> (dma.intRegIf.commandReg == $past(dma.d.ioDataBuffer) ) );
+property loadCommandReg;
+	int expectedIoDataBuffer;
+	##7 (referenceModel.loadCommandReg, expectedIoDataBuffer = dma.d.ioDataBuffer)
+	|=> (dma.intRegIf.commandReg == expectedIoDataBuffer)
+endproperty
+loadCommandReg_a : assert property ( loadCommandReg );
+
 //loadModeReg_a : assert property (##8 referenceModel.loadModeReg |=> (dma.intRegIf.modeReg[$past(dma.d.ioDataBuffer[1:0])] == $past(dma.d.ioDataBuffer[7:2])));
 readStatusReg_a : assert property (##10 referenceModel.readStatusReg |=> (dma.d.ioDataBuffer == $past(dma.intRegIf.statusReg)));
 internalFFzero_a : assert property (##5 (referenceModel.clearInternalFF & !dma.d.enUpperAddress) |=> (dma.d.internalFF == 1'b0));
 internalFFone_a : assert property (##6 (!referenceModel.clearInternalFF & dma.d.enUpperAddress) |=> (dma.d.internalFF == 1'b1));
-loadWriteBuffer_a : assert property (##5 (referenceModel.loadCommandReg & referenceModel.loadBaseAddressReg & referenceModel.loadBaseWordCountReg)|=> (dma.d.writeBuffer == $past(dma.d.ioDataBuffer)));
+
+//loadWriteBuffer_a : assert property (##5 (referenceModel.loadCommandReg & referenceModel.loadBaseAddressReg & referenceModel.loadBaseWordCountReg)|=> (dma.d.writeBuffer == $past(dma.d.ioDataBuffer)));
+property loadWriteBuffer;
+	int expectedIoDataBuffer;
+	##5 ( (referenceModel.loadCommandReg & referenceModel.loadBaseAddressReg & referenceModel.loadBaseWordCountReg), expectedIoDataBuffer = dma.d.writeBuffer)
+	|=> (dma.d.writeBuffer == expectedIoDataBuffer);
+endproperty
+loadWriteBuffer_a : assert property ( loadWriteBuffer );
 
 baseAddressShouldNotChange : assert property ( !$changed(dma.d.baseAddressReg[0]) || !$changed(dma.d.baseAddressReg[1]) || !$changed(dma.d.baseAddressReg[2]) || !$changed(dma.d.baseAddressReg[3]) );
 baseWordCountShouldNotChange : assert property ( !$changed(dma.d.baseWordCountReg[0]) || !$changed(dma.d.baseWordCountReg[1]) || !$changed(dma.d.baseWordCountReg[2]) || !$changed(dma.d.baseWordCountReg[3]) );
