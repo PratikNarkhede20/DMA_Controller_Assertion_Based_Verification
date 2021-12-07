@@ -49,9 +49,9 @@ ioWrite_c : cover property (##10 busIf.IOW_N == 1'b0);
 memoryRead_c : cover property (##5 busIf.MEMR_N == 1'b0);
 memoryWrite_c : cover property (##10 busIf.MEMW_N == 1'b0);
 
-AENactive_c : cover property (busIf.AEN == 1'b1); //cover for address enable signal
-ADSTBactive_c : cover property (busIf.ADSTB == 1'b1); ////cover for address strobe signal
-HRQactive_c : cover property (busIf.HRQ == 1'b1);//cover for hold request signal
+AENactive_c : cover property (##5 busIf.AEN == 1'b1); //cover for address enable signal
+ADSTBactive_c : cover property (##5 busIf.ADSTB == 1'b1); ////cover for address strobe signal
+HRQactive_c : cover property (##5 busIf.HRQ == 1'b1);//cover for hold request signal
 
 //state machine covers
 stateSI_c : cover property (##5 dma.tC.state == `SI);
@@ -69,7 +69,7 @@ stateTransistions_a : cover property ((dma.tC.state == `SI) ##10
 
 //state machine assertions on chip select set to low
 stateTransistionSItoSO_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `SI) )
-																							 |-> ##[0:$] (dma.tC.nextState == `SO) );
+																							 |-> s_eventually (dma.tC.nextState == `SO) );
 
 stateTransistionSOtoS1_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `SO) && busIf.HLDA )
 																							 |-> (dma.tC.nextState == `S1) );
