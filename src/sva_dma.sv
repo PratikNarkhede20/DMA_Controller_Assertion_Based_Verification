@@ -246,10 +246,10 @@ endgenerate
 //loadIoDataBufferFromDB_a : assert property ( ##2 referenceModel.loadIoDataBufferFromDB |=> (dma.d.ioDataBuffer == $past(busIf.DB)));
 property loadIoDataBufferFromDB;
 	int expectedIoDataBuffer;
-	(referenceModel.loadIoDataBufferFromDB, expectedIoDataBuffer = busIf.DB)
+	##3 (referenceModel.loadIoDataBufferFromDB, expectedIoDataBuffer = busIf.DB)
 	|=> (dma.d.ioDataBuffer == expectedIoDataBuffer)
 endproperty
-loadIoDataBufferFromDB_a : assert property ( ##2 loadIoDataBufferFromDB );
+loadIoDataBufferFromDB_a : assert property ( loadIoDataBufferFromDB );
 
 //readIoDataBuffer_a : assert property (##4 (!busIf.CS_N & !busIf.IOR_N) |-> (dma.d.ioDataBuffer == busIf.DB));
 loadCommandReg_a : assert property (##7 referenceModel.loadCommandReg |=> (dma.intRegIf.commandReg == $past(dma.d.ioDataBuffer) ) );
