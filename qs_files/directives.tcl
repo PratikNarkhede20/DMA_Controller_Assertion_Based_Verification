@@ -2,7 +2,7 @@
 netlist clock busIf.CLK -period 10
 
 # Constrain rst
-formal netlist constraint busIf.RESET 1'b0
+#formal netlist constraint busIf.RESET 1'b0
 
 #netlist cutpoint dma.d.ioDataBuffer
 #formal netlist constraint dma.intRegIf.modeReg[0] 2'b01
