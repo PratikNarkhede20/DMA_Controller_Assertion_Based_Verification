@@ -69,7 +69,8 @@ stateTransistions_a : cover property ((dma.tC.state == `SI) ##10
 
 //state machine assertions on chip select set to low
 stateTransistionSItoSO_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `SI) )
-																							 |-> s_eventually(dma.tC.nextState == `SO) );
+																							 |-> ##[0:$] (dma.tC.nextState == `SO)
+																							 |=> (dma.tC.state == `SO) );
 
 stateTransistionSOtoS1_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `SO) && busIf.HLDA )
 																							 |-> (dma.tC.nextState == `S1) );
