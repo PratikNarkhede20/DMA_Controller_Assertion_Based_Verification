@@ -314,25 +314,81 @@ property loadCurrentLowerAddress;
 endproperty
 loadCurrentLowerAddress_a : assert property ( loadCurrentLowerAddress );
 
-loadBaseUpperWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && dma.d.internalFF)
-																						 |=> ( dma.d.baseWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
-loadBaseLowerWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && !dma.d.internalFF)
-																						 |=> ( dma.d.baseWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
+//loadBaseUpperWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && dma.d.internalFF)
+//																						 |=> ( dma.d.baseWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
+//loadBaseLowerWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && !dma.d.internalFF)
+//																						 |=> ( dma.d.baseWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
 
-loadCurrentUpperWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && dma.d.internalFF)
-																						 		|=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
-loadCurrentLowerWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && !dma.d.internalFF)
-																						 		|=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
+property loadBaseUpperWordCount;
+	int channel, expectedWriteBuffer;
+	( (referenceModel.loadBaseWordCountReg && dma.d.internalFF), channel = {busIf.A2, busIf.A1}, expectedWriteBuffer = dma.d.writeBuffer )
+	|=> ( dma.d.baseWordCountReg[channel] [15:8] == expectedWriteBuffer )
+endproperty
+loadBaseUpperWordCount_a : assert property ( loadBaseUpperWordCount );
 
-readCurrentUpperAddress_a : assert property ( (referenceModel.readCurrentAddressReg && dma.d.internalFF)
-																						 	|=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == dma.d.readBuffer) );
-readCurrentLowerAddress_a : assert property ( (referenceModel.readCurrentAddressReg && !dma.d.internalFF)
-																						 	|=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == dma.d.readBuffer) );
+property loadBaseLowerWordCount;
+	int channel, expectedWriteBuffer;
+	( (referenceModel.loadBaseWordCountReg && !dma.d.internalFF), channel = {busIf.A2, busIf.A1}, expectedWriteBuffer = dma.d.writeBuffer )
+	|=> ( dma.d.baseWordCountReg[channel] [7:0] == expectedWriteBuffer )
+endproperty
+loadBaseLowerWordCount_a : assert property ( loadBaseLowerWordCount );
 
-readCurrentUpperWordCount_a : assert property ( (referenceModel.readCurrentWordCountReg && dma.d.internalFF)
-																						 		|=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == dma.d.readBuffer) );
-readCurrentLowerWordCount_a : assert property ( (referenceModel.readCurrentWordCountReg && !dma.d.internalFF)
-																								|=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == dma.d.readBuffer) );
+//loadCurrentUpperWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && dma.d.internalFF)
+//																						 		|=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
+//loadCurrentLowerWordCount_a : assert property ( (referenceModel.loadBaseWordCountReg && !dma.d.internalFF)
+//																						 		|=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == $past(dma.d.writeBuffer) ) );
+
+property loadCurrentUpperWordCount;
+	int channel, expectedWriteBuffer;
+	( (referenceModel.loadBaseWordCountReg && dma.d.internalFF), channel = {busIf.A2, busIf.A1}, expectedWriteBuffer = dma.d.writeBuffer )
+	|=> ( dma.d.currentWordCountReg[channel] [15:8] == expectedWriteBuffer )
+endproperty
+loadCurrentUpperWordCount_a : assert property ( loadCurrentUpperWordCount );
+
+property loadCurrentLowerWordCount;
+	int channel, expectedWriteBuffer;
+	( (referenceModel.loadBaseWordCountReg && !dma.d.internalFF), channel = {busIf.A2, busIf.A1}, expectedWriteBuffer = dma.d.writeBuffer )
+	|=> ( dma.d.currentWordCountReg[channel] [7:0] == expectedWriteBuffer )
+endproperty
+loadCurrentLowerWordCount_a : assert property ( loadCurrentLowerWordCount );
+
+//readCurrentUpperAddress_a : assert property ( (referenceModel.readCurrentAddressReg && dma.d.internalFF)
+//																						 	|=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == dma.d.readBuffer) );
+//readCurrentLowerAddress_a : assert property ( (referenceModel.readCurrentAddressReg && !dma.d.internalFF)
+//																						 	|=> ( dma.d.currentAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == dma.d.readBuffer) );
+
+property readCurrentUpperAddress;
+	int channel;
+	( (referenceModel.readCurrentAddressReg && dma.d.internalFF), channel = {busIf.A2, busIf.A1} )
+	|=> ( dma.d.currentAddressReg[channel] [15:8] == dma.d.readBuffer )
+endproperty
+readCurrentUpperAddress_a : assert property ( readCurrentUpperAddress );
+
+property readCurrentLowerAddress;
+	int channel;
+	( (referenceModel.readCurrentAddressReg && !dma.d.internalFF), channel = {busIf.A2, busIf.A1} )
+	|=> ( dma.d.currentAddressReg[channel] [7:0] == dma.d.readBuffer )
+endproperty
+readCurrentLowerAddress_a : assert property ( readCurrentLowerAddress );
+
+//readCurrentUpperWordCount_a : assert property ( (referenceModel.readCurrentWordCountReg && dma.d.internalFF)
+//																						 		|=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == dma.d.readBuffer) );
+//readCurrentLowerWordCount_a : assert property ( (referenceModel.readCurrentWordCountReg && !dma.d.internalFF)
+//																								|=> ( dma.d.currentWordCountReg[{$past(busIf.A2), $past(busIf.A1)}] [7:0] == dma.d.readBuffer) );
+
+property readCurrentUpperWordCount;
+	int channel;
+	( (referenceModel.readCurrentWordCountReg && dma.d.internalFF), channel = {busIf.A2, busIf.A1} )
+	|=> ( dma.d.currentAddressReg[channel] [15:8] == dma.d.readBuffer )
+endproperty
+readCurrentUpperWordCount_a : assert property ( readCurrentUpperWordCount );
+
+property readCurrentLowerWordCount;
+	int channel;
+	( (referenceModel.readCurrentWordCountReg && !dma.d.internalFF), channel = {busIf.A2, busIf.A1} )
+	|=> ( dma.d.currentAddressReg[channel] [7:0] == dma.d.readBuffer )
+endproperty
+readCurrentLowerWordCount_a : assert property ( readCurrentLowerWordCount );
 
 `endif
 
