@@ -8,6 +8,10 @@ module dma_checker_sva(busInterface busIf);
 `define S3 6'b010000
 `define S4 6'b100000
 
+parameter ADDRESSWIDTH = 16;
+parameter DATAWIDTH = 8;
+parameter CHANNELS = 4;
+
 logic programCondition;
 logic address;
 
@@ -92,19 +96,24 @@ stateTransistionS4toSI_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `
 
 `ifdef EOP
 stateTransistionSItoSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `SI) )
-																												|-> (dma.tC.nextState == `SI) );
+																												|-> (dma.tC.nextState == `SI)
+																												|=> (dma.tC.state == `SI) );
 
 stateTransistionSOtoSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `SO) )
-																												|-> (dma.tC.nextState == `SI) );
+																												|-> (dma.tC.nextState == `SI)
+																												|=> (dma.tC.state == `SI) );
 
 stateTransistionS1toSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `S1) )
-																												|-> (dma.tC.nextState == `SI) );
+																												|-> (dma.tC.nextState == `SI)
+																												|=> (dma.tC.state == `SI) );
 
 stateTransistionS2toSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `S2) )
-																												|-> (dma.tC.nextState == `SI) );
+																												|-> (dma.tC.nextState == `SI)
+																												|=> (dma.tC.state == `SI) );
 
 stateTransistionS4toSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `S2) )
-																												|-> (dma.tC.nextState == `SI) );
+																												|-> (dma.tC.nextState == `SI)
+																												|=> (dma.tC.state == `SI) );
 `endif
 
 `ifdef Reset
@@ -120,7 +129,7 @@ statusRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.statusRe
 																													(dma.intRegIf.modeReg[2] == '0) &&
 																													(dma.intRegIf.modeReg[3] == '0) ) );
 */
-modeRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<4;i=i+1) (dma.intRegIf.modeReg[i] == '0) ) );
+modeRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) (dma.intRegIf.modeReg[i] == '0) ) );
 
 writeBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.writeBuffer == '0));
 
@@ -131,28 +140,28 @@ readBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.readBuffer == 
 																																 (dma.d.baseAddressReg[2] == '0) &&
 																																 (dma.d.baseAddressReg[3] == '0) ) );
 */
-baseAddressRegZeroOnReset_a :  assert property (busIf.RESET |=> ( for (int i=0; i<4;i=i+1) (dma.d.baseAddressReg[i] == '0) ) );
+baseAddressRegZeroOnReset_a :  assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) (dma.d.baseAddressReg[i] == '0) ) );
 
 /*currentAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.currentAddressReg[0] == '0) &&
 																																		(dma.d.currentAddressReg[1] == '0) &&
 																																		(dma.d.currentAddressReg[2] == '0) &&
 																																		(dma.d.currentAddressReg[3] == '0) ) );
 */
-currentAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<4;i=i+1) (dma.d.currentAddressReg[i] == '0) ) );
+currentAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) (dma.d.currentAddressReg[i] == '0) ) );
 
 /*baseWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.baseWordCountReg[0] == '0) &&
 																																	 (dma.d.baseWordCountReg[1] == '0) &&
 																																	 (dma.d.baseWordCountReg[2] == '0) &&
 																																	 (dma.d.baseWordCountReg[3] == '0) ) );
 */
-baseWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<4;i=i+1) (dma.d.baseWordCountReg[0] == '0) ) );
+baseWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) (dma.d.baseWordCountReg[i] == '0) ) );
 
 /*currentWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.currentWordCountReg[0] == '0) &&
 																																			(dma.d.currentWordCountReg[1] == '0) &&
 																																			(dma.d.currentWordCountReg[2] == '0) &&
 																																			(dma.d.currentWordCountReg[3] == '0) ) );
 */
-currentWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<4;i=i+1) (dma.d.currentWordCountReg[i] == '0) ) );
+currentWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) (dma.d.currentWordCountReg[i] == '0) ) );
 
 tempAddressRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.temporaryAddressReg == '0));
 
@@ -160,18 +169,14 @@ tempWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.t
 
 internalFFzeroOnReset_a : assert property (busIf.RESET |=> (dma.d.internalFF == 1'b0));
 
+ioAddressBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.ioAddressBuffer == '0'));
+
 outputAddressBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.outputAddressBuffer == '0));
 
-priorityOrderDefaultOnReset_a : assert property (busIf.RESET |=> dma.pL.priorityOrder == 8'b11_10_01_00);
+priorityOrderDefaultOnReset_a : assert property (busIf.RESET |=> dma.pL.priorityOrder == 8'b11_10_01_00); //default priority order
 
 DACKisZeroOnReset_a : assert property (busIf.RESET |=> busIf.DACK == 4'b0000);
 `endif
-
-//tried to write assertion with local variable. but it failes on compile
-/*baseAddressRegZeroOnReset_a1 : assert property (int i; (busIf.RESET) |=> ( for(int i=0;i<4;i=i+1)
-                                                                            dma.d.baseAddressReg[i] == '0
-                                                                         ) );*/
-//busIf.RESET == 1'b0;
 
 `ifdef Run
 //assertions for priority logic
@@ -206,6 +211,8 @@ DREQ1101ToDACK0001_a : assert property ( DACKforDREQ(4'b1101, 4'b0001) );
 DREQ1110ToDACK0010_a : assert property ( DACKforDREQ(4'b1110, 4'b0010) );
 DREQ1111ToDACK0001_a : assert property ( DACKforDREQ(4'b1111, 4'b0001) );
 */
+
+//priorityType=1'b0 is fixed priority, priorityType=1'b1 is rotating priority
 property DACKforDREQfixedPriority (logic [3:0] inputDREQ, expectedDACK);
   ( ( (busIf.DREQ == inputDREQ) &&  (!dma.intRegIf.commandReg.priorityType) ) |=> ##[0:$] (busIf.DACK == expectedDACK) );
 endproperty
@@ -213,7 +220,7 @@ endproperty
 //exhaustive testing fixed priority logic. DREQ 0000 to 1111 as input
 genvar i;
 generate
-  for(i=0; i<16; i=i+1)
+  for(i=0; i<(2^CHANNELS); i=i+1)
    begin : g1
      if(i[0]==1'b1)
 		 begin : DACK0001
@@ -247,7 +254,7 @@ generate
    end
 endgenerate
 
-
+//priorityType=1'b0 is fixed priority, priorityType=1'b1 is rotating priority
 rotatingPriority_c : cover property ((busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0001) ##[1:$]
 																		 (busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0010) ##[1:$]
 																		 (busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0100) ##[1:$]
@@ -315,15 +322,15 @@ addressStrobeActiveforOneCycle_a : assert property ( $rose(busIf.ADSTB) |=> $fel
 addressBusValid_a : assert property (busIf.ADSTB |-> !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0}));
 dataBusValid_a : assert property ((busIf.ADSTB & busIf.AEN) |-> !$isunknown(busIf.DB));
 
-noReadWriteAtSameTime_a : assert property (!(!busIf.IOW_N && !busIf.IOR_N));
-addressValidOnReadWrite_a : assert property( ((busIf.IOW_N && !busIf.IOR_N) || (!busIf.IOW_N && busIf.IOR_N)) |-> !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0} ) );
+noReadWriteAtSameTime_a : assert property (not(!busIf.IOW_N && !busIf.IOR_N));
+addressValidOnReadWrite_a : assert property( ((busIf.IOW_N && !busIf.IOR_N) || (!busIf.IOW_N && busIf.IOR_N)) |-> !$isunknown(referenceModel.address) );
 dataValidOnReadWrite_a : assert property ( (!busIf.IOW_N || !busIf.IOR_N) |-> !$isunknown(busIf.DB) );
 
 //validReadWriteSignalsOnHLDA_a : assert property ( ( !$isunknown(busIf.IOR_N) && !$isunknown(busIf.IOW_N) ) throughout busIf.HLDA[*]);
 //validAddressBusOnHLDA_a : assert property ( !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0}) throughout busIf.HLDA[*] );
 
 validReadWriteSignalsOnHLDA_a : assert property ( ##5 busIf.HLDA |-> ( !$isunknown(busIf.IOR_N) && !$isunknown(busIf.IOW_N) ) );
-validAddressBusOnHLDA_a : assert property ( ##5 busIf.HLDA |-> !$isunknown({busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0}) );
+validAddressBusOnHLDA_a : assert property ( ##5 busIf.HLDA |-> !$isunknown(referenceModel.address) );
 
 //loadBaseUpperAddress_a : assert property ( (referenceModel.loadBaseAddressReg && dma.d.internalFF)
 //																						|=> ( dma.d.baseAddressReg[{$past(busIf.A2), $past(busIf.A1)}] [15:8] == $past(dma.d.writeBuffer) ) );
@@ -333,7 +340,7 @@ validAddressBusOnHLDA_a : assert property ( ##5 busIf.HLDA |-> !$isunknown({busI
 property loadBaseUpperAddress;
 	int channel, expectedWriteBuffer;
 	( (referenceModel.loadBaseAddressReg && dma.d.internalFF), channel = {busIf.A2, busIf.A1}, expectedWriteBuffer = dma.d.writeBuffer )
-	|=> ( dma.d.baseAddressReg[channel] [15:8] == expectedWriteBuffer )
+	|=> ( dma.d.baseAddressReg[channel] [(ADDRESSWIDTH-1) : (ADDRESSWIDTH/2)] == expectedWriteBuffer )
 endproperty
 loadBaseUpperAddress_a : assert property ( loadBaseUpperAddress );
 
@@ -352,14 +359,14 @@ loadBaseLowerAddress_a : assert property ( loadBaseLowerAddress );
 property loadCurrentUpperAddress;
 	int channel, expectedWriteBuffer;
 	( (referenceModel.loadBaseAddressReg && dma.d.internalFF), channel = {busIf.A2, busIf.A1}, expectedWriteBuffer = dma.d.writeBuffer )
-	|=> ( dma.d.currentAddressReg[channel] [15:8] == expectedWriteBuffer )
+	|=> ( dma.d.currentAddressReg[channel] [(ADDRESSWIDTH-1) : (ADDRESSWIDTH/2)] == expectedWriteBuffer )
 endproperty
 loadCurrentUpperAddress_a : assert property ( loadCurrentUpperAddress );
 
 property loadCurrentLowerAddress;
 	int channel, expectedWriteBuffer;
 	( (referenceModel.loadBaseAddressReg && !dma.d.internalFF), channel = {busIf.A2, busIf.A1}, expectedWriteBuffer = dma.d.writeBuffer )
-	|=> ( dma.d.currentAddressReg[channel] [7:0] == expectedWriteBuffer )
+	|=> ( dma.d.currentAddressReg[channel] [((ADDRESSWIDTH/2)-1) : 0] == expectedWriteBuffer )
 endproperty
 loadCurrentLowerAddress_a : assert property ( loadCurrentLowerAddress );
 
@@ -371,14 +378,14 @@ loadCurrentLowerAddress_a : assert property ( loadCurrentLowerAddress );
 property loadBaseUpperWordCount;
 	int channel, expectedWriteBuffer;
 	( (referenceModel.loadBaseWordCountReg && dma.d.internalFF), channel = {busIf.A2, busIf.A1}, expectedWriteBuffer = dma.d.writeBuffer )
-	|=> ( dma.d.baseWordCountReg[channel] [15:8] == expectedWriteBuffer )
+	|=> ( dma.d.baseWordCountReg[channel] [(ADDRESSWIDTH-1) : (ADDRESSWIDTH/2)] == expectedWriteBuffer )
 endproperty
 loadBaseUpperWordCount_a : assert property ( loadBaseUpperWordCount );
 
 property loadBaseLowerWordCount;
 	int channel, expectedWriteBuffer;
 	( (referenceModel.loadBaseWordCountReg && !dma.d.internalFF), channel = {busIf.A2, busIf.A1}, expectedWriteBuffer = dma.d.writeBuffer )
-	|=> ( dma.d.baseWordCountReg[channel] [7:0] == expectedWriteBuffer )
+	|=> ( dma.d.baseWordCountReg[channel] [((ADDRESSWIDTH/2)-1) : 0] == expectedWriteBuffer )
 endproperty
 loadBaseLowerWordCount_a : assert property ( loadBaseLowerWordCount );
 
@@ -390,14 +397,14 @@ loadBaseLowerWordCount_a : assert property ( loadBaseLowerWordCount );
 property loadCurrentUpperWordCount;
 	int channel, expectedWriteBuffer;
 	( (referenceModel.loadBaseWordCountReg && dma.d.internalFF), channel = {busIf.A2, busIf.A1}, expectedWriteBuffer = dma.d.writeBuffer )
-	|=> ( dma.d.currentWordCountReg[channel] [15:8] == expectedWriteBuffer )
+	|=> ( dma.d.currentWordCountReg[channel] [(ADDRESSWIDTH-1) : (ADDRESSWIDTH/2)] == expectedWriteBuffer )
 endproperty
 loadCurrentUpperWordCount_a : assert property ( loadCurrentUpperWordCount );
 
 property loadCurrentLowerWordCount;
 	int channel, expectedWriteBuffer;
 	( (referenceModel.loadBaseWordCountReg && !dma.d.internalFF), channel = {busIf.A2, busIf.A1}, expectedWriteBuffer = dma.d.writeBuffer )
-	|=> ( dma.d.currentWordCountReg[channel] [7:0] == expectedWriteBuffer )
+	|=> ( dma.d.currentWordCountReg[channel] [((ADDRESSWIDTH/2)-1) : 0] == expectedWriteBuffer )
 endproperty
 loadCurrentLowerWordCount_a : assert property ( loadCurrentLowerWordCount );
 
@@ -409,14 +416,14 @@ loadCurrentLowerWordCount_a : assert property ( loadCurrentLowerWordCount );
 property readCurrentUpperAddress;
 	int channel;
 	( (referenceModel.readCurrentAddressReg && dma.d.internalFF), channel = {busIf.A2, busIf.A1} )
-	|=> ( dma.d.currentAddressReg[channel] [15:8] == dma.d.readBuffer )
+	|=> ( dma.d.currentAddressReg[channel] [(ADDRESSWIDTH-1) : (ADDRESSWIDTH/2)] == dma.d.readBuffer )
 endproperty
 readCurrentUpperAddress_a : assert property ( readCurrentUpperAddress );
 
 property readCurrentLowerAddress;
 	int channel;
 	( (referenceModel.readCurrentAddressReg && !dma.d.internalFF), channel = {busIf.A2, busIf.A1} )
-	|=> ( dma.d.currentAddressReg[channel] [7:0] == dma.d.readBuffer )
+	|=> ( dma.d.currentAddressReg[channel] [((ADDRESSWIDTH/2)-1) : 0] == dma.d.readBuffer )
 endproperty
 readCurrentLowerAddress_a : assert property ( readCurrentLowerAddress );
 
@@ -428,14 +435,14 @@ readCurrentLowerAddress_a : assert property ( readCurrentLowerAddress );
 property readCurrentUpperWordCount;
 	int channel;
 	( (referenceModel.readCurrentWordCountReg && dma.d.internalFF), channel = {busIf.A2, busIf.A1} )
-	|=> ( dma.d.currentAddressReg[channel] [15:8] == dma.d.readBuffer )
+	|=> ( dma.d.currentAddressReg[channel] [(ADDRESSWIDTH-1) : (ADDRESSWIDTH/2)] == dma.d.readBuffer )
 endproperty
 readCurrentUpperWordCount_a : assert property ( readCurrentUpperWordCount );
 
 property readCurrentLowerWordCount;
 	int channel;
 	( (referenceModel.readCurrentWordCountReg && !dma.d.internalFF), channel = {busIf.A2, busIf.A1} )
-	|=> ( dma.d.currentAddressReg[channel] [7:0] == dma.d.readBuffer )
+	|=> ( dma.d.currentAddressReg[channel] [((ADDRESSWIDTH/2)-1) : 0] == dma.d.readBuffer )
 endproperty
 readCurrentLowerWordCount_a : assert property ( readCurrentLowerWordCount );
 

@@ -5,6 +5,8 @@ reset: clean compileReset formalReset debug
 
 eop: clean compileEOP formal debug
 
+runb: clean compile formalBlackbox debug
+
 compile:
 	vlib work
 	vmap work work
@@ -48,6 +50,15 @@ formalReset:
 	  do qs_files/directivesReset.tcl; \
 		formal compile -d dma -cuname my_bind_sva \
 			-target_cover_statements; \
+		formal verify -init qs_files/myinit.init \
+		-timeout 5m; \
+		exit"
+
+formalBlackbox:
+	qverify -c -od Output_Results -do "\
+		do qs_files/directivesBlackbox.tcl; \
+		formal compile -d dma -cuname my_bind_sva \
+	  	-target_cover_statements; \
 		formal verify -init qs_files/myinit.init \
 		-timeout 5m; \
 		exit"

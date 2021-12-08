@@ -13,6 +13,7 @@ module referenceModel(busInterface.referenceModel busIf, input logic programCond
   logic loadIoDataBufferFromStatus;
   logic regConfigInProgress; //flag set when one of the regiter congiguration is in progess
   logic regConfigOneHot; //flag to check if only one register is activated at a time in program condition
+  logic [7:0] address;
 
   assign loadIoDataBufferFromDB = ( !busIf.CS_N & !busIf.IOW_N & !dma.intSigIf.loadAddr & !(readStatusReg|readCurrentAddressReg|readCurrentWordCountReg) );
   assign loadIoDataBufferFromStatus = ( !busIf.CS_N & !busIf.IOR_N & readStatusReg & !dma.intSigIf.loadAddr & !(readCurrentAddressReg|readCurrentWordCountReg) );
@@ -20,6 +21,8 @@ module referenceModel(busInterface.referenceModel busIf, input logic programCond
   assign regConfigInProgress = ( loadCommandReg | loadModeReg | loadBaseAddressReg | readCurrentAddressReg | loadBaseWordCountReg | readCurrentWordCountReg | readStatusReg | clearInternalFF );
 
   assign regConfigOneHot = $onehot( {loadCommandReg, loadModeReg, loadBaseAddressReg, readCurrentAddressReg, loadBaseWordCountReg, readCurrentWordCountReg, readStatusReg, clearInternalFF} );
+
+  assign address = {busIf.A7, busIf.A6, busIf.A5, busIf.A4, busIf.A3, busIf.A2, busIf.A1, busIf.A0};
 
   always_comb
     begin
