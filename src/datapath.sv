@@ -33,7 +33,7 @@ module datapath(busInterface busIf, dmaInternalRegistersIf intRegIf, dmaInternal
   logic rdStatusReg;
   logic clearInternalFF;
   bit enUpperAddress;
-  
+
   logic [7:0] testIoDataBuffer;
 
 
@@ -178,6 +178,9 @@ module datapath(busInterface busIf, dmaInternalRegistersIf intRegIf, dmaInternal
           ioDataBuffer <= intRegIf.temporaryAddressReg[ (ADDRESSWIDTH-1) : (ADDRESSWIDTH/2) ];
           {outputAddressBuffer, ioAddressBuffer} <= intRegIf.temporaryAddressReg[ ((ADDRESSWIDTH/2)-1) : 0 ];
         end
+
+      else if(intSigIf.incrTemporaryAddressReg)
+        intRegIf.temporaryAddressReg <= intRegIf.temporaryAddressReg + 1'b1;
 
       else
         begin
@@ -384,19 +387,6 @@ module datapath(busInterface busIf, dmaInternalRegistersIf intRegIf, dmaInternal
             end
 
         end
-    end
-
-  //temporary address register
-  always_ff @(posedge busIf.CLK)
-    begin
-      if(busIf.RESET)
-        intRegIf.temporaryAddressReg <= '0;
-
-      else if(intSigIf.incrTemporaryAddressReg)
-        intRegIf.temporaryAddressReg <= intRegIf.temporaryAddressReg + 1'b1;
-
-      else
-        intRegIf.temporaryAddressReg <= intRegIf.temporaryAddressReg;
     end
 
   //temporary word count
