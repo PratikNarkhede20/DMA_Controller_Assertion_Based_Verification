@@ -129,7 +129,7 @@ statusRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.statusRe
 																													(dma.intRegIf.modeReg[2] == '0) &&
 																													(dma.intRegIf.modeReg[3] == '0) ) );
 */
-//modeRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) (dma.intRegIf.modeReg[i] == '0) ) );
+modeRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<4;i=i+1) (dma.intRegIf.modeReg[i] == '0) ) );
 
 writeBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.writeBuffer == '0));
 
