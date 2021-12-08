@@ -10,4 +10,4 @@ netlist clock busIf.CLK -period 10
 #formal netlist constraint dma.intRegIf.modeReg[2] 2'b01
 #formal netlist constraint dma.intRegIf.modeReg[3] 2'b01
 
-netlist blackbox dma.pL
+netlist blackbox priorityLogic
