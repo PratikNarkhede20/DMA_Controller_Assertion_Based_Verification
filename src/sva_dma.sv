@@ -124,10 +124,13 @@ writeBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.writeBuffer =
 
 readBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.readBuffer == '0));
 
-baseAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.baseAddressReg[0] == '0) &&
+/*baseAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.baseAddressReg[0] == '0) &&
 																																 (dma.d.baseAddressReg[1] == '0) &&
 																																 (dma.d.baseAddressReg[2] == '0) &&
 																																 (dma.d.baseAddressReg[3] == '0) ) );
+*/
+
+baseAddressRegZeroOnReset_a :  assert property (busIf.RESET |=> ( for (int i=0; i<4;i=i+1) dma.d.baseAddressReg[i] == '0 );
 
 currentAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.currentAddressReg[0] == '0) &&
 																																		(dma.d.currentAddressReg[1] == '0) &&
