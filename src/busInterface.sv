@@ -86,7 +86,11 @@ interface busInterface(input logic CLK, RESET);
     input A0,
     input A1,
     input A2,
-    input A3);
+    input A3,
+    input A4,
+    input A5,
+    input A6,
+    input A7);
 
 
 endinterface
