@@ -64,7 +64,7 @@ stateS1_c : cover property (dma.tC.state == `S1);
 stateS2_c : cover property (dma.tC.state == `S2);
 stateS4_c : cover property (dma.tC.state == `S4);
 
-stateTransistions_a : cover property ((dma.tC.state == `SI) ##10
+stateTransistions_c : cover property ((dma.tC.state == `SI) ##10
 																			(dma.tC.state == `SO) ##[1:10]
 																			(dma.tC.state == `S1) ##1
 																			(dma.tC.state == `S2) ##1
