@@ -1,13 +1,11 @@
 module dma_checker_sva_reset(busInterface busIf);
-//`define Reset
-//`define Run
+
 `define SI 6'b000001
 `define SO 6'b000010
 `define S1 6'b000100
 `define S2 6'b001000
 `define S3 6'b010000
 `define S4 6'b100000
-
 
 default clocking c0 @(posedge busIf.CLK); endclocking
 

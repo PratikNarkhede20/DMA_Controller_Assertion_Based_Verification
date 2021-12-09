@@ -1,6 +1,5 @@
 module dma_checker_sva(busInterface busIf);
-//`define Reset
-//`define Run
+
 `define SI 6'b000001
 `define SO 6'b000010
 `define S1 6'b000100
@@ -13,21 +12,22 @@ parameter DATAWIDTH = 8;
 parameter CHANNELS = 4;
 
 logic programCondition;
-logic address;
 
 default clocking c0 @(posedge busIf.CLK); endclocking
-`ifdef Run
-//assign address = busIf.A7,busIf.A6,busIf.A5,busIf.A4,busIf.A3,busIf.A2,busIf.A1,busIf.A0
+
+
 assign programCondition = dma.intSigIf.programCondition;
 referenceModel referenceModel(busIf.referenceModel, programCondition);
 default disable iff (busIf.RESET);
-`endif
 
-`ifdef Run
-CS_NisLow_assume : assume property (busIf.CS_N == 1'b0); //assume the DMA controller is always active
-//HLDAisActive_assume : assume property (busIf.HLDA == 1'b1); //assume the DMA Controller always gets hold acknowledgement signal from CPU
+//assume the DMA controller is always active
+CS_NisLow_assume : assume property (busIf.CS_N == 1'b0);
 
-EOP_NisHigh_assume : assume property (busIf.EOP_N == 1'b1);
+//assume the DMA Controller always gets hold acknowledgement signal from CPU
+//HLDAisActive_assume : assume property (busIf.HLDA == 1'b1);
+
+//assume that there's no EOP in normal run
+EOP_NisLow_assume : assume property (busIf.EOP_N == 1'b0);
 
 /*
 ReadOrWriteTransferType_assume : assume property ( ( (dma.intRegIf.modeReg[0].transferType == 2'b01) || (dma.intRegIf.modeReg[0].transferType == 2'b10) ) ||
@@ -91,89 +91,8 @@ stateTransistionS2toS4_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `
 stateTransistionS4toSI_a : assert property ( ( !busIf.CS_N && (dma.tC.state == `S4) )
 																							 |-> (dma.tC.nextState == `SI)
 																							 |=> (dma.tC.state == `SI) );
-//|TCbusIf.DREQ && intSigIf.programCondition && configured
-`endif
 
-`ifdef EOP
-stateTransistionSItoSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `SI) )
-																												|-> (dma.tC.nextState == `SI)
-																												|=> (dma.tC.state == `SI) );
 
-stateTransistionSOtoSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `SO) )
-																												|-> (dma.tC.nextState == `SI)
-																												|=> (dma.tC.state == `SI) );
-
-stateTransistionS1toSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `S1) )
-																												|-> (dma.tC.nextState == `SI)
-																												|=> (dma.tC.state == `SI) );
-
-stateTransistionS2toSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `S2) )
-																												|-> (dma.tC.nextState == `SI)
-																												|=> (dma.tC.state == `SI) );
-
-stateTransistionS4toSIonEOP_a : assert property ( ##5 ( !busIf.EOP_N && (dma.tC.state == `S2) )
-																												|-> (dma.tC.nextState == `SI)
-																												|=> (dma.tC.state == `SI) );
-`endif
-
-`ifdef Reset
-//assertions on signals/registers on reset
-stateTransistionOnReset_a : assert property (busIf.RESET |=> (dma.tC.state == `SI) );
-
-commandRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.commandReg == '0) );
-
-statusRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.statusReg == '0) );
-
-modeRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.intRegIf.modeReg[0] == '0) &&
-																													(dma.intRegIf.modeReg[1] == '0) &&
-																													(dma.intRegIf.modeReg[2] == '0) &&
-																													(dma.intRegIf.modeReg[3] == '0) ) );
-//modeRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) dma.intRegIf.modeReg[i] == '0 ) ); //doesn't compile
-
-writeBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.writeBuffer == '0));
-
-readBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.readBuffer == '0));
-
-baseAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.baseAddressReg[0] == '0) &&
-																																 (dma.d.baseAddressReg[1] == '0) &&
-																																 (dma.d.baseAddressReg[2] == '0) &&
-																																 (dma.d.baseAddressReg[3] == '0) ) );
-//baseAddressRegZeroOnReset_a :  assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) dma.d.baseAddressReg[i] == '0 ) ); //doesn't compile
-
-currentAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.currentAddressReg[0] == '0) &&
-																																		(dma.d.currentAddressReg[1] == '0) &&
-																																		(dma.d.currentAddressReg[2] == '0) &&
-																																		(dma.d.currentAddressReg[3] == '0) ) );
-//currentAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) dma.d.currentAddressReg[i] == '0 ) ); //doesn't compile
-
-baseWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.baseWordCountReg[0] == '0) &&
-																																	 (dma.d.baseWordCountReg[1] == '0) &&
-																																	 (dma.d.baseWordCountReg[2] == '0) &&
-																																	 (dma.d.baseWordCountReg[3] == '0) ) );
-//baseWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) (dma.d.baseWordCountReg[i] == '0) ) ); //doesn't compile
-
-currentWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.currentWordCountReg[0] == '0) &&
-																																			(dma.d.currentWordCountReg[1] == '0) &&
-																																			(dma.d.currentWordCountReg[2] == '0) &&
-																																			(dma.d.currentWordCountReg[3] == '0) ) );
-//currentWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) (dma.d.currentWordCountReg[i] == '0) ) ); //doesn't compile
-
-tempAddressRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.temporaryAddressReg == '0));
-
-tempWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.temporaryWordCountReg == '0));
-
-internalFFzeroOnReset_a : assert property (busIf.RESET |=> (dma.d.internalFF == 1'b0));
-
-ioAddressBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.ioAddressBuffer == '0));
-
-outputAddressBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.outputAddressBuffer == '0));
-
-priorityOrderDefaultOnReset_a : assert property (busIf.RESET |=> dma.pL.priorityOrder == 8'b11_10_01_00); //default priority order
-
-DACKisZeroOnReset_a : assert property (busIf.RESET |=> busIf.DACK == 4'b0000);
-`endif
-
-`ifdef Run
 //assertions for priority logic
 
 //doesn't compile. expected '=', expecting ++ or --. 2nd version of this is written furthur in the code
@@ -249,11 +168,14 @@ generate
    end
 endgenerate
 
+//cover for rorating priority logic
 //priorityType=1'b0 is fixed priority, priorityType=1'b1 is rotating priority
 rotatingPriority_c : cover property ((busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0001) ##[1:$]
 																		 (busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0010) ##[1:$]
 																		 (busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b0100) ##[1:$]
 																		 (busIf.DREQ == 4'b1111 && dma.intRegIf.commandReg.priorityType && busIf.DACK == 4'b1000));
+
+
 //this below code is for exhaustive testcases for DREQ in generate block. there are few errors which we are still trying to figure out.
 //the compile errors are due to tool not able to process local variables in assertions.
 /*
@@ -272,6 +194,7 @@ generate
   end
 endgenerate
 */
+
 //loadIoDataBufferFromDB_a : assert property ( ##2 referenceModel.loadIoDataBufferFromDB |=> (dma.d.ioDataBuffer == $past(busIf.DB)));
 property loadIoDataBufferFromDB;
 	int expectedIoDataBuffer;
@@ -440,7 +363,5 @@ property readCurrentLowerWordCount;
 	|=> ( dma.d.currentAddressReg[channel] [((ADDRESSWIDTH/2)-1) : 0] == dma.d.readBuffer )
 endproperty
 readCurrentLowerWordCount_a : assert property ( readCurrentLowerWordCount );
-
-`endif
 
 endmodule
