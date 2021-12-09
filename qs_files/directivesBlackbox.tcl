@@ -19,4 +19,4 @@ set busIf.RESET 1'b1
 after 300
 #formal netlist constraint busIf.RESET 1'b0
 
-netlist blackbox priorityLogic
+netlist blackbox instance dma.pL
