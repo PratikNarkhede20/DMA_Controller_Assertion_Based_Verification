@@ -2,7 +2,7 @@
 # Questa Static Verification System
 # Version 10.7b linux_x86_64 12 Jun 2018
 
-log created Sun Dec  5 08:29:52 2021 by pratik2 on mo.ece.pdx.edu
+log created Wed Dec  8 23:22:35 2021 by pratik2 on mo.ece.pdx.edu
 
 
 Command: netlist elaborate
@@ -31,7 +31,7 @@ Analyzing design...
 -- Loading module z0in_work.priorityLogic
 -- Loading module z0in_work.timingAndControl
 -- Loading module z0in_work.datapath
--- Loading module z0in_work.dma_checker_sva
+-- Loading module z0in_work.dma_checker_sva_run
 -- Loading module z0in_work.referenceModel
 -- Loading interface z0in_work.busInterface
 Optimizing 11 design-units (inlining 0/9 module instances):
@@ -44,18 +44,18 @@ Optimizing 11 design-units (inlining 0/9 module instances):
 -- Optimizing module z0in_work.timingAndControl(fast)
 -- Optimizing module z0in_work.datapath(fast)
 -- Optimizing module z0in_work.referenceModel(fast)
--- Optimizing module z0in_work.dma_checker_sva(fast)
+-- Optimizing module z0in_work.dma_checker_sva_run(fast)
 -- Optimizing module z0in_work.dma(fast)
 Optimized design name is zi_opt_csl_1402776646_1
 Identified prefix 'dma'.
-End of log Sun Dec  5 08:29:53 2021
+End of log Wed Dec  8 23:22:36 2021
 
 
 # 
 # Questa Static Verification System
 # Version 10.7b linux_x86_64 12 Jun 2018
 
-log created Sun Dec  5 08:29:53 2021 by pratik2 on mo.ece.pdx.edu
+log created Wed Dec  8 23:22:36 2021 by pratik2 on mo.ece.pdx.edu
 
 
 Command: netlist create
@@ -81,21 +81,21 @@ Processing module 'datapath'
 Elaborating module 'datapath'.
 Processing module 'referenceModel'
 Elaborating module 'referenceModel'.
-Processing module 'dma_checker_sva'
-Elaborating module 'dma_checker_sva'.
+Processing module 'dma_checker_sva_run'
+Elaborating module 'dma_checker_sva_run'.
 Processing module 'dma'
 Elaborating module 'dma'.
 
-##Time Taken (Synthesis) = 231.000000 ticks = 2.310000 secs
+##Time Taken (Synthesis) = 277.000000 ticks = 2.770000 secs
 
-End of log Sun Dec  5 08:29:56 2021
+End of log Wed Dec  8 23:22:40 2021
 
 
 # 
 # Questa Static Verification System
 # Version 10.7b linux_x86_64 12 Jun 2018
 
-log created Sun Dec  5 08:29:57 2021 by pratik2 on mo.ece.pdx.edu
+log created Wed Dec  8 23:22:40 2021 by pratik2 on mo.ece.pdx.edu
 
 
 Command: formal compile
@@ -120,8 +120,8 @@ Processing module 'datapath'
 Restoring module 'datapath'.
 Processing module 'referenceModel'
 Restoring module 'referenceModel'.
-Processing module 'dma_checker_sva'
-Restoring module 'dma_checker_sva'.
+Processing module 'dma_checker_sva_run'
+Restoring module 'dma_checker_sva_run'.
 Processing module 'dma'
 Restoring module 'dma'.
 Flattening design 'dmaInternalRegistersIf'.
@@ -130,7 +130,7 @@ Flattening design 'priorityLogic'.
 Flattening design 'timingAndControl'.
 Flattening design 'datapath'.
 Flattening design 'referenceModel'.
-Flattening design 'dma_checker_sva'.
+Flattening design 'dma_checker_sva_run'.
 Flattening design 'dma'.
 Flattening design 'dma'.
 Info    : Detected reset.  Reset: busIf.RESET, polarity: synchronous, active: high.  [netlist-12]
@@ -157,8 +157,8 @@ Inferred directives
 ------------------------------------------------------------------------------
 
 Design is linked for formal analysis.  Design 'dma'.
+Info    : Multiply-driven register/latch found.  Register: 'd.ioDataBuffer'.  [formal-280]
 Info    : Multiply-driven register/latch found.  Register: 'd.ioAddressBuffer'.  [formal-280]
-Info    : Multiply-driven register/latch found.  Register: 'd.intRegIf.temporaryAddressReg'.  [formal-280]
 Info    : Multiply-driven register/latch found.  Register: 'd.outputAddressBuffer'.  [formal-280]
 Info    : Multiply-driven register/latch found.  Register: 'd.enUpperAddress'.  [formal-280]
 Info    : Multiply-driven register/latch found.  Register: 'd.readBuffer'.  [formal-280]
@@ -166,18 +166,18 @@ Formal model has been created.
 
 Property Summary
 -------------------------------------------------------------------------------
-Total  Directives :42
-Assert Directives :23
+Total  Directives :89
+Assert Directives :53
 Assume Directives :2
-Cover  Directives :17
+Cover  Directives :34
 
 SVA Summary
 -------------------------------------------------------------------------------
 SVA Directive Type        Directives           Checkers
 -------------------------------------------------------------------------------
-Assert                        23                  23
+Assert                        53                  53
 Assume                         2                   2
-Cover                         17                  17
+Cover                         34                  34
 -------------------------------------------------------------------------------
 
 Design Checks Summary
@@ -202,7 +202,7 @@ Count  Type     Message ID         Summary
     1  Info     netlist-11         Detected clock.
     1  Info     netlist-12         Detected reset.
 
-Final Process Statistics: Max memory 610MB, CPU time 5s, Total time 6s
-End of log Sun Dec  5 08:29:59 2021
+Final Process Statistics: Max memory 622MB, CPU time 5s, Total time 9s
+End of log Wed Dec  8 23:22:43 2021
 
 

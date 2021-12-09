@@ -3,7 +3,7 @@ Questa Version 10.7b linux_x86_64 12 Jun 2018
 
 -------------------------------------------------------------------------------
 Design Report
-Created Sun Dec  5 08:29:59 2021
+Created Wed Dec  8 23:22:43 2021
 -------------------------------------------------------------------------------
 
 
@@ -17,16 +17,16 @@ Design Summary                    Count
 Clocks                                1
   User-specified                      1
   Inferred                            0
-Control Point Bits                   95
+Control Point Bits                   85
   DUT Input Bits                     37
-  Cut Point Bits                      8
+  Cut Point Bits                      0
   Black Box Output Bits               0
-  Undriven Wire Bits                 50
-State Bits                          376
-  Design Register Bits              376
+  Undriven Wire Bits                 48
+State Bits                          384
+  Design Register Bits              384
   Design Latch Bits                   0
 Storage Structures       
-  Counters                            1
+  Counters                            2
   RAMs                                0
 Black Boxes                           0
 ---------------------------------------
@@ -43,7 +43,7 @@ busIf.CLK                                  10              0 5    PE
 ------------------------------------------------------------------------------
 Cut Points
 ----------
-  d.ioDataBuffer  (8 bits) 
+  <none>
 
 Black Box Outputs
 -----------------
@@ -51,8 +51,6 @@ Black Box Outputs
 
 Undriven Wires
 --------------
-  check1.address  (1 bit)
-  check1.referenceModel.loadIoDataBufferFromDB  (1 bit)
   d.temporaryReg  (8 bits)
   intRegIf.maskReg  (4 bits)
   intRegIf.requestReg  (3 bits)
@@ -65,6 +63,7 @@ Latches
 
 Counters
 --------
+  d.intRegIf.temporaryAddressReg  (16 bits)
   d.intRegIf.temporaryWordCountReg  (16 bits)
 
 RAMs
@@ -118,7 +117,7 @@ Count  Module          Location
    1   datapath        /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/datapath.sv (Line 1)
    1   dmaInternalRegistersIf /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/dmaInternalRegistersIf.sv (Line 1)
    1   dmaInternalSignalsIf /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/dmaInternalSignalsIf.sv (Line 1)
-   1   dma_checker_sva /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv (Line 1)
+   1   dma_checker_sva_run /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv (Line 1)
    1   priorityLogic   /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/priorityLogic.sv (Line 1)
    1   referenceModel  /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/referenceModel.sv (Line 1)
    1   timingAndControl /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/timingAndControl.sv (Line 1)
@@ -129,12 +128,12 @@ Design Checks Details
 ===============================================================================
 Type      : REG_MULTIPLY_DRIVEN
 Module    : datapath
-Name      : ioAddressBuffer
+Name      : ioDataBuffer
 Instance  : d
 
 Type      : REG_MULTIPLY_DRIVEN
 Module    : datapath
-Name      : intRegIf.temporaryAddressReg
+Name      : ioAddressBuffer
 Instance  : d
 
 Type      : REG_MULTIPLY_DRIVEN

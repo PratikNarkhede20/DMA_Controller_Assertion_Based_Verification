@@ -1,9 +1,9 @@
 
-# /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qverify_cmds.tcl : 6
+# /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qverify_cmds.tcl : 5
 /pkgs/mentor/questa_cdc_formal/10.7b/linux_x86_64/bin/qverifyek  -od Output_Results -l .elab.log  -cli -internal -cmd elab -zdb /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qcache/DB/zdb_0 -tool propcheck -d dma -cuname my_bind_sva
 
-# /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qverify_cmds.tcl : 6
+# /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qverify_cmds.tcl : 5
 /pkgs/mentor/questa_cdc_formal/10.7b/linux_x86_64/bin/qverifyek  -od Output_Results -l .createnl.log  -cli -internal -cmd create_netlist -zdb /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qcache/DB/zdb_0 -tool propcheck -d dma -cuname my_bind_sva -tcs
 
-# /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qverify_cmds.tcl : 6
+# /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qverify_cmds.tcl : 5
 /pkgs/mentor/questa_cdc_formal/10.7b/linux_x86_64/bin/qverifyek  -od Output_Results -l .csl.log  -cli -internal -cmd csl -zdb /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/Output_Results/qcache/DB/zdb_0 -d dma -cuname my_bind_sva -tcs

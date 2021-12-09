@@ -1,7 +1,7 @@
 -------------------------------------------------------------------------------
 Questa PropCheck Version 10.7b linux_x86_64 12 Jun 2018
 -------------------------------------------------------------------------------
-Report Generated               : Sun Dec  5 08:30:00 2021
+Report Generated               : Wed Dec  8 23:22:44 2021
 -------------------------------------------------------------------------------
 
 Command-line arguments:
@@ -63,13 +63,13 @@ busIf.RESET = 1'b0
 -------------------------------------------------------------------------------
 Assumptions (2)
 -------------------------------------------------------------------------------
-check1.CS_NisLow_assume
-check1.ReadOrWriteTransferType_assume
+check1.dmaIsAlwaysActive
+check1.noEndOfProcess_assume
 -------------------------------------------------------------------------------
 
 
 -------------------------------------------------------------------------------
-Active Targets (40)
+Active Targets (87)
 -------------------------------------------------------------------------------
 check1.ADSTBactive_c
 check1.AENactive_c
@@ -77,29 +77,74 @@ check1.DACK0isOne_c
 check1.DACK1isOne_c
 check1.DACK2isOne_c
 check1.DACK3isOne_c
-check1.DREQ0011ToDACK0001_a
-check1.DREQ0111ToDACK0001_a
-check1.DREQ1110ToDACK0010_a
-check1.DREQ1111ToDACK0001_a
 check1.HRQactive_c
-check1.addressBusValid
+check1.addressBusValid_a
 check1.addressEnable_a
+check1.addressStrobeActiveForTwoCycles_a
 check1.addressStrobeActive_a
-check1.addressStrobeLow_a
-check1.addressValidOnReadWrite
-check1.dataBusValid
-check1.dataValidOnReadWrite
+check1.addressStrobeActiveforOneCycle_a
+check1.addressValidOnReadWrite_a
+check1.baseAddressShouldNotChange_a
+check1.baseWordCountShouldNotChange_a
+check1.dataBusValid_a
+check1.dataValidOnReadWrite_a
+check1.g1[0].DACK0000.DACK0000forDREQ_c
+check1.g1[0].DACK0000.DACK0000forDREQfixedPriority_a
+check1.g1[10].DACK0010.DACK0010forDREQ_c
+check1.g1[10].DACK0010.DACK0010forDREQfixedPriority_a
+check1.g1[11].DACK0001.DACK0001forDREQ_c
+check1.g1[11].DACK0001.DACK0001forDREQfixedPriority_a
+check1.g1[12].DACK0100.DACK0100forDREQ_c
+check1.g1[12].DACK0100.DACK0100forDREQfixedPriority_a
+check1.g1[13].DACK0001.DACK0001forDREQ_c
+check1.g1[13].DACK0001.DACK0001forDREQfixedPriority_a
+check1.g1[14].DACK0010.DACK0010forDREQ_c
+check1.g1[14].DACK0010.DACK0010forDREQfixedPriority_a
+check1.g1[15].DACK0001.DACK0001forDREQ_c
+check1.g1[15].DACK0001.DACK0001forDREQfixedPriority_a
+check1.g1[1].DACK0001.DACK0001forDREQ_c
+check1.g1[1].DACK0001.DACK0001forDREQfixedPriority_a
+check1.g1[2].DACK0010.DACK0010forDREQ_c
+check1.g1[2].DACK0010.DACK0010forDREQfixedPriority_a
+check1.g1[3].DACK0001.DACK0001forDREQ_c
+check1.g1[3].DACK0001.DACK0001forDREQfixedPriority_a
+check1.g1[4].DACK0100.DACK0100forDREQ_c
+check1.g1[4].DACK0100.DACK0100forDREQfixedPriority_a
+check1.g1[5].DACK0001.DACK0001forDREQ_c
+check1.g1[5].DACK0001.DACK0001forDREQfixedPriority_a
+check1.g1[6].DACK0010.DACK0010forDREQ_c
+check1.g1[6].DACK0010.DACK0010forDREQfixedPriority_a
+check1.g1[7].DACK0001.DACK0001forDREQ_c
+check1.g1[7].DACK0001.DACK0001forDREQfixedPriority_a
+check1.g1[8].DACK1000.DACK1000forDREQ_c
+check1.g1[8].DACK1000.DACK1000forDREQfixedPriority_a
+check1.g1[9].DACK0001.DACK0001forDREQ_c
+check1.g1[9].DACK0001.DACK0001forDREQfixedPriority_a
 check1.internalFFone_a
 check1.internalFFzero_a
 check1.ioRead_c
 check1.ioWrite_c
+check1.loadBaseLowerAddress_a
+check1.loadBaseLowerWordCount_a
+check1.loadBaseUpperAddress_a
+check1.loadBaseUpperWordCount_a
 check1.loadCommandReg_a
+check1.loadCurrentLowerAddress_a
+check1.loadCurrentLowerWordCount_a
+check1.loadCurrentUpperAddress_a
+check1.loadCurrentUpperWordCount_a
 check1.loadIoDataBufferFromDB_a
 check1.loadWriteBuffer_a
 check1.memoryRead_c
 check1.memoryWrite_c
-check1.noReadWriteAtSameTime
+check1.noReadWriteAtSameTime_a
+check1.readCurrentLowerAddress_a
+check1.readCurrentLowerWordCount_a
+check1.readCurrentUpperAddress_a
+check1.readCurrentUpperWordCount_a
 check1.readStatusReg_a
+check1.rotatingPriority_c
+check1.singleRegConfigInProgramMode_a
 check1.stateS1_c
 check1.stateS2_c
 check1.stateS4_c
@@ -111,66 +156,96 @@ check1.stateTransistionS4toSI_a
 check1.stateTransistionSItoSO_a
 check1.stateTransistionSOtoS1_a
 check1.stateTransistions_a
+check1.validAddressBusOnHLDA_a
+check1.validReadWriteSignalsOnHLDA_a
 -------------------------------------------------------------------------------
 
 
 -------------------------------------------------------------------------------
 X Registers in Starting State
 -------------------------------------------------------------------------------
-  2 registers (5.3% of 38 in sequential fanin of properties)
+  1 register (1.8% of 56 in sequential fanin of properties)
 -------------------------------------------------------------------------------
   d.enUpperAddress (File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/datapath.sv, Line 35) 1'bx
-  d.intRegIf.temporaryAddressReg (File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/datapath.sv, Line 1) 16'bxxxxxxxxxxxxxxxx
 -------------------------------------------------------------------------------
 
 
 -------------------------------------------------------------------------------
 Z Registers in Starting State
 -------------------------------------------------------------------------------
-  0 registers (0.0% of 38 in sequential fanin of properties)
+  0 registers (0.0% of 56 in sequential fanin of properties)
 -------------------------------------------------------------------------------
 
 
 ---------------------------------------
 Formal Netlist Statistics         Count
 ---------------------------------------
-Control Point Bits                   36
-  DUT Input Bits                     22
-  Cut Point Bits                      8
+Control Point Bits                   45
+  DUT Input Bits                     23
+  Cut Point Bits                      0
   Black Box Output Bits               0
   Undriven Wire Bits                  0
-  Modeling Bits                       6
-State Bits                          290
-  Counter State Bits                 16
+  Modeling Bits                      22
+State Bits                          856
+  Counter State Bits                 32
   RAM State Bits                      0
-  Register State Bits               115
-  Property State Bits               159
-Logic Gates                         818
-  Design Gates                      645
-  Property Gates                    173
+  Register State Bits               323
+  Property State Bits               501
+Logic Gates                        2556
+  Design Gates                     1363
+  Property Gates                   1193
 ---------------------------------------
 
 
 -------------------------------------------------------------------------------
-Targets Proven (17)
+Targets Proven (46)
 -------------------------------------------------------------------------------
-check1.DREQ0011ToDACK0001_a
-check1.DREQ0111ToDACK0001_a
-check1.DREQ1110ToDACK0010_a
-check1.DREQ1111ToDACK0001_a
-check1.addressBusValid
-check1.addressStrobeLow_a
-check1.addressValidOnReadWrite
-check1.dataBusValid
-check1.dataValidOnReadWrite
+check1.addressBusValid_a
+check1.addressEnable_a
+check1.addressStrobeActiveForTwoCycles_a
+check1.addressStrobeActive_a
+check1.addressStrobeActiveforOneCycle_a
+check1.addressValidOnReadWrite_a
+check1.dataBusValid_a
+check1.dataValidOnReadWrite_a
+check1.g1[0].DACK0000.DACK0000forDREQfixedPriority_a
+check1.g1[10].DACK0010.DACK0010forDREQfixedPriority_a
+check1.g1[11].DACK0001.DACK0001forDREQfixedPriority_a
+check1.g1[12].DACK0100.DACK0100forDREQfixedPriority_a
+check1.g1[13].DACK0001.DACK0001forDREQfixedPriority_a
+check1.g1[14].DACK0010.DACK0010forDREQfixedPriority_a
+check1.g1[15].DACK0001.DACK0001forDREQfixedPriority_a
+check1.g1[1].DACK0001.DACK0001forDREQfixedPriority_a
+check1.g1[2].DACK0010.DACK0010forDREQfixedPriority_a
+check1.g1[3].DACK0001.DACK0001forDREQfixedPriority_a
+check1.g1[4].DACK0100.DACK0100forDREQfixedPriority_a
+check1.g1[5].DACK0001.DACK0001forDREQfixedPriority_a
+check1.g1[6].DACK0010.DACK0010forDREQfixedPriority_a
+check1.g1[7].DACK0001.DACK0001forDREQfixedPriority_a
+check1.g1[8].DACK1000.DACK1000forDREQfixedPriority_a
+check1.g1[9].DACK0001.DACK0001forDREQfixedPriority_a
 check1.internalFFone_a
 check1.internalFFzero_a
+check1.loadBaseLowerAddress_a
+check1.loadBaseLowerWordCount_a
+check1.loadBaseUpperAddress_a
+check1.loadBaseUpperWordCount_a
 check1.loadCommandReg_a
+check1.loadCurrentLowerAddress_a
+check1.loadCurrentLowerWordCount_a
+check1.loadCurrentUpperAddress_a
+check1.loadCurrentUpperWordCount_a
+check1.loadIoDataBufferFromDB_a
+check1.readCurrentLowerAddress_a
+check1.readCurrentUpperAddress_a
+check1.singleRegConfigInProgramMode_a
 check1.stateTransistionS1toS2_a
 check1.stateTransistionS2toS4_a
 check1.stateTransistionS4toSI_a
 check1.stateTransistionSItoSO_a
 check1.stateTransistionSOtoS1_a
+check1.validAddressBusOnHLDA_a
+check1.validReadWriteSignalsOnHLDA_a
 -------------------------------------------------------------------------------
 
 
@@ -182,18 +257,25 @@ check1.loadWriteBuffer_a
 
 
 -------------------------------------------------------------------------------
-Targets Fired (5)
+Targets Fired (1)
 -------------------------------------------------------------------------------
-check1.addressEnable_a
-check1.addressStrobeActive_a
-check1.loadIoDataBufferFromDB_a
-check1.noReadWriteAtSameTime
+check1.noReadWriteAtSameTime_a
+-------------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------------
+Targets Fired with Warnings (5)
+-------------------------------------------------------------------------------
+check1.baseAddressShouldNotChange_a
+check1.baseWordCountShouldNotChange_a
+check1.readCurrentLowerWordCount_a
+check1.readCurrentUpperWordCount_a
 check1.readStatusReg_a
 -------------------------------------------------------------------------------
 
 
 -------------------------------------------------------------------------------
-Targets Covered (17)
+Targets Covered (34)
 -------------------------------------------------------------------------------
 check1.ADSTBactive_c
 check1.AENactive_c
@@ -202,10 +284,27 @@ check1.DACK1isOne_c
 check1.DACK2isOne_c
 check1.DACK3isOne_c
 check1.HRQactive_c
+check1.g1[0].DACK0000.DACK0000forDREQ_c
+check1.g1[10].DACK0010.DACK0010forDREQ_c
+check1.g1[11].DACK0001.DACK0001forDREQ_c
+check1.g1[12].DACK0100.DACK0100forDREQ_c
+check1.g1[13].DACK0001.DACK0001forDREQ_c
+check1.g1[14].DACK0010.DACK0010forDREQ_c
+check1.g1[15].DACK0001.DACK0001forDREQ_c
+check1.g1[1].DACK0001.DACK0001forDREQ_c
+check1.g1[2].DACK0010.DACK0010forDREQ_c
+check1.g1[3].DACK0001.DACK0001forDREQ_c
+check1.g1[4].DACK0100.DACK0100forDREQ_c
+check1.g1[5].DACK0001.DACK0001forDREQ_c
+check1.g1[6].DACK0010.DACK0010forDREQ_c
+check1.g1[7].DACK0001.DACK0001forDREQ_c
+check1.g1[8].DACK1000.DACK1000forDREQ_c
+check1.g1[9].DACK0001.DACK0001forDREQ_c
 check1.ioRead_c
 check1.ioWrite_c
 check1.memoryRead_c
 check1.memoryWrite_c
+check1.rotatingPriority_c
 check1.stateS1_c
 check1.stateS2_c
 check1.stateS4_c
@@ -218,7 +317,17 @@ check1.stateTransistions_a
 -------------------------------------------------------------------------------
 Assumptions Used in Proofs
 -------------------------------------------------------------------------------
-<no assumptions used in proofs>
+Target:  check1.addressEnable_a
+		check1.dmaIsAlwaysActive
+		check1.noEndOfProcess_assume
+Target:  check1.addressStrobeActiveForTwoCycles_a
+		check1.dmaIsAlwaysActive
+		check1.noEndOfProcess_assume
+Target:  check1.addressStrobeActive_a
+		check1.dmaIsAlwaysActive
+		check1.noEndOfProcess_assume
+Target:  check1.addressStrobeActiveforOneCycle_a
+		check1.dmaIsAlwaysActive
 -------------------------------------------------------------------------------
 
 
@@ -244,26 +353,44 @@ Assumptions Used in Bounded Unsatisfiable Sanity Checks
 
 
 -------------------------------------------------------------------------------
-Target Waveforms (22)
+Target Waveforms (40)
 -------------------------------------------------------------------------------
   TB Time(ns) Dist  Target
 -------------------------------------------------------------------------------
-           40    3  check1.ADSTBactive_c
-           40    3  check1.AENactive_c
+           70    6  check1.ADSTBactive_c
+           70    6  check1.AENactive_c
            40    3  check1.DACK0isOne_c
            40    3  check1.DACK1isOne_c
            40    3  check1.DACK2isOne_c
            40    3  check1.DACK3isOne_c
-           30    2  check1.HRQactive_c
-           50    4  check1.addressEnable_a
-           50    4  check1.addressStrobeActive_a
+           70    6  check1.HRQactive_c
+           20    1  check1.baseAddressShouldNotChange_a
+           20    1  check1.baseWordCountShouldNotChange_a
+           50    4  check1.g1[0].DACK0000.DACK0000forDREQ_c
+           50    4  check1.g1[10].DACK0010.DACK0010forDREQ_c
+           50    4  check1.g1[11].DACK0001.DACK0001forDREQ_c
+           50    4  check1.g1[12].DACK0100.DACK0100forDREQ_c
+           50    4  check1.g1[13].DACK0001.DACK0001forDREQ_c
+           50    4  check1.g1[14].DACK0010.DACK0010forDREQ_c
+           50    4  check1.g1[15].DACK0001.DACK0001forDREQ_c
+           50    4  check1.g1[1].DACK0001.DACK0001forDREQ_c
+           50    4  check1.g1[2].DACK0010.DACK0010forDREQ_c
+           50    4  check1.g1[3].DACK0001.DACK0001forDREQ_c
+           50    4  check1.g1[4].DACK0100.DACK0100forDREQ_c
+           50    4  check1.g1[5].DACK0001.DACK0001forDREQ_c
+           50    4  check1.g1[6].DACK0010.DACK0010forDREQ_c
+           50    4  check1.g1[7].DACK0001.DACK0001forDREQ_c
+           50    4  check1.g1[8].DACK1000.DACK1000forDREQ_c
+           50    4  check1.g1[9].DACK0001.DACK0001forDREQ_c
            70    6  check1.ioRead_c
           120   11  check1.ioWrite_c
-           30    2  check1.loadIoDataBufferFromDB_a
            70    6  check1.memoryRead_c
           120   11  check1.memoryWrite_c
-           20    1  check1.noReadWriteAtSameTime
+           20    1  check1.noReadWriteAtSameTime_a
+           60    5  check1.readCurrentLowerWordCount_a
+           60    5  check1.readCurrentUpperWordCount_a
           130   12  check1.readStatusReg_a
+          110   10  check1.rotatingPriority_c
            40    3  check1.stateS1_c
            50    4  check1.stateS2_c
            60    5  check1.stateS4_c
@@ -278,17 +405,18 @@ Target Waveforms Summary by Distance
 ---------------------------------------
 Distance                          Count
 ---------------------------------------
-  1 cycle                             1
-  2 cycles                            3
-  3 cycles                            7
-  4 cycles                            3
-  5 cycles                            1
-  6 cycles                            3
+  1 cycle                             3
+  2 cycles                            1
+  3 cycles                            5
+  4 cycles                           17
+  5 cycles                            3
+  6 cycles                            6
+ 10 cycles                            1
  11 cycles                            2
  12 cycles                            1
  15 cycles                            1
 ---------------------------------------
-Total                                22
+Total                                40
 ---------------------------------------
 
 
@@ -304,9 +432,9 @@ Engine Performance
 ---------------------- Proofs -------------------------- Waveforms ------------
    Engine |  Safety Liveness Vacuity  Sanity |  Safety Liveness Vacuity  Sanity
 -------------------------------------------------------------------------------
-        0 |      11        0       1       0 |       0        0       0       0
-        7 |       2        0       0       0 |      18        0       4       0
-       10 |       5        0       0       0 |       4        0      18       0
+        0 |       8        0       0       0 |       0        0       0       0
+        7 |      25        0       1       0 |      37        0      28       0
+       10 |      14        0       0       0 |       3        0      24       0
 -------------------------------------------------------------------------------
 
 
@@ -314,37 +442,38 @@ Engine Performance
 Property Summary                  Count
 ---------------------------------------
 Assumed                               2
-Proven                               18
+Proven                               47
   Vacuous                             1
-Covered                              17
+Covered                              34
 Inconclusive                          0
-Fired                                 5
+Fired                                 6
+  Fired with Warning                  5
 Uncoverable                           0
 ---------------------------------------
-Total                                42
+Total                                89
 ---------------------------------------
 
 
 --------- Process Statistics ----------
 Elapsed Time                       2 s 
 -------- Orchestration Process --------
--------- mo.ece.pdx.edu:18711 ---------
+-------- mo.ece.pdx.edu:24497 ---------
 CPU Time                           1 s 
 Peak Memory                      0.2 GB
 ---------- Engine Processes -----------
--------- mo.ece.pdx.edu:18731 ---------
-CPU Time                           0 s 
-Peak Memory                      0.1 GB
-CPU Utilization                    0 % 
--------- mo.ece.pdx.edu:18742 ---------
-CPU Time                           2 s 
+-------- mo.ece.pdx.edu:24510 ---------
+CPU Time                           1 s 
 Peak Memory                      0.3 GB
 CPU Utilization                  100 % 
--------- mo.ece.pdx.edu:18741 ---------
+-------- mo.ece.pdx.edu:24513 ---------
 CPU Time                           0 s 
 Peak Memory                      0.1 GB
 CPU Utilization                    0 % 
--------- mo.ece.pdx.edu:18743 ---------
+-------- mo.ece.pdx.edu:24511 ---------
+CPU Time                           0 s 
+Peak Memory                      0.1 GB
+CPU Utilization                    0 % 
+-------- mo.ece.pdx.edu:24512 ---------
 CPU Time                           0 s 
 Peak Memory                      0.1 GB
 CPU Utilization                    0 % 
