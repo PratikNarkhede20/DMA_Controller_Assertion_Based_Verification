@@ -164,7 +164,7 @@ tempWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.t
 
 internalFFzeroOnReset_a : assert property (busIf.RESET |=> (dma.d.internalFF == 1'b0));
 
-ioAddressBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.ioAddressBuffer == '0'));
+ioAddressBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.ioAddressBuffer == '0));
 
 outputAddressBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.outputAddressBuffer == '0));
 
