@@ -2,4 +2,4 @@ $default_clock busIf.CLK
 $default_input_value 0
 busIf.RESET = 1'b1
 ##
-buIf.RESET = 1'b0
+busIf.RESET = 1'b0
