@@ -215,7 +215,7 @@ endproperty
 //exhaustive testing fixed priority logic. DREQ 0000 to 1111 as input
 genvar i;
 generate
-  for(i=0; i<(2^CHANNELS); i=i+1)
+  for(i=0; i<(2**CHANNELS); i=i+1)
    begin : g1
      if(i[0]==1'b1)
 		 begin : DACK0001
