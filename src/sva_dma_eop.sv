@@ -1,4 +1,4 @@
-module dma_checker_eop(busInterface busIf);
+module dma_checker_sva_eop(busInterface busIf);
 //`define Reset
 //`define Run
 `define SI 6'b000001
@@ -7,11 +7,6 @@ module dma_checker_eop(busInterface busIf);
 `define S2 6'b001000
 `define S3 6'b010000
 `define S4 6'b100000
-
-parameter ADDRESSWIDTH = 16;
-parameter DATAWIDTH = 8;
-parameter CHANNELS = 4;
-
 
 default clocking c0 @(posedge busIf.CLK); endclocking
 
