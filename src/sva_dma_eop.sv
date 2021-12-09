@@ -1,4 +1,4 @@
-module dma_checker_sva(busInterface busIf);
+module dma_checker_eop(busInterface busIf);
 //`define Reset
 //`define Run
 `define SI 6'b000001
