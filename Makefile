@@ -12,7 +12,7 @@ compile:
 	vmap work work
 	vlog ./src/dmaRegConfigPkg.sv ./src/busInterface.sv ./src/dmaInternalRegistersIf.sv ./src/dmaInternalSignalsIf.sv ./src/timingAndControl.sv ./src/datapath.sv ./src/priorityLogic.sv ./src/dma.sv
 	vlog -sv -mfcu -cuname my_bind_sva ./src/referenceModel.sv \
-		./src/sva_bind_run.sv +define+Run ./src/sva_dma_run.sv
+		./src/sva_bind_run.sv ./src/sva_dma_run.sv
 
 formal:
 	qverify -c -od Output_Results -do "\

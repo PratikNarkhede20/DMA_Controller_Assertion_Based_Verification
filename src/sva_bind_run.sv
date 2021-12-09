@@ -1,1 +1,1 @@
-bind dma dma_checker_sva check1(busIf);
+bind dma dma_checker_sva_run check1(busIf);
