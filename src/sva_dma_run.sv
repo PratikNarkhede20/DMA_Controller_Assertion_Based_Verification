@@ -21,13 +21,13 @@ referenceModel referenceModel(busIf.referenceModel, programCondition);
 default disable iff (busIf.RESET);
 
 //assume the DMA controller is always active
-CS_NisLow_assume : assume property (busIf.CS_N == 1'b0);
+dmaIsAlwaysActive : assume property (busIf.CS_N == 1'b0);
 
 //assume the DMA Controller always gets hold acknowledgement signal from CPU
 //HLDAisActive_assume : assume property (busIf.HLDA == 1'b1);
 
-//assume that there's no EOP in normal run
-EOP_NisLow_assume : assume property (busIf.EOP_N == 1'b0);
+//active low signal. assume that there's no EOP in normal run, EOP_N=1'b1
+noEndOfProcess_assume : assume property (busIf.EOP_N == 1'b1);
 
 /*
 ReadOrWriteTransferType_assume : assume property ( ( (dma.intRegIf.modeReg[0].transferType == 2'b01) || (dma.intRegIf.modeReg[0].transferType == 2'b10) ) ||
