@@ -232,7 +232,7 @@ baseWordCountShouldNotChange_a : assert property ( !$changed(dma.d.baseWordCount
 singleRegConfigInProgramMode_a : assert property (referenceModel.regConfigInProgress |-> referenceModel.regConfigOneHot);
 
 addressEnable_a : assert property ( ##2 ( |busIf.DREQ && $rose(busIf.HLDA) && (dma.tC.state == `SO) ) |=> $rose(busIf.AEN) );
-addressStrobeActiveForTwoCycles_a : assert property ($rose(busIf.AEN) |=> ##1 $fell(busIf.AEN));
+addressEnableActiveForTwoCycles_a : assert property ($rose(busIf.AEN) |=> ##1 $fell(busIf.AEN));
 
 addressStrobeActive_a : assert property ( ##2 ( |busIf.DREQ && $rose(busIf.HLDA) && (dma.tC.state == `SO)) |=> $rose(busIf.ADSTB) );
 addressStrobeActiveforOneCycle_a : assert property ( $rose(busIf.ADSTB) |=> $fell(busIf.ADSTB) );
