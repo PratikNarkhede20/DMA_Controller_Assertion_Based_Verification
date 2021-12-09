@@ -1,268 +1,565 @@
 
 
 ===============================================================================
-Module: dma_checker_sva
+Module: dma_checker_sva_run
 ===============================================================================
+Parameters: 
+    parameter  ADDRESSWIDTH = 16
+    parameter  DATAWIDTH = 8
+    parameter  CHANNELS = 4
 Summary
 -------------------------------------------------------------------------------
-Assertions   : 23 
+Assertions   : 53 
 Assumptions  : 2 
-Covers       : 17 
+Covers       : 34 
 -------------------------------------------------------------------------------
 assert stateTransistionSItoSO_a (sva)
   Instance: check1.stateTransistionSItoSO_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 63
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 77
   Severity: error
-  Stats:  gates=33 flops=2
-  SAFETY_EMPTY (Safety empty property) (warning) 
+  Stats:  gates=24 flops=4
 
 assert stateTransistionSOtoS1_a (sva)
   Instance: check1.stateTransistionSOtoS1_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 64
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 81
   Severity: error
-  Stats:   depth=1 gates=13 flops=0
+  Stats:   depth=2 gates=16 flops=1
 
 assert stateTransistionS1toS2_a (sva)
   Instance: check1.stateTransistionS1toS2_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 65
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 85
   Severity: error
-  Stats:   depth=1 gates=12 flops=0
+  Stats:   depth=2 gates=15 flops=1
 
 assert stateTransistionS2toS4_a (sva)
   Instance: check1.stateTransistionS2toS4_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 66
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 89
   Severity: error
-  Stats:   depth=1 gates=12 flops=0
+  Stats:   depth=2 gates=15 flops=1
 
 assert stateTransistionS4toSI_a (sva)
   Instance: check1.stateTransistionS4toSI_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 67
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 93
   Severity: error
-  Stats:   depth=1 gates=12 flops=0
+  Stats:   depth=2 gates=15 flops=1
 
-assert DREQ0011ToDACK0001_a (sva)
-  Instance: check1.DREQ0011ToDACK0001_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 99
-  Severity: error
-  Stats:  gates=35 flops=3
-  SAFETY_EMPTY (Safety empty property) (warning) 
-
-assert DREQ0111ToDACK0001_a (sva)
-  Instance: check1.DREQ0111ToDACK0001_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 100
+assert g1[0].DACK0000.DACK0000forDREQfixedPriority_a (sva)
+  Instance: check1.g1[0].DACK0000.DACK0000forDREQfixedPriority_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 165
   Severity: error
   Stats:  gates=35 flops=3
   SAFETY_EMPTY (Safety empty property) (warning) 
 
-assert DREQ1111ToDACK0001_a (sva)
-  Instance: check1.DREQ1111ToDACK0001_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 101
+assert g1[1].DACK0001.DACK0001forDREQfixedPriority_a (sva)
+  Instance: check1.g1[1].DACK0001.DACK0001forDREQfixedPriority_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 141
   Severity: error
   Stats:  gates=35 flops=3
   SAFETY_EMPTY (Safety empty property) (warning) 
 
-assert DREQ1110ToDACK0010_a (sva)
-  Instance: check1.DREQ1110ToDACK0010_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 102
+assert g1[2].DACK0010.DACK0010forDREQfixedPriority_a (sva)
+  Instance: check1.g1[2].DACK0010.DACK0010forDREQfixedPriority_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 147
+  Severity: error
+  Stats:  gates=35 flops=3
+  SAFETY_EMPTY (Safety empty property) (warning) 
+
+assert g1[3].DACK0001.DACK0001forDREQfixedPriority_a (sva)
+  Instance: check1.g1[3].DACK0001.DACK0001forDREQfixedPriority_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 141
+  Severity: error
+  Stats:  gates=35 flops=3
+  SAFETY_EMPTY (Safety empty property) (warning) 
+
+assert g1[4].DACK0100.DACK0100forDREQfixedPriority_a (sva)
+  Instance: check1.g1[4].DACK0100.DACK0100forDREQfixedPriority_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 153
+  Severity: error
+  Stats:  gates=35 flops=3
+  SAFETY_EMPTY (Safety empty property) (warning) 
+
+assert g1[5].DACK0001.DACK0001forDREQfixedPriority_a (sva)
+  Instance: check1.g1[5].DACK0001.DACK0001forDREQfixedPriority_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 141
+  Severity: error
+  Stats:  gates=35 flops=3
+  SAFETY_EMPTY (Safety empty property) (warning) 
+
+assert g1[6].DACK0010.DACK0010forDREQfixedPriority_a (sva)
+  Instance: check1.g1[6].DACK0010.DACK0010forDREQfixedPriority_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 147
+  Severity: error
+  Stats:  gates=35 flops=3
+  SAFETY_EMPTY (Safety empty property) (warning) 
+
+assert g1[7].DACK0001.DACK0001forDREQfixedPriority_a (sva)
+  Instance: check1.g1[7].DACK0001.DACK0001forDREQfixedPriority_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 141
+  Severity: error
+  Stats:  gates=35 flops=3
+  SAFETY_EMPTY (Safety empty property) (warning) 
+
+assert g1[8].DACK1000.DACK1000forDREQfixedPriority_a (sva)
+  Instance: check1.g1[8].DACK1000.DACK1000forDREQfixedPriority_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 159
+  Severity: error
+  Stats:  gates=35 flops=3
+  SAFETY_EMPTY (Safety empty property) (warning) 
+
+assert g1[9].DACK0001.DACK0001forDREQfixedPriority_a (sva)
+  Instance: check1.g1[9].DACK0001.DACK0001forDREQfixedPriority_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 141
+  Severity: error
+  Stats:  gates=35 flops=3
+  SAFETY_EMPTY (Safety empty property) (warning) 
+
+assert g1[10].DACK0010.DACK0010forDREQfixedPriority_a (sva)
+  Instance: check1.g1[10].DACK0010.DACK0010forDREQfixedPriority_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 147
+  Severity: error
+  Stats:  gates=35 flops=3
+  SAFETY_EMPTY (Safety empty property) (warning) 
+
+assert g1[11].DACK0001.DACK0001forDREQfixedPriority_a (sva)
+  Instance: check1.g1[11].DACK0001.DACK0001forDREQfixedPriority_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 141
+  Severity: error
+  Stats:  gates=35 flops=3
+  SAFETY_EMPTY (Safety empty property) (warning) 
+
+assert g1[12].DACK0100.DACK0100forDREQfixedPriority_a (sva)
+  Instance: check1.g1[12].DACK0100.DACK0100forDREQfixedPriority_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 153
+  Severity: error
+  Stats:  gates=35 flops=3
+  SAFETY_EMPTY (Safety empty property) (warning) 
+
+assert g1[13].DACK0001.DACK0001forDREQfixedPriority_a (sva)
+  Instance: check1.g1[13].DACK0001.DACK0001forDREQfixedPriority_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 141
+  Severity: error
+  Stats:  gates=35 flops=3
+  SAFETY_EMPTY (Safety empty property) (warning) 
+
+assert g1[14].DACK0010.DACK0010forDREQfixedPriority_a (sva)
+  Instance: check1.g1[14].DACK0010.DACK0010forDREQfixedPriority_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 147
+  Severity: error
+  Stats:  gates=35 flops=3
+  SAFETY_EMPTY (Safety empty property) (warning) 
+
+assert g1[15].DACK0001.DACK0001forDREQfixedPriority_a (sva)
+  Instance: check1.g1[15].DACK0001.DACK0001forDREQfixedPriority_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 141
   Severity: error
   Stats:  gates=35 flops=3
   SAFETY_EMPTY (Safety empty property) (warning) 
 
 assert loadIoDataBufferFromDB_a (sva)
   Instance: check1.loadIoDataBufferFromDB_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 130
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 204
   Severity: error
-  Stats:   depth=2 gates=21 flops=1
+  Stats:   depth=5 gates=15 flops=4
 
 assert loadCommandReg_a (sva)
   Instance: check1.loadCommandReg_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 132
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 214
   Severity: error
   Stats:   depth=9 gates=19 flops=8
 
 assert readStatusReg_a (sva)
   Instance: check1.readStatusReg_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 134
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 217
   Severity: error
   Stats:   depth=12 gates=22 flops=11
 
 assert internalFFzero_a (sva)
   Instance: check1.internalFFzero_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 135
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 218
   Severity: error
   Stats:   depth=7 gates=19 flops=6
 
 assert internalFFone_a (sva)
   Instance: check1.internalFFone_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 136
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 219
   Severity: error
   Stats:   depth=8 gates=20 flops=7
 
 assert loadWriteBuffer_a (sva)
   Instance: check1.loadWriteBuffer_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 137
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 227
   Severity: error
   Stats:   depth=7 gates=19 flops=6
 
-assert addressEnable_a (sva)
-  Instance: check1.addressEnable_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 140
-  Severity: error
-  Stats:   depth=4 gates=14 flops=3
-
-assert addressStrobeActive_a (sva)
-  Instance: check1.addressStrobeActive_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 141
-  Severity: error
-  Stats:   depth=4 gates=14 flops=3
-
-assert addressStrobeLow_a (sva)
-  Instance: check1.addressStrobeLow_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 142
-  Severity: error
-  Stats:   depth=2 gates=12 flops=1
-
-assert addressBusValid (sva)
-  Instance: check1.addressBusValid
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 144
-  Severity: error
-  Stats:   depth=1 gates=11 flops=0
-
-assert dataBusValid (sva)
-  Instance: check1.dataBusValid
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 145
+assert baseAddressShouldNotChange_a (sva)
+  Instance: check1.baseAddressShouldNotChange_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 229
   Severity: error
   Stats:   depth=1 gates=12 flops=0
 
-assert noReadWriteAtSameTime (sva)
-  Instance: check1.noReadWriteAtSameTime
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 147
+assert baseWordCountShouldNotChange_a (sva)
+  Instance: check1.baseWordCountShouldNotChange_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 230
   Severity: error
-  Stats:   depth=1 gates=9 flops=0
+  Stats:   depth=1 gates=12 flops=0
 
-assert addressValidOnReadWrite (sva)
-  Instance: check1.addressValidOnReadWrite
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 148
+assert singleRegConfigInProgramMode_a (sva)
+  Instance: check1.singleRegConfigInProgramMode_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 232
+  Severity: error
+  Stats:   depth=1 gates=10 flops=0
+
+assert addressEnable_a (sva)
+  Instance: check1.addressEnable_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 234
+  Severity: error
+  Stats:   depth=4 gates=16 flops=3
+
+assert addressStrobeActiveForTwoCycles_a (sva)
+  Instance: check1.addressStrobeActiveForTwoCycles_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 235
+  Severity: error
+  Stats:   depth=3 gates=21 flops=3
+
+assert addressStrobeActive_a (sva)
+  Instance: check1.addressStrobeActive_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 237
+  Severity: error
+  Stats:   depth=4 gates=16 flops=3
+
+assert addressStrobeActiveforOneCycle_a (sva)
+  Instance: check1.addressStrobeActiveforOneCycle_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 238
+  Severity: error
+  Stats:   depth=2 gates=12 flops=1
+
+assert addressBusValid_a (sva)
+  Instance: check1.addressBusValid_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 240
+  Severity: error
+  Stats:   depth=1 gates=11 flops=0
+
+assert dataBusValid_a (sva)
+  Instance: check1.dataBusValid_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 241
+  Severity: error
+  Stats:   depth=1 gates=12 flops=0
+
+assert noReadWriteAtSameTime_a (sva)
+  Instance: check1.noReadWriteAtSameTime_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 243
+  Severity: error
+  Stats:   depth=1 gates=6 flops=0
+
+assert addressValidOnReadWrite_a (sva)
+  Instance: check1.addressValidOnReadWrite_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 244
   Severity: error
   Stats:   depth=1 gates=16 flops=0
 
-assert dataValidOnReadWrite (sva)
-  Instance: check1.dataValidOnReadWrite
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 149
+assert dataValidOnReadWrite_a (sva)
+  Instance: check1.dataValidOnReadWrite_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 245
   Severity: error
   Stats:   depth=1 gates=14 flops=0
 
-assume CS_NisLow_assume (sva)
-  Instance: check1.CS_NisLow_assume
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 23
+assert validReadWriteSignalsOnHLDA_a (sva)
+  Instance: check1.validReadWriteSignalsOnHLDA_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 250
+  Severity: error
+  Stats:   depth=6 gates=19 flops=5
+
+assert validAddressBusOnHLDA_a (sva)
+  Instance: check1.validAddressBusOnHLDA_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 251
+  Severity: error
+  Stats:   depth=6 gates=17 flops=5
+
+assert loadBaseUpperAddress_a (sva)
+  Instance: check1.loadBaseUpperAddress_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 263
+  Severity: error
+  Stats:   depth=2 gates=13 flops=1
+
+assert loadBaseLowerAddress_a (sva)
+  Instance: check1.loadBaseLowerAddress_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 270
+  Severity: error
+  Stats:   depth=2 gates=14 flops=1
+
+assert loadCurrentUpperAddress_a (sva)
+  Instance: check1.loadCurrentUpperAddress_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 282
+  Severity: error
+  Stats:   depth=2 gates=13 flops=1
+
+assert loadCurrentLowerAddress_a (sva)
+  Instance: check1.loadCurrentLowerAddress_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 289
+  Severity: error
+  Stats:   depth=2 gates=14 flops=1
+
+assert loadBaseUpperWordCount_a (sva)
+  Instance: check1.loadBaseUpperWordCount_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 301
+  Severity: error
+  Stats:   depth=2 gates=13 flops=1
+
+assert loadBaseLowerWordCount_a (sva)
+  Instance: check1.loadBaseLowerWordCount_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 308
+  Severity: error
+  Stats:   depth=2 gates=14 flops=1
+
+assert loadCurrentUpperWordCount_a (sva)
+  Instance: check1.loadCurrentUpperWordCount_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 320
+  Severity: error
+  Stats:   depth=2 gates=13 flops=1
+
+assert loadCurrentLowerWordCount_a (sva)
+  Instance: check1.loadCurrentLowerWordCount_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 327
+  Severity: error
+  Stats:   depth=2 gates=14 flops=1
+
+assert readCurrentUpperAddress_a (sva)
+  Instance: check1.readCurrentUpperAddress_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 339
+  Severity: error
+  Stats:   depth=2 gates=13 flops=1
+
+assert readCurrentLowerAddress_a (sva)
+  Instance: check1.readCurrentLowerAddress_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 346
+  Severity: error
+  Stats:   depth=2 gates=14 flops=1
+
+assert readCurrentUpperWordCount_a (sva)
+  Instance: check1.readCurrentUpperWordCount_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 358
+  Severity: error
+  Stats:   depth=2 gates=13 flops=1
+
+assert readCurrentLowerWordCount_a (sva)
+  Instance: check1.readCurrentLowerWordCount_a
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 365
+  Severity: error
+  Stats:   depth=2 gates=14 flops=1
+
+assume dmaIsAlwaysActive (sva)
+  Instance: check1.dmaIsAlwaysActive
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 24
   Severity: error
   Stats:   depth=1 gates=5 flops=0
 
-assume ReadOrWriteTransferType_assume (sva)
-  Instance: check1.ReadOrWriteTransferType_assume
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 29
+assume noEndOfProcess_assume (sva)
+  Instance: check1.noEndOfProcess_assume
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 30
   Severity: error
-  Stats:   depth=1 gates=20 flops=0
+  Stats:   depth=1 gates=5 flops=0
 
 cover DACK0isOne_c (sva)
   Instance: check1.DACK0isOne_c
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 39
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 45
   Severity: info
   Stats:   depth=1 gates=3 flops=0
 
 cover DACK1isOne_c (sva)
   Instance: check1.DACK1isOne_c
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 40
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 46
   Severity: info
   Stats:   depth=1 gates=3 flops=0
 
 cover DACK2isOne_c (sva)
   Instance: check1.DACK2isOne_c
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 41
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 47
   Severity: info
   Stats:   depth=1 gates=3 flops=0
 
 cover DACK3isOne_c (sva)
   Instance: check1.DACK3isOne_c
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 42
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 48
   Severity: info
   Stats:   depth=1 gates=3 flops=0
 
 cover ioRead_c (sva)
   Instance: check1.ioRead_c
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 45
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 51
   Severity: info
   Stats:   depth=6 gates=10 flops=5
 
 cover ioWrite_c (sva)
   Instance: check1.ioWrite_c
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 46
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 52
   Severity: info
   Stats:   depth=11 gates=15 flops=10
 
 cover memoryRead_c (sva)
   Instance: check1.memoryRead_c
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 47
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 53
   Severity: info
   Stats:   depth=6 gates=10 flops=5
 
 cover memoryWrite_c (sva)
   Instance: check1.memoryWrite_c
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 48
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 54
   Severity: info
   Stats:   depth=11 gates=15 flops=10
 
 cover AENactive_c (sva)
   Instance: check1.AENactive_c
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 50
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 56
   Severity: info
-  Stats:   depth=1 gates=3 flops=0
+  Stats:   depth=6 gates=10 flops=5
 
 cover ADSTBactive_c (sva)
   Instance: check1.ADSTBactive_c
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 51
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 57
   Severity: info
-  Stats:   depth=1 gates=3 flops=0
+  Stats:   depth=6 gates=10 flops=5
 
 cover HRQactive_c (sva)
   Instance: check1.HRQactive_c
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 52
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 58
   Severity: info
-  Stats:   depth=1 gates=3 flops=0
+  Stats:   depth=6 gates=10 flops=5
 
 cover stateSI_c (sva)
   Instance: check1.stateSI_c
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 55
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 61
   Severity: info
   Stats:   depth=6 gates=10 flops=5
 
 cover stateSO_c (sva)
   Instance: check1.stateSO_c
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 56
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 62
   Severity: info
   Stats:   depth=1 gates=3 flops=0
 
 cover stateS1_c (sva)
   Instance: check1.stateS1_c
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 57
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 63
   Severity: info
   Stats:   depth=1 gates=3 flops=0
 
 cover stateS2_c (sva)
   Instance: check1.stateS2_c
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 58
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 64
   Severity: info
   Stats:   depth=1 gates=3 flops=0
 
 cover stateS4_c (sva)
   Instance: check1.stateS4_c
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 59
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 65
   Severity: info
   Stats:   depth=1 gates=3 flops=0
 
 cover stateTransistions_a (sva)
   Instance: check1.stateTransistions_a
-  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma.sv, Line 60
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 72
   Severity: info
-  Stats:   depth=15 gates=27 flops=14
+  Stats:   depth=24 gates=45 flops=23
+
+cover g1[0].DACK0000.DACK0000forDREQ_c (sva)
+  Instance: check1.g1[0].DACK0000.DACK0000forDREQ_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 166
+  Severity: info
+  Stats:   depth=4 gates=11 flops=3
+
+cover g1[1].DACK0001.DACK0001forDREQ_c (sva)
+  Instance: check1.g1[1].DACK0001.DACK0001forDREQ_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 142
+  Severity: info
+  Stats:   depth=4 gates=11 flops=3
+
+cover g1[2].DACK0010.DACK0010forDREQ_c (sva)
+  Instance: check1.g1[2].DACK0010.DACK0010forDREQ_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 148
+  Severity: info
+  Stats:   depth=4 gates=11 flops=3
+
+cover g1[3].DACK0001.DACK0001forDREQ_c (sva)
+  Instance: check1.g1[3].DACK0001.DACK0001forDREQ_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 142
+  Severity: info
+  Stats:   depth=4 gates=11 flops=3
+
+cover g1[4].DACK0100.DACK0100forDREQ_c (sva)
+  Instance: check1.g1[4].DACK0100.DACK0100forDREQ_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 154
+  Severity: info
+  Stats:   depth=4 gates=11 flops=3
+
+cover g1[5].DACK0001.DACK0001forDREQ_c (sva)
+  Instance: check1.g1[5].DACK0001.DACK0001forDREQ_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 142
+  Severity: info
+  Stats:   depth=4 gates=11 flops=3
+
+cover g1[6].DACK0010.DACK0010forDREQ_c (sva)
+  Instance: check1.g1[6].DACK0010.DACK0010forDREQ_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 148
+  Severity: info
+  Stats:   depth=4 gates=11 flops=3
+
+cover g1[7].DACK0001.DACK0001forDREQ_c (sva)
+  Instance: check1.g1[7].DACK0001.DACK0001forDREQ_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 142
+  Severity: info
+  Stats:   depth=4 gates=11 flops=3
+
+cover g1[8].DACK1000.DACK1000forDREQ_c (sva)
+  Instance: check1.g1[8].DACK1000.DACK1000forDREQ_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 160
+  Severity: info
+  Stats:   depth=4 gates=11 flops=3
+
+cover g1[9].DACK0001.DACK0001forDREQ_c (sva)
+  Instance: check1.g1[9].DACK0001.DACK0001forDREQ_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 142
+  Severity: info
+  Stats:   depth=4 gates=11 flops=3
+
+cover g1[10].DACK0010.DACK0010forDREQ_c (sva)
+  Instance: check1.g1[10].DACK0010.DACK0010forDREQ_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 148
+  Severity: info
+  Stats:   depth=4 gates=11 flops=3
+
+cover g1[11].DACK0001.DACK0001forDREQ_c (sva)
+  Instance: check1.g1[11].DACK0001.DACK0001forDREQ_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 142
+  Severity: info
+  Stats:   depth=4 gates=11 flops=3
+
+cover g1[12].DACK0100.DACK0100forDREQ_c (sva)
+  Instance: check1.g1[12].DACK0100.DACK0100forDREQ_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 154
+  Severity: info
+  Stats:   depth=4 gates=11 flops=3
+
+cover g1[13].DACK0001.DACK0001forDREQ_c (sva)
+  Instance: check1.g1[13].DACK0001.DACK0001forDREQ_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 142
+  Severity: info
+  Stats:   depth=4 gates=11 flops=3
+
+cover g1[14].DACK0010.DACK0010forDREQ_c (sva)
+  Instance: check1.g1[14].DACK0010.DACK0010forDREQ_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 148
+  Severity: info
+  Stats:   depth=4 gates=11 flops=3
+
+cover g1[15].DACK0001.DACK0001forDREQ_c (sva)
+  Instance: check1.g1[15].DACK0001.DACK0001forDREQ_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 142
+  Severity: info
+  Stats:   depth=4 gates=11 flops=3
+
+cover rotatingPriority_c (sva)
+  Instance: check1.rotatingPriority_c
+  Location: File /u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification/src/sva_dma_run.sv, Line 176
+  Severity: info
+  Stats:  gates=25 flops=6
 

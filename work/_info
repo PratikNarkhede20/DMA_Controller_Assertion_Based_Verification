@@ -11,15 +11,15 @@ Z0 d/u/pratik2/ECE560/DMA_Controller_Assertion_Based_Verification
 YbusInterface
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
 Z2 DXx4 work 15 dmaRegConfigPkg 0 22 V0[j_Bh<Y:[nc[jSc0:In2
-Z3 !s110 1638721790
+Z3 !s110 1639034553
 !i10b 1
-!s100 3fIN78I[zk1C=o]a?K<7n0
-IWCoIlkIbj<hjLcd4l3Ykd2
+!s100 @hKEIKXZ870XCVk@Ek=EG1
+IhJ68BogS7IO9Zz;mieZeG1
 Z4 VDg1SIo80bB@j0V0VzS_@n1
 !s105 busInterface_sv_unit
 S1
 R0
-w1638711155
+w1639009216
 8./src/busInterface.sv
 F./src/busInterface.sv
 L0 1
@@ -27,9 +27,9 @@ Z5 OL;L;10.6b;65
 r1
 !s85 0
 31
-Z6 !s108 1638721790.000000
-Z7 !s107 ./src/dma.sv|./src/priorityLogic.sv|./src/datapath.sv|./src/timingAndControl.sv|./src/dmaInternalSignalsIf.sv|./src/dmaInternalRegistersIf.sv|./src/busInterface.sv|./src/dmaInternalRegistersPkg.sv|./src/dmaRegConfigPkg.sv|
-Z8 !s90 ./src/dmaRegConfigPkg.sv|./src/dmaInternalRegistersPkg.sv|./src/busInterface.sv|./src/dmaInternalRegistersIf.sv|./src/dmaInternalSignalsIf.sv|./src/timingAndControl.sv|./src/datapath.sv|./src/priorityLogic.sv|./src/dma.sv|
+Z6 !s108 1639034553.000000
+Z7 !s107 ./src/dma.sv|./src/priorityLogic.sv|./src/datapath.sv|./src/timingAndControl.sv|./src/dmaInternalSignalsIf.sv|./src/dmaInternalRegistersIf.sv|./src/busInterface.sv|./src/dmaRegConfigPkg.sv|
+Z8 !s90 ./src/dmaRegConfigPkg.sv|./src/busInterface.sv|./src/dmaInternalRegistersIf.sv|./src/dmaInternalSignalsIf.sv|./src/timingAndControl.sv|./src/datapath.sv|./src/priorityLogic.sv|./src/dma.sv|
 !i113 0
 Z9 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 Z10 tCvgOpt 0
@@ -39,13 +39,13 @@ R1
 R2
 R3
 !i10b 1
-!s100 O]IK<9f0;hNKBzdNnC^lI0
-IkYElKP[iPZ9:mTbznEc5B1
+!s100 E2^eg0NOK]zB[=nIAERY>0
+I@OJC_OWhT7GVWW2RL^nAm3
 R4
 !s105 datapath_sv_unit
 S1
 R0
-w1638705864
+w1639002496
 8./src/datapath.sv
 F./src/datapath.sv
 L0 1
@@ -70,7 +70,7 @@ R4
 !s105 dma_sv_unit
 S1
 R0
-w1637992260
+Z11 w1638782050
 8./src/dma.sv
 F./src/dma.sv
 L0 1
@@ -84,30 +84,29 @@ R8
 !i113 0
 R9
 R10
-vdma_checker_sva
+vdma_checker_sva_run
 R1
-DXx4 work 11 my_bind_sva 0 22 2VhnB;Q4nkUezK11B<VaP3
+DXx4 work 11 my_bind_sva 0 22 `>3:K0XCZZ<]PQ:Nc4C=^3
 R4
 r1
 !s85 0
 31
 !i10b 1
-!s100 zlXV]nVN7[mZVNTGVh@:21
-IHld0XhL2H2PRY@IFE[UBb3
-Z11 !s105 my_bind_sva
+!s100 _UmDk3?IOf<6@gzg0g8_i3
+ICg[8ZlVYAn5Ela@P=0bg>1
+Z12 !s105 my_bind_sva
 S1
 R0
-Z12 w1638721789
-Z13 8./src/sva_dma.sv
-Z14 F./src/sva_dma.sv
+Z13 w1639024661
+Z14 8./src/sva_dma_run.sv
+Z15 F./src/sva_dma_run.sv
 L0 1
 R5
 R6
-Z15 !s107 ./src/sva_dma.sv|./src/sva_bind.sv|./src/referenceModel.sv|
-Z16 !s90 -sv|-mfcu|-cuname|my_bind_sva|./src/referenceModel.sv|./src/sva_bind.sv|+define+Run|./src/sva_dma.sv|
+Z16 !s107 ./src/sva_dma_run.sv|./src/sva_bind_run.sv|./src/referenceModel.sv|
+Z17 !s90 -sv|-mfcu|-cuname|my_bind_sva|./src/referenceModel.sv|./src/sva_bind_run.sv|./src/sva_dma_run.sv|
 !i113 0
-Z17 o-sv -mfcu -cuname my_bind_sva -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-Z18 !s92 -sv -mfcu -cuname my_bind_sva +define+Run -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z18 o-sv -mfcu -cuname my_bind_sva -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R10
 YdmaInternalRegistersIf
 R1
@@ -120,7 +119,7 @@ R4
 !s105 dmaInternalRegistersIf_sv_unit
 S1
 R0
-Z19 w1636888566
+R11
 8./src/dmaInternalRegistersIf.sv
 F./src/dmaInternalRegistersIf.sv
 L0 1
@@ -135,31 +134,6 @@ R8
 R9
 R10
 ndma@internal@registers@if
-XdmaInternalRegistersPkg
-R1
-R2
-R3
-!i10b 1
-!s100 mN^C_[E[0R][l?NA03PX63
-IP?_JeY=]WG<;1:a5LDF`V3
-VP?_JeY=]WG<;1:a5LDF`V3
-S1
-R0
-w1638141436
-8./src/dmaInternalRegistersPkg.sv
-F./src/dmaInternalRegistersPkg.sv
-L0 1
-R5
-r1
-!s85 0
-31
-R6
-R7
-R8
-!i113 0
-R9
-R10
-ndma@internal@registers@pkg
 YdmaInternalSignalsIf
 R1
 R3
@@ -170,7 +144,7 @@ R4
 !s105 dmaInternalSignalsIf_sv_unit
 S1
 R0
-R19
+R11
 8./src/dmaInternalSignalsIf.sv
 F./src/dmaInternalSignalsIf.sv
 L0 1
@@ -194,7 +168,7 @@ IV0[j_Bh<Y:[nc[jSc0:In2
 VV0[j_Bh<Y:[nc[jSc0:In2
 S1
 R0
-R19
+R11
 8./src/dmaRegConfigPkg.sv
 F./src/dmaRegConfigPkg.sv
 L0 1
@@ -211,30 +185,29 @@ R10
 ndma@reg@config@pkg
 Xmy_bind_sva
 R1
-V2VhnB;Q4nkUezK11B<VaP3
+V`>3:K0XCZZ<]PQ:Nc4C=^3
 r1
 !s85 0
 31
 !i10b 1
-!s100 3UWD4:AD]Tg06U^D?@kz<0
-I2VhnB;Q4nkUezK11B<VaP3
+!s100 ]okN7PY_[9A2c2X9^ZSf93
+I`>3:K0XCZZ<]PQ:Nc4C=^3
 !i103 1
 S1
 R0
-R12
-Z20 8./src/referenceModel.sv
-Z21 F./src/referenceModel.sv
-8./src/sva_bind.sv
-F./src/sva_bind.sv
 R13
+Z19 8./src/referenceModel.sv
+Z20 F./src/referenceModel.sv
+8./src/sva_bind_run.sv
+F./src/sva_bind_run.sv
 R14
+R15
 L0 1
 R5
 R6
-R15
 R16
-!i113 0
 R17
+!i113 0
 R18
 R10
 vpriorityLogic
@@ -247,7 +220,7 @@ R4
 !s105 priorityLogic_sv_unit
 S1
 R0
-w1638584490
+R11
 8./src/priorityLogic.sv
 F./src/priorityLogic.sv
 L0 1
@@ -264,27 +237,26 @@ R10
 npriority@logic
 vreferenceModel
 R1
-!s110 1638721791
+R3
 !i10b 1
-!s100 llQhJjhg5Ugi:9mWc1JOb0
-IM2U>]PIG>aOlJ3LHDi7[@3
+!s100 2W7jg;FT^EC_L4b@d]kKc1
+IhZF]TR@FPd4Gaemf6VZ^j1
 R4
-R11
+R12
 S1
 R0
-w1638718694
+w1639007072
+R19
 R20
-R21
 L0 1
 R5
 r1
 !s85 0
 31
 R6
-R15
 R16
-!i113 0
 R17
+!i113 0
 R18
 R10
 nreference@model
@@ -292,13 +264,13 @@ vtimingAndControl
 R1
 R3
 !i10b 1
-!s100 Hb=8>B6^YOR[kL4O_]G690
-IX[IcK`df3FRSbdNR<Rhof0
+!s100 3f2nF>1J^`coWfH>k<6>A1
+I`EL9OiA;`3_=Yd6ok5hiN2
 R4
 !s105 timingAndControl_sv_unit
 S1
 R0
-w1638716239
+R11
 8./src/timingAndControl.sv
 F./src/timingAndControl.sv
 L0 1
