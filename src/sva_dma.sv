@@ -124,44 +124,39 @@ commandRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.command
 
 statusRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.statusReg == '0) );
 
-/*modeRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.intRegIf.modeReg[0] == '0) &&
+modeRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.intRegIf.modeReg[0] == '0) &&
 																													(dma.intRegIf.modeReg[1] == '0) &&
 																													(dma.intRegIf.modeReg[2] == '0) &&
 																													(dma.intRegIf.modeReg[3] == '0) ) );
-*/
-modeRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<4;i=i+1) dma.intRegIf.modeReg[i] == '0 );
+//modeRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) dma.intRegIf.modeReg[i] == '0 ) ); //doesn't compile
 
 writeBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.writeBuffer == '0));
 
 readBufferZeroOnReset_a : assert property (busIf.RESET |=> (dma.d.readBuffer == '0));
 
-/*baseAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.baseAddressReg[0] == '0) &&
+baseAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.baseAddressReg[0] == '0) &&
 																																 (dma.d.baseAddressReg[1] == '0) &&
 																																 (dma.d.baseAddressReg[2] == '0) &&
 																																 (dma.d.baseAddressReg[3] == '0) ) );
-*/
-baseAddressRegZeroOnReset_a :  assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) dma.d.baseAddressReg[i] == '0 ) );
+//baseAddressRegZeroOnReset_a :  assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) dma.d.baseAddressReg[i] == '0 ) ); //doesn't compile
 
-/*currentAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.currentAddressReg[0] == '0) &&
+currentAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.currentAddressReg[0] == '0) &&
 																																		(dma.d.currentAddressReg[1] == '0) &&
 																																		(dma.d.currentAddressReg[2] == '0) &&
 																																		(dma.d.currentAddressReg[3] == '0) ) );
-*/
-currentAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) dma.d.currentAddressReg[i] == '0 ) );
+//currentAddressRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) dma.d.currentAddressReg[i] == '0 ) ); //doesn't compile
 
-/*baseWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.baseWordCountReg[0] == '0) &&
+baseWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.baseWordCountReg[0] == '0) &&
 																																	 (dma.d.baseWordCountReg[1] == '0) &&
 																																	 (dma.d.baseWordCountReg[2] == '0) &&
 																																	 (dma.d.baseWordCountReg[3] == '0) ) );
-*/
-//baseWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) (dma.d.baseWordCountReg[i] == '0) ) );
+//baseWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) (dma.d.baseWordCountReg[i] == '0) ) ); //doesn't compile
 
-/*currentWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.currentWordCountReg[0] == '0) &&
+currentWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( (dma.d.currentWordCountReg[0] == '0) &&
 																																			(dma.d.currentWordCountReg[1] == '0) &&
 																																			(dma.d.currentWordCountReg[2] == '0) &&
 																																			(dma.d.currentWordCountReg[3] == '0) ) );
-*/
-//currentWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) (dma.d.currentWordCountReg[i] == '0) ) );
+//currentWordCountRegZeroOnReset_a : assert property (busIf.RESET |=> ( for (int i=0; i<CHANNELS;i=i+1) (dma.d.currentWordCountReg[i] == '0) ) ); //doesn't compile
 
 tempAddressRegZeroOnReset_a : assert property (busIf.RESET |=> (dma.intRegIf.temporaryAddressReg == '0));
 
@@ -308,8 +303,8 @@ property loadWriteBuffer;
 endproperty
 loadWriteBuffer_a : assert property ( loadWriteBuffer );
 
-baseAddressShouldNotChange : assert property ( !$changed(dma.d.baseAddressReg[0]) || !$changed(dma.d.baseAddressReg[1]) || !$changed(dma.d.baseAddressReg[2]) || !$changed(dma.d.baseAddressReg[3]) );
-baseWordCountShouldNotChange : assert property ( !$changed(dma.d.baseWordCountReg[0]) || !$changed(dma.d.baseWordCountReg[1]) || !$changed(dma.d.baseWordCountReg[2]) || !$changed(dma.d.baseWordCountReg[3]) );
+baseAddressShouldNotChange_a : assert property ( !$changed(dma.d.baseAddressReg[0]) || !$changed(dma.d.baseAddressReg[1]) || !$changed(dma.d.baseAddressReg[2]) || !$changed(dma.d.baseAddressReg[3]) );
+baseWordCountShouldNotChange_a : assert property ( !$changed(dma.d.baseWordCountReg[0]) || !$changed(dma.d.baseWordCountReg[1]) || !$changed(dma.d.baseWordCountReg[2]) || !$changed(dma.d.baseWordCountReg[3]) );
 
 singleRegConfigInProgramMode_a : assert property (referenceModel.regConfigInProgress |-> referenceModel.regConfigOneHot);
 
