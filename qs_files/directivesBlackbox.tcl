@@ -5,5 +5,4 @@ netlist clock busIf.CLK -period 10
 formal netlist constraint busIf.RESET 1'b0
 
 
-
 netlist blackbox instance dma.pL
